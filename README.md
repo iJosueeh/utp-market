@@ -119,24 +119,24 @@ graph TD
 ```
 ---
 # 1️⃣ Clonar el repositorio
-```mermaid
+```
 git clone https://github.com/usuario/utp-market.git
 ```
 
 # 2️⃣ Entrar al directorio del proyecto
-```mermaid
+```
 cd utp-market
 ```
 
 # 3️⃣ Configurar la base de datos en application.properties
-```mermaid
+```
 spring.datasource.url=jdbc:mysql://localhost:3306/utp_market
 spring.datasource.username=root
 spring.datasource.password=tu_password
 ```
 
 # 4️⃣ Ejecutar el proyecto
-```mermaid
+```
 mvn spring-boot:run
 ```
 ---
