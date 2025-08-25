@@ -1,1 +1,17 @@
+C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\config\JwtFilter.java
+C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\config\SecurityConfig.java
+C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\controllers\AuthController.java
+C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\models\dto\auth\LoginRequestDTO.java
+C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\models\dto\auth\LoginResponseDTO.java
+C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\models\dto\TokenRequest.java
+C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\models\dto\usuario\UsuarioDTO.java
+C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\models\dto\usuario\UsuarioRequestDTO.java
+C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\models\dto\usuario\UsuarioResponseDTO.java
+C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\models\entity\Usuario.java
+C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\repository\UsuarioRepository.java
+C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\security\interfaces\AuthService.java
+C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\security\interfaces\IAuthService.java
+C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\security\interfaces\IUsuarioService.java
+C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\security\UsuarioService.java
+C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\utils\JwtUtil.java
 C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\UtpmarketApplication.java
