@@ -1,34 +1,30 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js"; 
+import "bootstrap-icons/font/bootstrap-icons.css";
 import './App.css'
 
+import MainPage from './pages/MainPage'
+//Función, que dependiendo de las solicitudes/rutas, renderiza los componentes:
+//MainPage, Login, Register, Profile, AdminProfile.
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        {/* Add more routes here, for example: */}
+        {/* <Route path="/login" element={<Login />} /> */}
+        {/* <Route path="/register" element={<Register />} /> */}
+        {/* <Route path="/profile" element={<Profile />} /> */}
+        {/* <Route path="/admin" element={<AdminProfile />} /> */}
+      </Routes>
+    </Router>
+  );
 }
 
 export default App
