@@ -45,8 +45,8 @@ const Navbar = ({  links = [] }) => {
               </span>
 
               {/* Botones de autenticación*/}
-              <a href="#" className="btn btn-dark text-white ms-2 d-lg-block ">Iniciar Sesion</a>
-              <a href="#" className="btn btn-dark mx-2 me-4 d-none d-lg-block">Registrarse</a>
+              <Link to="/login" className="btn btn-dark text-white ms-2 d-lg-block ">Iniciar Sesion</Link>
+              <Link to="/register" className="btn btn-dark mx-2 me-4 d-none d-lg-block">Registrarse</Link>
 
               {/*  Icono de usuario - (Deshabilitado temporalmente)
               <a href="#" className="btn btn-icon btn-dark rounded-circle bg-dark me-4">
