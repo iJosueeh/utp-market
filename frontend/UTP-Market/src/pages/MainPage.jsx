@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../components/common/Navbar";
+import FAQList from "../components/a/FAQList";
 
 
 
@@ -15,7 +16,7 @@ export default function MainPage() {
             </header>
 
             <main className="content">
-                
+             <section className="bg-light py-5"> <FAQList /></section>  
             </main>
 
             <footer className="main-footer">
