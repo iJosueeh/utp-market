@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import feather from "feather-icons";
 
-// import logo from your assets (either src/assets or public/assets)
 import brandLogo from "../../assets/utpmarketlogo.png"; // adjust path
 
 const Navbar = ({ logoText = "UTP Market", links = [] }) => {
@@ -234,12 +233,12 @@ const Navbar = ({ logoText = "UTP Market", links = [] }) => {
                 </a>
               </span>
 
-              <a href="../pages/sign-in.html" className="btn btn-outline-primary ms-2">
+              <Link to="/login" className="btn btn-outline-primary ms-2">
                 Sign in
-              </a>
-              <a href="../pages/sign-up.html" className="btn btn-primary ms-1 d-none d-lg-block">
+              </Link>
+              <Link to="/register" className="btn btn-primary ms-1 d-none d-lg-block">
                 Sign up
-              </a>
+              </Link>
 
               {/* Toggler */}
               <button
