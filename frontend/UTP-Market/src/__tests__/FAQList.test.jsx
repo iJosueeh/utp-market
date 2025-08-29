@@ -1,6 +1,6 @@
 import { render, screen, cleanup } from '@testing-library/react';
 import { describe, it, expect, afterEach } from 'vitest';
-import FAQList from '../components/a/FAQList';
+import FAQList from '../pages/features/faq/FAQList';
 
 afterEach(cleanup);
 
@@ -43,7 +43,7 @@ describe('FAQList', () => {
 
   it('should render the correct number of FAQ cards', () => {
     const { container } = render(<FAQList />);
-    const cards = container.querySelectorAll('.list-group-item');
+    const cards = container.querySelectorAll('.accordion-item');
     expect(cards.length).toBe(faqs.length);
   });
 });
