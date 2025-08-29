@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Register = () => {
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
+
     return (
         <div className="container-fluid vh-100 px-0">
             <div className="row h-100 g-0">
-
                 {/* Lado izquierdo con imagen */}
                 <div className="col-md-6 d-none d-md-block">
                     <img
@@ -19,12 +21,9 @@ const Register = () => {
                         }}
                     />
                 </div>
-
                 {/* Lado derecho con formulario */}
                 <div className="col-md-6 d-flex align-items-center justify-content-center bg-white">
                     <div className="w-75" style={{ maxWidth: "400px" }}>
-
-                        {/* Logo + título */}
                         <div className="text-center mb-4">
                             <img
                                 src="src/assets/UTP-Market.png"
@@ -33,8 +32,6 @@ const Register = () => {
                             />
                             <h2 className="fw-bold mt-3">Regístrate</h2>
                         </div>
-
-                        {/* Formulario */}
                         <form>
                             <div className="row">
                                 <div className="col-md-6 mb-3">
@@ -52,11 +49,39 @@ const Register = () => {
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="password" className="form-label">Contraseña</label>
-                                <input type="password" className="form-control" id="password" placeholder="************" />
+                                <div className="input-group">
+                                    <input
+                                        type={showPassword ? "text" : "password"}
+                                        className="form-control"
+                                        id="password"
+                                        placeholder="************"
+                                    />
+                                    <button
+                                        type="button"
+                                        className="btn btn-outline-secondary"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                    >
+                                        <i className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"}`}></i>
+                                    </button>
+                                </div>
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="confirmPassword" className="form-label">Confirmar contraseña</label>
-                                <input type="password" className="form-control" id="confirmPassword" placeholder="************" />
+                                <div className="input-group">
+                                    <input
+                                        type={showConfirm ? "text" : "password"}
+                                        className="form-control"
+                                        id="confirmPassword"
+                                        placeholder="************"
+                                    />
+                                    <button
+                                        type="button"
+                                        className="btn btn-outline-secondary"
+                                        onClick={() => setShowConfirm(!showConfirm)}
+                                    >
+                                        <i className={`bi ${showConfirm ? "bi-eye-slash" : "bi-eye"}`}></i>
+                                    </button>
+                                </div>
                             </div>
                             <div className="form-check mb-3">
                                 <input type="checkbox" className="form-check-input" id="rememberMe" />

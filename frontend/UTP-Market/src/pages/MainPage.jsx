@@ -11,7 +11,7 @@ export default function MainPage() {
                     <header className="main-header">
                     </header>
 
-                    <main className="content">
+                    <main className="content mt-5">
                         <section className="bg-light py-5"> <FAQList /></section>
                     </main>
 
