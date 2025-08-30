@@ -1,8 +1,7 @@
 import React from "react";
 import Navbar from "../components/common/Navbar";
 import FAQList from "../pages/features/faq/FAQList";
-import CardProfileTeam from "../components/a/CardProfileTeam";
-
+import CardProfileTeam from "../pages/features/CardProfileTeam";
 export default function MainPage() {
     return (
         <>
