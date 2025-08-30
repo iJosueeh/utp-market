@@ -1,6 +1,6 @@
 // CardProfileTeam.jsx
 import "bootstrap/dist/css/bootstrap.min.css";
-import { FaLinkedin, FaTwitter, FaInstagram, FaFacebook } from "react-icons/fa";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 export default function CardProfileTeam() {
   const profiles = [
@@ -100,16 +100,16 @@ export default function CardProfileTeam() {
               {/* Redes sociales */}
               <div className="d-flex justify-content-center gap-3 mb-3">
                 <a href={profile.social.linkedin} target="_blank" rel="noreferrer">
-                  <FaLinkedin  className="text-dark fs-5" />
+                  <i className="bi bi-linkedin text-dark fs-5"></i>
                 </a>
                 <a href={profile.social.twitter} target="_blank" rel="noreferrer">
-                  <FaTwitter  className="text-dark fs-5" />
+                  <i className="bi bi-twitter text-dark fs-5"></i>
                 </a>
                 <a href={profile.social.instagram} target="_blank" rel="noreferrer">
-                  <FaInstagram  className="text-dark fs-5" />
+                  <i className="bi bi-instagram text-dark fs-5"></i>
                 </a>
                 <a href={profile.social.facebook} target="_blank" rel="noreferrer">
-                  <FaFacebook  className="text-dark fs-5" />
+                  <i className="bi bi-facebook text-dark fs-5"></i>
                 </a>
               </div>
               {/* Botón */}

@@ -12,10 +12,10 @@ export default function MainPage() {
                     </header>
 
                     <main className="content">
-                        <section className="bg-light py-5">
+                        <section className="bg-light py-5 mt-5">
                             <FAQList />
                         </section>  
-                        <section className="bg-danger py-5">
+                        <section className="bg-danger py-5 mt-5">
                             <CardProfileTeam />
                         </section>  
                     </main>
