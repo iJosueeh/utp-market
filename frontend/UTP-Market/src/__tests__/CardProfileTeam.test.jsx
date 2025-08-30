@@ -2,17 +2,17 @@ import { render, screen, cleanup } from '@testing-library/react';
 import { describe, it, expect, beforeEach } from 'vitest';
 import CardProfileTeam from '../pages/features/CardProfileTeam';
 
-describe('CardProfileTeam component', () => {
+describe('Componente CardProfileTeam', () => {
   beforeEach(() => {
     cleanup();
   });
 
-  it('should render the main title', () => {
+  it('debería renderizar el título principal', () => {
     render(<CardProfileTeam />);
     expect(screen.getByText('Nuestro Equipo')).not.toBeNull();
   });
 
-  it('should render all team members', () => {
+  it('debería renderizar todos los miembros del equipo', () => {
     render(<CardProfileTeam />);
     const profiles = [
       "Kenny Salazar",
@@ -28,7 +28,7 @@ describe('CardProfileTeam component', () => {
     });
   });
 
-  it('should render the contact link for each profile', () => {
+  it('debería renderizar el enlace de contacto para cada perfil', () => {
     render(<CardProfileTeam />);
     const contactLinks = screen.getAllByRole('link', { name: /Contacta a/i });
     expect(contactLinks.length).toBe(5);
