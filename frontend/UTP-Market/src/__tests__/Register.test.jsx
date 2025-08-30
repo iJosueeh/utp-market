@@ -3,8 +3,8 @@ import { describe, it, expect } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import Register from '../pages/Register';
 
-describe('Register page', () => {
-  it('should render all form elements', () => {
+describe('Página de Registro', () => {
+  it('debería renderizar todos los elementos del formulario', () => {
     render(
       <MemoryRouter>
         <Register />
@@ -21,7 +21,7 @@ describe('Register page', () => {
     expect(screen.getByText(/¿Ya tienes una cuenta?/i)).not.toBeNull();
   });
 
-  it('should toggle password visibility', () => {
+  it('debería alternar la visibilidad de la contraseña', () => {
     render(
       <MemoryRouter>
         <Register />
@@ -40,7 +40,7 @@ describe('Register page', () => {
     expect(passwordInput.type).toBe('password');
   });
 
-  it('should toggle confirm password visibility', () => {
+  it('debería alternar la visibilidad de la contraseña de confirmación', () => {
     render(
       <MemoryRouter>
         <Register />
