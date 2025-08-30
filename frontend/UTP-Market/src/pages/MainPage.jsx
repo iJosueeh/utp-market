@@ -6,7 +6,7 @@ export default function MainPage() {
     return (
         <>
             <div className="main-page container-fluid px-0">
-                <div className="px-3">
+                <div>
                     <Navbar />
                     <header className="main-header">
                     </header>
