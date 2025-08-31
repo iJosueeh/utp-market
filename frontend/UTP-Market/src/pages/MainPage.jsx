@@ -2,7 +2,10 @@ import React from "react";
 import Navbar from "../components/common/Navbar";
 import FAQList from "../pages/features/faq/FAQList";
 import Footer from "../components/common/Footer";
-
+import Hero from "../pages/features/hero/Hero";
+import Emprendimiento from "../pages/features/Materiales/Emprendimiento";
+import Reseñas from "../pages/features/Materiales/Reseñas";
+import CardProfileTeam from "../pages/features/CardProfileTeam";
 
 export default function MainPage() {
     return (
