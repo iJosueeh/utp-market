@@ -4,7 +4,7 @@ import FAQList from '../pages/features/faq/FAQList';
 
 afterEach(cleanup);
 
-describe('FAQList', () => {
+describe('Lista de Preguntas Frecuentes', () => {
   const faqs = [
     {
       question: "¿Qué es UTP Market?",
@@ -28,12 +28,12 @@ describe('FAQList', () => {
     }
   ];
 
-  it('should render the main title', () => {
+  it('debería renderizar el título principal', () => {
     render(<FAQList />);
     expect(screen.getByText('Preguntas Frecuentes')).not.toBeNull();
   });
 
-  it('should render all FAQ questions', () => {
+  it('debería renderizar todas las preguntas frecuentes', () => {
     render(<FAQList />);
     
     faqs.forEach(faq => {
@@ -41,7 +41,7 @@ describe('FAQList', () => {
     });
   });
 
-  it('should render the correct number of FAQ cards', () => {
+  it('debería renderizar el número correcto de tarjetas de preguntas frecuentes', () => {
     const { container } = render(<FAQList />);
     const cards = container.querySelectorAll('.accordion-item');
     expect(cards.length).toBe(faqs.length);
