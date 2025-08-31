@@ -3,8 +3,8 @@ import { describe, it, expect } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import Login from '../pages/Login';
 
-describe('Login page', () => {
-  it('should render all form elements', () => {
+describe('Página de Login', () => {
+  it('debería renderizar todos los elementos del formulario', () => {
     render(
       <MemoryRouter>
         <Login />
@@ -19,7 +19,7 @@ describe('Login page', () => {
     expect(screen.getByText(/¿Aún no tienes una cuenta?/i)).not.toBeNull();
   });
 
-  it('should toggle password visibility', () => {
+  it('debería alternar la visibilidad de la contraseña', () => {
     render(
       <MemoryRouter>
         <Login />
