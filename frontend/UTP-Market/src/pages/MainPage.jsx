@@ -8,13 +8,26 @@ export default function MainPage() {
     return (
         <>
             <div className="main-page container-fluid px-0">
-                <div className="px-3">
+                <div>
                     <Navbar />
                     <header className="main-header">
                     </header>
+                       <Hero />
 
-                    <main className="content mt-5">
-                        <section className="bg-light py-5"> <FAQList /></section>
+                    <main className="content">
+                        <section className="bg-white ">
+                        <Emprendimiento />
+                            </section>
+                        <section className="bg-black py-5 mt-5">
+                           <Reseñas />
+                        </section>
+
+                        <section className="bg-light py-5 mt-5">
+                            <FAQList />
+                        </section>  
+                        <section className="bg-danger py-5 mt-5">
+                            <CardProfileTeam />
+                        </section>  
                     </main>
 
 
