@@ -4,16 +4,15 @@ const Hero = () => {
     return (
  <section className="container py-5"style={{ marginTop: "200px",marginBottom: "200px"}}>
       <div className="row align-items-center">
-        <div className="col-md-6 text-center mb-4 mb-md-0">
+        <div className="col-md-5 text-center mb-4 mb-md-0">
           <img
             src={image1}
             alt="UTP Market"
-            className="rounded-circle img-fluid shadow"
-            style={{ width: "550px", height: "450px", objectFit: "cover" }}
+            className="img-fluid rounded"
           />
         </div>
 
-        <div className="col-md-6">
+        <div className="col-md-6 ps-md-5">
           <h6 className="text-danger fw-bold">UTP - MARKET</h6>
           <h1 className="fw-bold text-dark">
             Tu marketplace confiable hecho por y para estudiantes UTP
