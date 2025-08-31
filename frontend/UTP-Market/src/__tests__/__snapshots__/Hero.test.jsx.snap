@@ -10,17 +10,16 @@ exports[`Hero component > debe coincidir con el snapshot 1`] = `
       class="row align-items-center"
     >
       <div
-        class="col-md-6 text-center mb-4 mb-md-0"
+        class="col-md-5 text-center mb-4 mb-md-0"
       >
         <img
           alt="UTP Market"
-          class="rounded-circle img-fluid shadow"
+          class="img-fluid rounded"
           src="/src/assets/image1.webp"
-          style="width: 550px; height: 450px; object-fit: cover;"
         />
       </div>
       <div
-        class="col-md-6"
+        class="col-md-6 ps-md-5"
       >
         <h6
           class="text-danger fw-bold"
