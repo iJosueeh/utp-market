@@ -3,9 +3,20 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [validated, setValidated] = useState(false);
 
     const togglePassword = () => {
         setShowPassword(!showPassword);
+    };
+
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        setValidated(true);
     };
 
     return (
@@ -38,7 +49,7 @@ const Login = () => {
                         </div>
 
                         {/* Formulario */}
-                        <form>
+                        <form noValidate className={validated ? 'was-validated' : ''} onSubmit={handleSubmit}>
                             <div className="mb-3">
                                 <label htmlFor="InputEmail" className="form-label">Correo institucional</label>
                                 <input
@@ -46,16 +57,21 @@ const Login = () => {
                                     className="form-control"
                                     id="InputEmail"
                                     placeholder="example@utp.edu.pe"
+                                    required
                                 />
+                                <div className="invalid-feedback">
+                                    Por favor, ingrese un correo electrónico válido.
+                                </div>
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="InputPassword" className="form-label">Contraseña</label>
-                                <div className="input-group">
+                                <div className="input-group has-validation">
                                     <input
                                         type={showPassword ? "text" : "password"}
                                         className="form-control"
                                         id="InputPassword"
                                         placeholder="************"
+                                        required
                                     />
                                     <button
                                         type="button"
@@ -64,6 +80,9 @@ const Login = () => {
                                     >
                                         <i className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"}`}></i>
                                     </button>
+                                    <div className="invalid-feedback">
+                                        Por favor, ingrese su contraseña.
+                                    </div>
                                 </div>
                                 <p className="mt-1 text-secondary small">
                                     Debe tener al menos 8 caracteres, con letras, números y símbolos.

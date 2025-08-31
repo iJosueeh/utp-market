@@ -1,7 +1,19 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const ResetPasswordPage = () => {
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+  };
+
   return (
     <div className='container-fluid vh-100 px-0' style={{ backgroundColor: '#F2F4F8' }}>
       <div className="container">
@@ -18,7 +30,7 @@ const ResetPasswordPage = () => {
                 <p className="text-muted">Ingresa tu correo institucional para recibir instrucciones</p>
               </div>
 
-              <form>
+              <form noValidate className={validated ? 'was-validated' : ''} onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label htmlFor="InputEmail" className="form-label">Correo institucional</label>
                   <input
@@ -26,7 +38,11 @@ const ResetPasswordPage = () => {
                     className="form-control"
                     id="InputEmail"
                     placeholder="example@utp.edu.pe"
+                    required
                   />
+                  <div className="invalid-feedback">
+                    Por favor, ingrese un correo electrónico válido.
+                  </div>
                 </div>
                 <button type="submit" className="btn btn-danger w-100">Enviar</button>
               </form>
@@ -41,4 +57,4 @@ const ResetPasswordPage = () => {
   )
 }
 
-export default ResetPasswordPage
+export default ResetPasswordPage;
