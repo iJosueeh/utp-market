@@ -6,7 +6,7 @@ import Hero from "../pages/features/hero/Hero";
 import Emprendimiento from "../pages/features/Materiales/Emprendimiento";
 import Reseñas from "../pages/features/Materiales/Reseñas";
 import CardProfileTeam from "../pages/features/CardProfileTeam";
-
+import Contacto from "../pages/features/contacto/contacto";
 export default function MainPage() {
     return (
         <>
@@ -32,7 +32,7 @@ export default function MainPage() {
                             <CardProfileTeam />
                         </section>  
                     </main>
-
+                    <Contacto/>
 
                     <Footer />
                     </div>
