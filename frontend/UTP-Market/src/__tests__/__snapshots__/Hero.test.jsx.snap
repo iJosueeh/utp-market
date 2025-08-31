@@ -1,0 +1,58 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Hero component > debe coincidir con el snapshot 1`] = `
+<div>
+  <section
+    class="container py-5"
+    style="margin-top: 200px; margin-bottom: 200px;"
+  >
+    <div
+      class="row align-items-center"
+    >
+      <div
+        class="col-md-6 text-center mb-4 mb-md-0"
+      >
+        <img
+          alt="UTP Market"
+          class="rounded-circle img-fluid shadow"
+          src="/src/assets/image1.webp"
+          style="width: 550px; height: 450px; object-fit: cover;"
+        />
+      </div>
+      <div
+        class="col-md-6"
+      >
+        <h6
+          class="text-danger fw-bold"
+        >
+          UTP - MARKET
+        </h6>
+        <h1
+          class="fw-bold text-dark"
+        >
+          Tu marketplace confiable hecho por y para estudiantes UTP
+        </h1>
+        <p
+          class="text-muted fs-5 mt-3"
+        >
+          Cada vez más estudiantes usan nuestra página para comprar y vender servicios, materiales, guías y otros recursos académicos.
+        </p>
+        <div
+          class="d-flex gap-3 mt-4"
+        >
+          <button
+            class="btn btn-danger px-4 py-2"
+          >
+            Explorar productos
+          </button>
+          <button
+            class="btn btn-outline-danger px-4 py-2"
+          >
+            Únete a la comunidad
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+`;
