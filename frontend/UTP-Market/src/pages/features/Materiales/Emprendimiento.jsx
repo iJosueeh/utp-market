@@ -7,6 +7,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Button, Form, Card } from "react-bootstrap";
 
 export default function Emprendimiento() {
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+  };
+
   const [show, setShow] = useState(false);
   const [selected, setSelected] = useState(null);
 
@@ -21,7 +33,7 @@ export default function Emprendimiento() {
       id: 1,
       titulo: "Tutorías",
       desc: "Apoyo académico entre estudiantes para reforzar materias clave.",
-      img : Tutoria,
+      img: Tutoria,
     },
 
     {
@@ -58,14 +70,14 @@ export default function Emprendimiento() {
                 alt={item.titulo}
                 className="img-fluid"
                 style={{ height: "200px", objectFit: "cover" }}
-                />
+              />
               <Card.Body>
                 <Card.Title>{item.titulo}</Card.Title>
                 <Card.Text>{item.desc}</Card.Text>
                 <Button
-                variant="dark"
-                className="w-100"
-                onClick={() => handleShow(item)}
+                  variant="dark"
+                  className="w-100"
+                  onClick={() => handleShow(item)}
                 ><p className="m-0">Más Información →</p>
                 </Button>
               </Card.Body>
@@ -80,18 +92,40 @@ export default function Emprendimiento() {
         </Modal.Header>
         <Modal.Body>
           <p>{selected?.desc}</p>
-          <Form>
-            <Form.Group className="mb-3" controlId="nombre">
+          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="validationCustom01">
               <Form.Label>Nombre</Form.Label>
-              <Form.Control type="text" placeholder="Ingresa tu nombre" />
+              <Form.Control
+                required
+                type="text"
+                placeholder="Ingresa tu nombre"
+              />
+              <Form.Control.Feedback type="invalid">
+                Por favor, ingresa tu nombre.
+              </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="email">
+            <Form.Group className="mb-3" controlId="validationCustom02">
               <Form.Label>Correo</Form.Label>
-              <Form.Control type="email" placeholder="correo@ejemplo.com" />
+              <Form.Control
+                required
+                type="email"
+                placeholder="correo@ejemplo.com"
+              />
+              <Form.Control.Feedback type="invalid">
+                Por favor, ingresa un correo válido.
+              </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="mensaje">
+            <Form.Group className="mb-3" controlId="validationCustom03">
               <Form.Label>Mensaje</Form.Label>
-              <Form.Control as="textarea" rows={3} />
+              <Form.Control
+                required
+                as="textarea"
+                rows={3}
+                placeholder="Escribe tu mensaje aquí"
+              />
+              <Form.Control.Feedback type="invalid">
+                Por favor, escribe un mensaje.
+              </Form.Control.Feedback>
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -99,7 +133,9 @@ export default function Emprendimiento() {
           <Button variant="secondary" onClick={handleClose}>
             Cerrar
           </Button>
-          <Button variant="primary">Enviar</Button>
+          <Button variant="primary" onClick={handleSubmit}>
+            Enviar
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>
