@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import feather from "feather-icons";
 
 
 import brandLogo from "../../assets/utpmarketlogo.png"; 
 
-const Navbar = ({  links = [] }) => {
+const Navbar = () => {
   return (
     <>
       {/* NAVBAR: wrapper principal de navegación */}
-      <nav className="navbar navbar-expand-lg navbar-light bg-dark fixed-top ">
+
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top ">
         {/* CONTAINER: contiene a los grupos de la izquierda y derecha*/}
         <div className="container-fluid px-0">
 
@@ -32,27 +32,26 @@ const Navbar = ({  links = [] }) => {
               
 
               {/* Carrito de compras (Se esconde en pantallas pequeñas)*/}
-              <span className="d-none d-md-block">
+              <span className="d-none d-lg-block">
                 <a href="#" className="btn btn-icon btn-dark rounded-circle bg-dark">
                   <i className="bi bi-cart2 align-middle"></i>
                 </a>
               </span>
 
-              <span className="d-none d-md-block">
+              <span className="d-none d-lg-block">
                 <a href="#" className="btn btn-icon btn-dark rounded-circle bg-dark">
                   <i className="bi bi-bell align-middle"></i>
                 </a>
               </span>
 
-              {/* Botones de autenticación*/}
-              <Link to="/login" className="btn btn-dark text-white ms-2 d-lg-block ">Iniciar Sesion</Link>
-              <Link to="/register" className="btn btn-dark mx-2 me-4 d-none d-lg-block">Registrarse</Link>
+              
+              
 
-              {/*  Icono de usuario - (Deshabilitado temporalmente)
-              <a href="#" className="btn btn-icon btn-dark rounded-circle bg-dark me-4">
+              {/* Boton de perfil (Visible en pantallas grandes) */}
+              <Link to="/login" className="btn btn-icon btn-dark rounded-circle bg-dark me-4 d-none d-lg-block">
                   <i className="bi bi-person align-middle"></i>
-              </a>
-              */}    
+              </Link>
+                
 
               
               {/* Alternador movil: alterna el colapso*/}
@@ -73,8 +72,8 @@ const Navbar = ({  links = [] }) => {
 
 
           {/* Barra de navegación con los links principales de la pagina principal (Colapsa en moviles) */}
-          <div className="collapse navbar-collapse" id="navbar-default2">
-            <ul className="navbar-nav mx-1">
+          <div className="collapse navbar-collapse justify-content-center" id="navbar-default2">
+            <ul className="navbar-nav mx-1 text-center">
               {/* Items de navegación principales*/}
               {/* Pagina de inicio */}
               <li className="nav-item mx-2">
@@ -96,7 +95,7 @@ const Navbar = ({  links = [] }) => {
                 <a className="nav-link text-white " aria-current="page" href="#">Ayuda</a>
               </li>
 
-              {/* Pagina de venders */}  
+              {/* Pagina de vender */}  
               <li className="nav-item mx-2">
                 <a className="nav-link text-white " aria-current="page" href="#">Vender</a>
               </li>
@@ -117,7 +116,7 @@ const Navbar = ({  links = [] }) => {
                     <i className="bi bi-caret-down-fill ms-2 align-middle"></i>
                   </button>
 
-                  {/* Dropdown menu: nested categories and items */}
+                  {/* Menu: Listado de categorias */}
                   <ul className="dropdown-menu rounded shadow-lg border-0 py-3" aria-labelledby="dropdownMenuButton1">
 
                     <li><a href="#" className="dropdown-item px-4 py-2">Tutorías</a></li>
@@ -126,6 +125,21 @@ const Navbar = ({  links = [] }) => {
                     <li><a href="#" className="dropdown-item px-4 py-2">Materiales</a></li>
 
                   </ul>
+                </div>
+              </li>
+
+              {/* Iconos para movil */}
+              <li className="nav-item d-lg-none mt-3">
+                <div className="d-flex justify-content-center">
+                    <a href="#" className="btn btn-icon btn-dark rounded-circle bg-dark mx-2">
+                        <i className="bi bi-cart2 align-middle"></i>
+                    </a>
+                    <a href="#" className="btn btn-icon btn-dark rounded-circle bg-dark mx-2">
+                        <i className="bi bi-bell align-middle"></i>
+                    </a>
+                    <Link to="/login" className="btn btn-icon btn-dark rounded-circle bg-dark mx-2">
+                        <i className="bi bi-person align-middle"></i>
+                    </Link>
                 </div>
               </li>
 
