@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../components/common/Navbar";
-import FAQList from "../components/a/FAQList";
+import FAQList from "../pages/features/faq/FAQList";
 import Footer from "../components/common/Footer";
 
 
