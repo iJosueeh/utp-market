@@ -1,11 +1,12 @@
 import React from "react";
 import Navbar from "../components/common/Navbar";
 import FAQList from "../pages/features/faq/FAQList";
-import CardProfileTeam from "../pages/features/CardProfileTeam";
-import Hero from "../pages/features/hero/Hero"
+import Footer from "../components/common/Footer";
+import Hero from "../pages/features/hero/Hero";
 import Emprendimiento from "../pages/features/Materiales/Emprendimiento";
 import Reseñas from "../pages/features/Materiales/Reseñas";
-import Contacto from "../pages/features/contacto/contacto";
+import CardProfileTeam from "../pages/features/CardProfileTeam";
+
 export default function MainPage() {
     return (
         <>
@@ -31,11 +32,11 @@ export default function MainPage() {
                             <CardProfileTeam />
                         </section>  
                     </main>
-                    <Contacto/>
-                    <footer className="main-footer">
-                    </footer>
+
+
+                    <Footer />
+                    </div>
                 </div>
-            </div>
-        </>
-    );
+            </>
+            );
 }
