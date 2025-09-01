@@ -59,7 +59,7 @@ export default function Emprendimiento() {
   return (
     <div className="container my-5">
       <h5 className="text-black text-center">MATERIALES</h5>
-      <h2 className="text-center mb-4">Emprendimientos estudiantiles</h2>
+      <h2 className="text-center fw-bold mb-4">Emprendimientos estudiantiles</h2>
 
       <div className="row">
         {data.map((item) => (

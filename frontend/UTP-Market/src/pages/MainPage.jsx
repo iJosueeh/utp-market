@@ -15,28 +15,28 @@ export default function MainPage() {
                     <Navbar />
                     <header className="main-header">
                     </header>
-                       <Hero />
+                    <Hero />
 
                     <main className="content">
                         <section className="bg-white ">
-                        <Emprendimiento />
-                            </section>
+                            <Emprendimiento />
+                        </section>
                         <section className="bg-black py-5 mt-5">
-                           <Reseñas />
+                            <Reseñas />
                         </section>
 
                         <section className="bg-light py-5 mt-5">
                             <FAQList />
-                        </section>  
+                        </section>
                         <section className="bg-danger py-5 mt-5">
                             <CardProfileTeam />
-                        </section>  
+                        </section>
                     </main>
-                    <Contacto/>
+                    <Contacto />
 
                     <Footer />
-                    </div>
                 </div>
-            </>
-            );
+            </div>
+        </>
+    );
 }
