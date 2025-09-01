@@ -7,6 +7,7 @@ import Emprendimiento from "../pages/features/Materiales/Emprendimiento";
 import Reseñas from "../pages/features/Materiales/Reseñas";
 import CardProfileTeam from "../pages/features/CardProfileTeam";
 import Contacto from "../pages/features/contacto/contacto";
+import Chatbot from "../pages/features/chatbot/Chatbot";
 export default function MainPage() {
     return (
         <>
@@ -33,7 +34,7 @@ export default function MainPage() {
                         </section>
                     </main>
                     <Contacto />
-
+                    <Chatbot />
                     <Footer />
                 </div>
             </div>
