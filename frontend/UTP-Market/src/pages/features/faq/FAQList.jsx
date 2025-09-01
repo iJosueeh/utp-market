@@ -24,7 +24,7 @@ export default function FAQList() {
 
   return (
     <div className="container-fluid px-0 mt-4">
-      <h2 className="mb-5 text-center text-danger">Preguntas Frecuentes</h2>
+      <h2 className="mb-5 fw-bold text-center text-danger">Preguntas Frecuentes</h2>
 
       <div className="accordion w-75 mx-auto" id="faqAccordion">
         {faqs.map((faq, index) => (

@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import brandLogo from "../../assets/utpmarketlogo.png";
 <hr className="border border-1 border-white opacity-50" />
 
-const Footer = ({ links = [] }) => {
+const Footer = () => {
     return (
         <>
             {/* footer */}
@@ -61,17 +61,11 @@ const Footer = ({ links = [] }) => {
                             </div>
                         </div>
 
-
-
-
                         <div className="row">
                             <div className="col-12 text-center mt-4">
                                 <span> &copy; UTP MARKET  {new Date().getFullYear()}. Todos los derechos reservados</span>
                             </div>
                         </div>
-
-                        {/* Links */}
-
                     </div>
                 </div>
             </footer>

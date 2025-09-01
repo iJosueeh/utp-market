@@ -10,6 +10,7 @@ import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import MainPage from './pages/MainPage';
 import ForgotPassword from './pages/features/forgotPassword/resetPasswordPage.jsx';
+
 //Función, que dependiendo de las solicitudes/rutas, renderiza los componentes:
 //MainPage, Login, Register, Profile, AdminProfile.
 function App() {
