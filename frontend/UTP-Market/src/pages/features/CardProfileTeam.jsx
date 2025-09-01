@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import Kath from "../../assets/img_M/avatar.png";
+
 
 export default function CardProfileTeam() {
   const [showToast, setShowToast] = useState(false);
@@ -58,7 +60,7 @@ export default function CardProfileTeam() {
       },
     },
     {
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb09eSK9BC2vdtjv5KAJ5K771ImELEnc6Jxg&s",
+      image: Kath,
       name: "Katherine Salas",
       role: "Developer",
       email: "cmo@empresa.com",
