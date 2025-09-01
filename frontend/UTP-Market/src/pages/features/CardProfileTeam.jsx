@@ -24,15 +24,15 @@ export default function CardProfileTeam() {
   const profiles = [
     {
       image:
-        "https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/16620/production/_91408619_55df76d5-2245-41c1-8031-07a4da3f313f.jpg",
+        "https://avatars.githubusercontent.com/u/60082132?v=4",
       name: "Kenny Salazar",
       role: "Developer",
       email: "ceo@empresa.com",
       social: {
-        linkedin: "https://linkedin.com/in/kenny",
-        twitter: "https://twitter.com/kenny",
-        instagram: "https://instagram.com/kenny",
-        facebook: "https://facebook.com/kenny",
+        linkedin: "",
+        twitter: "",
+        instagram: "",
+        facebook: "",
       },
     },
     {
@@ -48,15 +48,15 @@ export default function CardProfileTeam() {
       },
     },
     {
-      image: "https://i.pinimg.com/474x/13/cd/7b/13cd7b0470f16386f9699dc337871fa6.jpg",
+      image: "https://avatars.githubusercontent.com/u/209205426?v=4",
       name: "Alexander Sinte",
-      role: "UX Designer & Co-founder",
+      role: "Developer",
       email: "cto@empresa.com",
       social: {
-        linkedin: "https://linkedin.com/in/alexander",
-        twitter: "https://twitter.com/alexander",
-        instagram: "https://instagram.com/alexander",
-        facebook: "https://facebook.com/alexander",
+        linkedin: "https://www.linkedin.com/in/alexander-sinte-042261346/",
+        twitter: "",
+        instagram: "https://www.instagram.com/_x4nnax/",
+        facebook: "",
       },
     },
     {
@@ -65,22 +65,22 @@ export default function CardProfileTeam() {
       role: "Developer",
       email: "cmo@empresa.com",
       social: {
-        linkedin: "https://linkedin.com/in/katherine",
-        twitter: "https://twitter.com/katherine",
-        instagram: "https://instagram.com/katherine",
-        facebook: "https://facebook.com/katherine",
+        linkedin: "https://www.linkedin.com/in/katherine-salas-quiroz-472506337/",
+        twitter: "",
+        instagram: "https://www.instagram.com/1_kath_6/",
+        facebook: "",
       },
     },
     {
-      image: "https://ih1.redbubble.net/image.697497590.6072/papergc,500x,w,f8f8f8-pad,750x1000,f8f8f8.u5.jpg",
+      image: "https://avatars.githubusercontent.com/u/226939243?v=4",
       name: "Ian Callirgos",
       role: "Developer",
       email: "cfo@empresa.com",
       social: {
-        linkedin: "https://linkedin.com/in/ian",
-        twitter: "https://twitter.com/ian",
-        instagram: "https://instagram.com/ian",
-        facebook: "https://facebook.com/ian",
+        linkedin: "",
+        twitter: "",
+        instagram: "https://www.instagram.com/engel_1017",
+        facebook: "https://www.facebook.com/ArturoCallirgos10",
       },
     },
   ];
@@ -104,7 +104,7 @@ export default function CardProfileTeam() {
               <img
                 src={profile.image}
                 alt={profile.name}
-                className="img-fluid opacity-75 object-fit-cover "
+                className="img-fluid object-fit-cover "
                 style={{
                   height: "200px",
                   width: "190px"
