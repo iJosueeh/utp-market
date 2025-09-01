@@ -103,7 +103,7 @@ function Chatbot() {
               <h6 className="mb-0 fw-bold">Chatea con nosotros!</h6>
               <div>
                 <i className="bi bi-dash-lg me-2" onClick={() => setIsOpen(false)} style={{cursor: 'pointer'}}></i>
-                <i className="bi bi-x-lg" onClick={() => setIsOpen(false)} style={{cursor: 'pointer'}}></i>
+                <i className="bi bi-x-lg" onClick={() => setIsOpen(false)} style={{cursor: 'pointer'}} role="button" aria-label="close chat"></i>
               </div>
             </div>
             <div className="d-flex align-items-center p-3 bg-white border-top border-bottom">
@@ -159,14 +159,15 @@ function Chatbot() {
               className="btn btn-primary rounded-circle"
               onClick={enviarMensaje}
               disabled={cargando}
-              style={{width: '40px', height: '40px'}}>
+              style={{width: '40px', height: '40px'}} aria-label="send message">
+                
               <i className="bi bi-send"></i>
             </button>
           </div>
         </div>
       </div>
       
-      <div className="chatbot-fab" onClick={toggleChat}>
+      <div className="chatbot-fab" onClick={toggleChat} role="button" aria-label="open chat">
         <i className={`bi ${isOpen ? 'bi-x-lg' : 'bi-chat-dots'}`}></i>
       </div>
     </>
