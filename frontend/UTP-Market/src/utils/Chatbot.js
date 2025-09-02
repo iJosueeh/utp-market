@@ -1,6 +1,12 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const ai = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+
+if (!apiKey) {
+  console.error("VITE_GEMINI_API_KEY is not set. Please add it to your .env file or configure it in your deployment environment.");
+}
+
+const ai = new GoogleGenerativeAI(apiKey);
 
 const systemPrompt = `
 Eres un asistente virtual para UTP Market, un marketplace creado por y para estudiantes de la UTP (Universidad Tecnológica del Perú).
@@ -25,6 +31,9 @@ Reglas:
 `;
 
 async function generateResponse(prompt) {
+  if (!apiKey) {
+    return "¡Uy! La configuración de la API no está completa. Por favor, contacta al administrador.";
+  }
   try {
     const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
     const fullPrompt = `${systemPrompt}\n\nUsuario: ${prompt}\nAsistente:`
