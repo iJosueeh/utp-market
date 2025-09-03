@@ -4,6 +4,26 @@ import { Link } from 'react-router-dom';
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
+    const [validated, setValidated] = useState(false);
+
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        const password = form.elements.password.value;
+        const confirmPassword = form.elements.confirmPassword.value;
+
+        if (password !== confirmPassword) {
+            form.elements.confirmPassword.setCustomValidity("Las contraseñas no coinciden.");
+        } else {
+            form.elements.confirmPassword.setCustomValidity("");
+        }
+
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        setValidated(true);
+    };
 
     return (
         <div className="container-fluid vh-100 px-0">
@@ -32,29 +52,39 @@ const Register = () => {
                             />
                             <h2 className="fw-bold mt-3">Regístrate</h2>
                         </div>
-                        <form>
+                        <form noValidate className={validated ? 'was-validated' : ''} onSubmit={handleSubmit}>
                             <div className="row">
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="nombre" className="form-label">Nombres</label>
-                                    <input type="text" className="form-control" id="nombre" placeholder="John" />
+                                    <input type="text" className="form-control" id="nombre" placeholder="John" required />
+                                    <div className="invalid-feedback">
+                                        Por favor, ingrese su nombre.
+                                    </div>
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="apellidos" className="form-label">Apellidos</label>
-                                    <input type="text" className="form-control" id="apellidos" placeholder="Doe" />
+                                    <input type="text" className="form-control" id="apellidos" placeholder="Doe" required />
+                                    <div className="invalid-feedback">
+                                        Por favor, ingrese sus apellidos.
+                                    </div>
                                 </div>
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="email" className="form-label">Correo electrónico</label>
-                                <input type="email" className="form-control" id="email" placeholder="example@utp.edu.pe" />
+                                <input type="email" className="form-control" id="email" placeholder="example@utp.edu.pe" required />
+                                <div className="invalid-feedback">
+                                    Por favor, ingrese un correo electrónico válido.
+                                </div>
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="password" className="form-label">Contraseña</label>
-                                <div className="input-group">
+                                <div className="input-group has-validation">
                                     <input
                                         type={showPassword ? "text" : "password"}
                                         className="form-control"
                                         id="password"
                                         placeholder="************"
+                                        required
                                     />
                                     <button
                                         type="button"
@@ -63,16 +93,20 @@ const Register = () => {
                                     >
                                         <i className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"}`}></i>
                                     </button>
+                                    <div className="invalid-feedback">
+                                        Por favor, ingrese una contraseña.
+                                    </div>
                                 </div>
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="confirmPassword" className="form-label">Confirmar contraseña</label>
-                                <div className="input-group">
+                                <div className="input-group has-validation">
                                     <input
                                         type={showConfirm ? "text" : "password"}
                                         className="form-control"
                                         id="confirmPassword"
                                         placeholder="************"
+                                        required
                                     />
                                     <button
                                         type="button"
@@ -81,6 +115,9 @@ const Register = () => {
                                     >
                                         <i className={`bi ${showConfirm ? "bi-eye-slash" : "bi-eye"}`}></i>
                                     </button>
+                                    <div className="invalid-feedback">
+                                        Las contraseñas no coinciden o el campo está vacío.
+                                    </div>
                                 </div>
                             </div>
                             <div className="form-check mb-3">

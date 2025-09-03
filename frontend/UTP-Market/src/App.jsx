@@ -8,7 +8,9 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import './App.css';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
-import MainPage from './pages/MainPage'
+import MainPage from './pages/MainPage';
+import ForgotPassword from './pages/features/forgotPassword/resetPasswordPage.jsx';
+
 //Función, que dependiendo de las solicitudes/rutas, renderiza los componentes:
 //MainPage, Login, Register, Profile, AdminProfile.
 function App() {
@@ -18,6 +20,7 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />}></Route>
         {/* <Route path="/profile" element={<Profile />} /> */}
         {/* <Route path="/admin" element={<AdminProfile />} /> */}
       </Routes>

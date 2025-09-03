@@ -1,0 +1,50 @@
+
+.chatbot-fab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  background-color:#b80c34; /* Bootstrap Primary Blue */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.8rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  cursor: pointer;
+  z-index: 1050;
+  transition: transform 0.2s ease-in-out;
+}
+
+.chatbot-fab:hover {
+  transform: scale(1.1);
+}
+
+.chatbot-widget-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 90%;
+  max-width: 400px; /* Same as chatbot card */
+  height: 80vh;
+  max-height: 700px;
+  z-index: 1050;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  transform-origin: bottom right;
+}
+
+.chatbot-widget-container.closed {
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chatbot-widget-container.open {
+  transform: scale(1);
+  opacity: 1;
+}
+.msgbg-primary {
+  background-color: #b80c34 ; /* Bootstrap Primary Blue */
+}
