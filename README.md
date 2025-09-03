@@ -139,4 +139,21 @@ spring.datasource.password=tu_password
 ```
 mvn spring-boot:run
 ```
----
+
+## Frontend (React)
+
+Para ejecutar el frontend, sigue estos pasos:
+
+1.  Navega al directorio del frontend:
+    ```bash
+    cd frontend/UTP-Market
+    ```
+2.  Instala las dependencias:
+    ```bash
+    npm install
+    ```
+3.  Inicia el servidor de desarrollo:
+    ```bash
+    npm run dev
+    ```
+    El frontend se ejecutará en `http://localhost:5173` (o un puerto similar, si el 5173 está en uso).
