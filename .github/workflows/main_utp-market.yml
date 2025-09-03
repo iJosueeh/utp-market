@@ -52,4 +52,4 @@ jobs:
           app-name: 'UTP-Market'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E7CE80F8DEE54948A9CE72BF42310C74 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A5E0F32EBA22433EAD2871F8340E4934 }}
