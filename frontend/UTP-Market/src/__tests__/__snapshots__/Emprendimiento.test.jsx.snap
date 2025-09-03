@@ -1,0 +1,284 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Emprendimiento component > matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="container my-5"
+  >
+    <h5
+      class="text-black text-center"
+    >
+      MATERIALES
+    </h5>
+    <h2
+      class="text-center fw-bold mb-4"
+    >
+      Emprendimientos estudiantiles
+    </h2>
+    <div
+      class="row"
+    >
+      <div
+        class="col-md-3 mb-4"
+      >
+        <div
+          class="card h-100 shadow-sm"
+        >
+          <img
+            alt="Tutorías"
+            class="card-img-top img-fluid"
+            src="/src/assets/img_M/tutoria.jpg"
+            style="height: 200px; object-fit: cover;"
+          />
+          <div
+            class="card-body"
+          >
+            <h5
+              class="card-title"
+            >
+              Tutorías
+            </h5>
+            <p
+              class="card-text"
+            >
+              Apoyo académico entre estudiantes para reforzar materias clave.
+            </p>
+            <button
+              class="btn btn-dark w-100"
+              data-bs-target="#infoModal"
+              data-bs-toggle="modal"
+            >
+              Más Información →
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-md-3 mb-4"
+      >
+        <div
+          class="card h-100 shadow-sm"
+        >
+          <img
+            alt="Guías de estudio"
+            class="card-img-top img-fluid"
+            src="/src/assets/img_M/guias.jpg"
+            style="height: 200px; object-fit: cover;"
+          />
+          <div
+            class="card-body"
+          >
+            <h5
+              class="card-title"
+            >
+              Guías de estudio
+            </h5>
+            <p
+              class="card-text"
+            >
+              Resúmenes y materiales hechos por estudiantes para facilitar el aprendizaje.
+            </p>
+            <button
+              class="btn btn-dark w-100"
+              data-bs-target="#infoModal"
+              data-bs-toggle="modal"
+            >
+              Más Información →
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-md-3 mb-4"
+      >
+        <div
+          class="card h-100 shadow-sm"
+        >
+          <img
+            alt="Ventas de snack"
+            class="card-img-top img-fluid"
+            src="/src/assets/img_M/ventas.jpg"
+            style="height: 200px; object-fit: cover;"
+          />
+          <div
+            class="card-body"
+          >
+            <h5
+              class="card-title"
+            >
+              Ventas de snack
+            </h5>
+            <p
+              class="card-text"
+            >
+              Snacks accesibles y prácticos dentro del campus.
+            </p>
+            <button
+              class="btn btn-dark w-100"
+              data-bs-target="#infoModal"
+              data-bs-toggle="modal"
+            >
+              Más Información →
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-md-3 mb-4"
+      >
+        <div
+          class="card h-100 shadow-sm"
+        >
+          <img
+            alt="Materiales"
+            class="card-img-top img-fluid"
+            src="/src/assets/img_M/mt.jpg"
+            style="height: 200px; object-fit: cover;"
+          />
+          <div
+            class="card-body"
+          >
+            <h5
+              class="card-title"
+            >
+              Materiales
+            </h5>
+            <p
+              class="card-text"
+            >
+              Intercambio y venta de útiles y herramientas académicas.
+            </p>
+            <button
+              class="btn btn-dark w-100"
+              data-bs-target="#infoModal"
+              data-bs-toggle="modal"
+            >
+              Más Información →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      aria-hidden="true"
+      aria-labelledby="infoModalLabel"
+      class="modal fade"
+      id="infoModal"
+      tabindex="-1"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered"
+      >
+        <div
+          class="modal-content"
+        >
+          <form
+            class="needs-validation "
+            novalidate=""
+          >
+            <div
+              class="modal-header"
+            >
+              <h5
+                class="modal-title"
+                id="infoModalLabel"
+              />
+              <button
+                aria-label="Cerrar"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                type="button"
+              />
+            </div>
+            <div
+              class="modal-body"
+            >
+              <p />
+              <div
+                class="mb-3"
+              >
+                <label
+                  class="form-label"
+                  for="nombre"
+                >
+                  Nombre
+                </label>
+                <input
+                  class="form-control"
+                  id="nombre"
+                  required=""
+                  type="text"
+                />
+                <div
+                  class="invalid-feedback"
+                >
+                  Por favor, ingresa tu nombre.
+                </div>
+              </div>
+              <div
+                class="mb-3"
+              >
+                <label
+                  class="form-label"
+                  for="correo"
+                >
+                  Correo
+                </label>
+                <input
+                  class="form-control"
+                  id="correo"
+                  required=""
+                  type="email"
+                />
+                <div
+                  class="invalid-feedback"
+                >
+                  Por favor, ingresa un correo válido.
+                </div>
+              </div>
+              <div
+                class="mb-3"
+              >
+                <label
+                  class="form-label"
+                  for="mensaje"
+                >
+                  Mensaje
+                </label>
+                <textarea
+                  class="form-control"
+                  id="mensaje"
+                  required=""
+                  rows="3"
+                />
+                <div
+                  class="invalid-feedback"
+                >
+                  Por favor, escribe un mensaje.
+                </div>
+              </div>
+            </div>
+            <div
+              class="modal-footer"
+            >
+              <button
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+                type="button"
+              >
+                Cerrar
+              </button>
+              <button
+                class="btn btn-primary"
+                type="submit"
+              >
+                Enviar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

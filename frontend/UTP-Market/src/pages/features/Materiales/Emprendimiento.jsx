@@ -4,29 +4,11 @@ import Guias from "../../../assets/img_M/guias.jpg";
 import Ventas from "../../../assets/img_M/ventas.jpg";
 import Material from "../../../assets/img_M/mt.jpg";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Modal, Button, Form, Card } from "react-bootstrap";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 export default function Emprendimiento() {
-  const [validated, setValidated] = useState(false);
-
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-    setValidated(true);
-  };
-
-  const [show, setShow] = useState(false);
   const [selected, setSelected] = useState(null);
-
-  const handleClose = () => setShow(false);
-  const handleShow = (item) => {
-    setSelected(item);
-    setShow(true);
-  };
+  const [validated, setValidated] = useState(false);
 
   const data = [
     {
@@ -35,7 +17,6 @@ export default function Emprendimiento() {
       desc: "Apoyo académico entre estudiantes para reforzar materias clave.",
       img: Tutoria,
     },
-
     {
       id: 2,
       titulo: "Guías de estudio",
@@ -56,6 +37,18 @@ export default function Emprendimiento() {
     },
   ];
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+    } else {
+      alert("Formulario enviado correctamente ✅");
+      // aquí puedes manejar el envío real
+    }
+    setValidated(true);
+  };
+
   return (
     <div className="container my-5">
       <h5 className="text-black text-center">MATERIALES</h5>
@@ -64,80 +57,121 @@ export default function Emprendimiento() {
       <div className="row">
         {data.map((item) => (
           <div className="col-md-3 mb-4" key={item.id}>
-            <Card className="h-100 shadow-sm">
-              <Card.Img variant="top"
+            <div className="card h-100 shadow-sm">
+              <img
                 src={item.img}
                 alt={item.titulo}
-                className="img-fluid"
+                className="card-img-top img-fluid"
                 style={{ height: "200px", objectFit: "cover" }}
               />
-              <Card.Body>
-                <Card.Title>{item.titulo}</Card.Title>
-                <Card.Text>{item.desc}</Card.Text>
-                <Button
-                  variant="dark"
-                  className="w-100"
-                  onClick={() => handleShow(item)}
-                ><p className="m-0">Más Información →</p>
-                </Button>
-              </Card.Body>
-            </Card>
+              <div className="card-body">
+                <h5 className="card-title">{item.titulo}</h5>
+                <p className="card-text">{item.desc}</p>
+                <button
+                  className="btn btn-dark w-100"
+                  data-bs-toggle="modal"
+                  data-bs-target="#infoModal"
+                  onClick={() => setSelected(item)}
+                >
+                  Más Información →
+                </button>
+              </div>
+            </div>
           </div>
         ))}
       </div>
 
-      <Modal show={show} onHide={handleClose} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>{selected?.titulo}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>{selected?.desc}</p>
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="validationCustom01">
-              <Form.Label>Nombre</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Ingresa tu nombre"
-              />
-              <Form.Control.Feedback type="invalid">
-                Por favor, ingresa tu nombre.
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="validationCustom02">
-              <Form.Label>Correo</Form.Label>
-              <Form.Control
-                required
-                type="email"
-                placeholder="correo@ejemplo.com"
-              />
-              <Form.Control.Feedback type="invalid">
-                Por favor, ingresa un correo válido.
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="validationCustom03">
-              <Form.Label>Mensaje</Form.Label>
-              <Form.Control
-                required
-                as="textarea"
-                rows={3}
-                placeholder="Escribe tu mensaje aquí"
-              />
-              <Form.Control.Feedback type="invalid">
-                Por favor, escribe un mensaje.
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cerrar
-          </Button>
-          <Button variant="primary" onClick={handleSubmit}>
-            Enviar
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      {/* Modal Bootstrap puro */}
+      <div
+        className="modal fade"
+        id="infoModal"
+        tabIndex="-1"
+        aria-labelledby="infoModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <form
+              className={`needs-validation ${validated ? "was-validated" : ""}`}
+              noValidate
+              onSubmit={handleSubmit}
+            >
+              <div className="modal-header">
+                <h5 className="modal-title" id="infoModalLabel">
+                  {selected?.titulo}
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Cerrar"
+                ></button>
+              </div>
+              <div className="modal-body">
+                <p>{selected?.desc}</p>
+
+                <div className="mb-3">
+                  <label htmlFor="nombre" className="form-label">
+                    Nombre
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="nombre"
+                    required
+                  />
+                  <div className="invalid-feedback">
+                    Por favor, ingresa tu nombre.
+                  </div>
+                </div>
+
+                <div className="mb-3">
+                  <label htmlFor="correo" className="form-label">
+                    Correo
+                  </label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="correo"
+                    required
+                  />
+                  <div className="invalid-feedback">
+                    Por favor, ingresa un correo válido.
+                  </div>
+                </div>
+
+                <div className="mb-3">
+                  <label htmlFor="mensaje" className="form-label">
+                    Mensaje
+                  </label>
+                  <textarea
+                    className="form-control"
+                    id="mensaje"
+                    rows="3"
+                    required
+                  ></textarea>
+                  <div className="invalid-feedback">
+                    Por favor, escribe un mensaje.
+                  </div>
+                </div>
+              </div>
+
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Cerrar
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  Enviar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
