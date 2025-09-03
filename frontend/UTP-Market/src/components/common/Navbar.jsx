@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import brandLogo from "../../assets/utpmarketlogo.png";
+import Carrito from "../../pages/features/carrito/Carrito";
 const Navbar = () => {
+  const [showCart, setShowCart] = useState(false);
+  const cartRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (cartRef.current && !cartRef.current.contains(event.target)) {
+        setShowCart(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [cartRef]);
   return (
     <>
       {/* NAVBAR: wrapper principal de navegación */}
@@ -14,7 +29,7 @@ const Navbar = () => {
             <a className="navbar-brand ms-5" href="/">
               <img
                 src={brandLogo}
-                alt="Geeks high quality website templates created with Bootstrap 5."
+                alt=""
                 style={{ height: 45 }}
               />
             </a>
@@ -24,11 +39,20 @@ const Navbar = () => {
           <div className="order-lg-3">
             <div className="d-flex align-items-center">
               {/* Carrito de compras (Se esconde en pantallas pequeñas)*/}
-              <span className="d-none d-lg-block">
-                <a href="#" className="btn btn-icon btn-dark rounded-circle bg-dark">
+              <div className="position-relative d-none d-lg-block" ref={cartRef}> 
+                <button type="button" className="btn btn-icon btn-dark rounded-circle bg-dark" onClick={() => setShowCart(!showCart)}>
                   <i className="bi bi-cart2 align-middle"></i>
-                </a>
-              </span>
+                </button>
+                {showCart && (
+                  <div className="dropdown-menu dropdown-menu-end show p-3" style={{ position: 'absolute', top: '120%', right: 0, width: '550px' }}>
+                    <div className="d-flex justify-content-between align-items-center mb-3">
+                      <h5 className="mb-0">Carrito de Compras</h5>
+                      <Link to="/" className="btn btn-sm text-white " style={{background:'#B50D30'}}>Ver todo</Link>
+                    </div>
+                    <Carrito />
+                  </div>
+                )}
+              </div>
               <span className="d-none d-lg-block">
                 <a href="#" className="btn btn-icon btn-dark rounded-circle bg-dark">
                   <i className="bi bi-bell align-middle"></i>
