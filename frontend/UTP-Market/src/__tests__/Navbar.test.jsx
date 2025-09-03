@@ -3,16 +3,17 @@ import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import Navbar from '../components/common/Navbar';
+import brandLogo from '../assets/utpmarketlogo.png';
 
 describe('Componente Navbar', () => {
   it('debería renderizar el logo de la marca', () => {
-    render(
+    const { container } = render(
       <MemoryRouter>
         <Navbar />
       </MemoryRouter>
     );
-    const brandLogo = screen.getByAltText(/Geeks high quality website templates created with Bootstrap 5./i);
-    expect(brandLogo).not.toBeNull();
+    const brandLogoImg = container.querySelector('img');
+    expect(brandLogoImg).toHaveAttribute('src', brandLogo);
   });
 
   it('debería renderizar los enlaces de navegación principales', () => {
