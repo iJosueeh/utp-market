@@ -26,7 +26,7 @@ const Login = () => {
                 {/* Imagen izquierda */}
                 <div className="col-md-6 d-none d-md-block">
                     <img
-                        src="/background/login_bg.webp"
+                        src="https://res.cloudinary.com/dy8qrtq40/image/upload/v1756951247/login-img_yuvzu6.webp"
                         alt="UTP Market Login Background"
                         className="img-fluid w-100 h-100"
                         style={{ objectFit: 'cover' }}
@@ -40,7 +40,7 @@ const Login = () => {
                         {/* Encabezado */}
                         <div className="text-center mb-4">
                             <img
-                                src="/UTP-MARKET.png"
+                                src="https://res.cloudinary.com/dy8qrtq40/image/upload/v1756951405/utpmarket-logo_otqu6x.webp"
                                 alt="UTP Market Logo"
                                 style={{ width: "90px" }}
                             />
