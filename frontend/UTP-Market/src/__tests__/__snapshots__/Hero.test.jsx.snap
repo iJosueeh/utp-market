@@ -15,7 +15,7 @@ exports[`Hero component > debe coincidir con el snapshot 1`] = `
         <img
           alt="UTP Market"
           class="img-fluid rounded"
-          src="/src/assets/image1.webp"
+          src="https://res.cloudinary.com/dy8qrtq40/image/upload/v1756951052/hero-img_q7z7cu.webp"
         />
       </div>
       <div

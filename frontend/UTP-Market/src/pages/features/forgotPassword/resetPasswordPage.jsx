@@ -22,7 +22,7 @@ const ResetPasswordPage = () => {
             <div className="bg-white p-4 rounded-3 shadow-sm">
               <div className="text-center mb-4">
                 <img
-                  src="/UTP-MARKET.png"
+                  src="https://res.cloudinary.com/dy8qrtq40/image/upload/v1756951405/utpmarket-logo_otqu6x.webp"
                   alt="UTP Market Logo"
                   style={{ width: "90px" }}
                 />

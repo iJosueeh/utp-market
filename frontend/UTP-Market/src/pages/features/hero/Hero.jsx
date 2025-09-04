@@ -1,12 +1,11 @@
 import React from 'react';
-import image1 from "../../../assets/image1.webp";
 const Hero = () => {
     return (
  <section className="container py-5"style={{ marginTop: "200px",marginBottom: "200px"}}>
       <div className="row align-items-center">
         <div className="col-md-5 text-center mb-4 mb-md-0">
           <img
-            src={image1}
+            src="https://res.cloudinary.com/dy8qrtq40/image/upload/v1756951052/hero-img_q7z7cu.webp"
             alt="UTP Market"
             className="img-fluid rounded"
           />
