@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import utpMarketLogo from '../assets/UTP-Market.png';
+import loginBg from '../assets/background/login_bg.webp';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -26,7 +28,7 @@ const Login = () => {
                 {/* Imagen izquierda */}
                 <div className="col-md-6 d-none d-md-block">
                     <img
-                        src="src/assets/background/login_bg.webp"
+                        src={loginBg}
                         alt="UTP Market Login Background"
                         className="img-fluid w-100 h-100"
                         style={{ objectFit: 'cover' }}
@@ -40,7 +42,7 @@ const Login = () => {
                         {/* Encabezado */}
                         <div className="text-center mb-4">
                             <img
-                                src="src/assets/UTP-Market.png"
+                                src={utpMarketLogo}
                                 alt="UTP Market Logo"
                                 style={{ width: "90px" }}
                             />

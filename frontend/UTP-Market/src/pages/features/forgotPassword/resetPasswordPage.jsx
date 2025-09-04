@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import utpMarketLogo from '../../../assets/UTP-Market.png';
 
 const ResetPasswordPage = () => {
   const [validated, setValidated] = useState(false);
@@ -22,7 +23,7 @@ const ResetPasswordPage = () => {
             <div className="bg-white p-4 rounded-3 shadow-sm">
               <div className="text-center mb-4">
                 <img
-                  src="src/assets/UTP-Market.png"
+                  src={utpMarketLogo}
                   alt="UTP Market Logo"
                   style={{ width: "90px" }}
                 />
