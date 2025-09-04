@@ -31,7 +31,7 @@ const Register = () => {
                 {/* Lado izquierdo con imagen */}
                 <div className="col-md-6 d-none d-md-block">
                     <img
-                        src="src/assets/background/register_bg.webp"
+                        src="/background/register_bg.webp"
                         alt="UTP Market Background"
                         className="img-fluid w-100 h-100"
                         style={{
@@ -46,7 +46,7 @@ const Register = () => {
                     <div className="w-75" style={{ maxWidth: "400px" }}>
                         <div className="text-center mb-4">
                             <img
-                                src="src/assets/UTP-Market.png"
+                                src="/UTP-MARKET.png"
                                 alt="UTP Market Logo"
                                 style={{ width: "90px" }}
                             />

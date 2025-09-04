@@ -26,7 +26,7 @@ const Login = () => {
                 {/* Imagen izquierda */}
                 <div className="col-md-6 d-none d-md-block">
                     <img
-                        src="src/assets/background/login_bg.webp"
+                        src="/background/login_bg.webp"
                         alt="UTP Market Login Background"
                         className="img-fluid w-100 h-100"
                         style={{ objectFit: 'cover' }}
@@ -40,7 +40,7 @@ const Login = () => {
                         {/* Encabezado */}
                         <div className="text-center mb-4">
                             <img
-                                src="src/assets/UTP-Market.png"
+                                src="/UTP-MARKET.png"
                                 alt="UTP Market Logo"
                                 style={{ width: "90px" }}
                             />
