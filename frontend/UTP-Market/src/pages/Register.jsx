@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import utpMarketLogo from '@src/assets/UTP-MARKET.png';
-import registerBg from '@src/assets/background/register_bg.webp';
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -33,7 +31,7 @@ const Register = () => {
                 {/* Lado izquierdo con imagen */}
                 <div className="col-md-6 d-none d-md-block">
                     <img
-                        src={registerBg}
+                        src="/background/register_bg.webp"
                         alt="UTP Market Background"
                         className="img-fluid w-100 h-100"
                         style={{
@@ -48,7 +46,7 @@ const Register = () => {
                     <div className="w-75" style={{ maxWidth: "400px" }}>
                         <div className="text-center mb-4">
                             <img
-                                src={utpMarketLogo}
+                                src="/UTP-MARKET.png"
                                 alt="UTP Market Logo"
                                 style={{ width: "90px" }}
                             />
