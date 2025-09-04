@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import utpMarketLogo from '../../../assets/UTP-Market.png';
+import utpMarketLogo from '@src/assets/UTP-Market.png';
 
 const ResetPasswordPage = () => {
   const [validated, setValidated] = useState(false);
