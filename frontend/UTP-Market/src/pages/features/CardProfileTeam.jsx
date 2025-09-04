@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import "/src/assets/css/bootstrap-icons.css";
+
 import Kath from "../../assets/img_M/avatar.png";
 
 

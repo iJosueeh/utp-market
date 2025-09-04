@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { generateResponse } from '../../../utils/Chatbot.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '/src/assets/css/bootstrap-icons.css';
-import '../../../assets/css/ChatbotWidget.css';
+
+
 
 const BotAvatar = () => (
   <div className="position-relative">
