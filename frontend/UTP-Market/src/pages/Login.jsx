@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import utpMarketLogo from '/src/assets/UTP-Market.png';
-import loginBg from '/src/assets/background/login_bg.webp';
+import utpMarketLogo from '@src/assets/UTP-Market.png';
+import loginBg from '@src/assets/background/login_bg.webp';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
