@@ -2,14 +2,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 import './App.css';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
-import MainPage from './pages/MainPage';
+import MainPage from './pages/MainPage.jsx';
 import ForgotPassword from './pages/features/forgotPassword/resetPasswordPage.jsx';
+import AboutUsPage from "./pages/AboutUs/AUPage.jsx";
+import HelpPage from "./pages/Help/HelpPage.jsx";
 
 //Función, que dependiendo de las solicitudes/rutas, renderiza los componentes:
 //MainPage, Login, Register, Profile, AdminProfile.
@@ -21,6 +21,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+        <Route path="/about-us" element={<AboutUsPage />} />  
+        <Route path="/help" element={<HelpPage />} />
+        <Route path="/main" element={<MainPage />} />
         {/* <Route path="/profile" element={<Profile />} /> */}
         {/* <Route path="/admin" element={<AdminProfile />} /> */}
       </Routes>

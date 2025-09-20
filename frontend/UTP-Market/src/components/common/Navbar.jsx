@@ -82,11 +82,15 @@ const Navbar = () => {
               {/* Items de navegación principales*/}
               {/* Pagina de inicio */}
               <li className="nav-item mx-2">
-                <a className="nav-link active text-white " aria-current="page" href="#">Inicio</a>
+                <Link className="nav-link text-white" to="/main">
+                  Inicio
+                  </Link>
               </li>
               {/* Pagina de nosotros */}
               <li className="nav-item mx-2">
-                <a className="nav-link text-white" href="#">Nosotros</a>
+                   <Link className="nav-link text-white" to="/about-us">
+                  Nosotros
+                  </Link>
               </li>
               {/* Pagina de sedes */}
               <li className="nav-item mx-2">
@@ -94,7 +98,9 @@ const Navbar = () => {
               </li>
               {/* Pagina de ayuda */}
               <li className="nav-item mx-2">
-                <a className="nav-link text-white " aria-current="page" href="#">Ayuda</a>
+                <Link className="nav-link text-white" to="/help">
+                  Ayuda
+                  </Link>
               </li>
               {/* Pagina de vender */}
               <li className="nav-item mx-2">
