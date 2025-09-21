@@ -37,7 +37,7 @@ public class JwtFilter extends OncePerRequestFilter {
                         .parseClaimsJws(token)
                         .getBody();
 
-                String email = claims.get("email", String.class);
+                String email = claims.getSubject();
 
                 if (email != null) {
                     UsernamePasswordAuthenticationToken authentication =
