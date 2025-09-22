@@ -1,5 +1,6 @@
 package com.utp.utpmarket.services;
 
+import com.utp.utpmarket.models.dto.PerfilActualizadoRequest;
 import com.utp.utpmarket.models.entity.Usuario;
 import com.utp.utpmarket.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -7,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -37,8 +37,23 @@ public class UsuarioService {
         }).orElseThrow(() -> new RuntimeException("Usuario no encontrado."));
     }
 
+    public Usuario actualizarPerfil (String email, PerfilActualizadoRequest request) {
+        Usuario usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        usuario.setNombre(request.nombre());
+        usuario.setApellido(request.apellido());
+        usuario.setTelefono(request.telefono());
+
+        return usuarioRepository.save(usuario);
+    }
+
     public void eliminarUsuario(Long id) {
         usuarioRepository.deleteById(id);
+    }
+
+    public Optional<Usuario> buscarPorEmail(String email) {
+        return usuarioRepository.findByEmail(email);
     }
 
 }
