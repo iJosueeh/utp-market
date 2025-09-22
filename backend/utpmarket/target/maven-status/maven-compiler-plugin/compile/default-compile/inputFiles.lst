@@ -5,6 +5,8 @@ C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\ut
 C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\exceptions\ManejadorExcepcionesGlobal.java
 C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\models\dto\AuthResponse.java
 C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\models\dto\LoginRequest.java
+C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\models\dto\PerfilActualizadoRequest.java
+C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\models\dto\PerfilResponse.java
 C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\models\dto\RegisterRequest.java
 C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\models\entity\Usuario.java
 C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\repository\UsuarioRepository.java
