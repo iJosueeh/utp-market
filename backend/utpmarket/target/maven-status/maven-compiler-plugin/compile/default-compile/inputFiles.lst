@@ -1,6 +1,8 @@
 C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\config\JwtFilter.java
 C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\config\SecurityConfig.java
 C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\controllers\AuthController.java
+C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\controllers\PageController.java
+C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\controllers\PasswordResetController.java
 C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\controllers\UsuarioController.java
 C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\exceptions\ManejadorExcepcionesGlobal.java
 C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket\src\main\java\com\utp\utpmarket\models\dto\AuthResponse.java

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -36,5 +37,11 @@ public class Usuario {
 
     @Column(nullable = false)
     private String password;
+
+    @Column(name = "reset_password_token")
+    private String resetPasswordToken;
+
+    @Column(name = "reset_password_token_expiry_date")
+    private LocalDateTime resetPasswordTokenExpiryDate;
 
 }

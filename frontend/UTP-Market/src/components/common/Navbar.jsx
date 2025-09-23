@@ -59,9 +59,9 @@ const Navbar = () => {
                 </a>
               </span>
               {/* Boton de perfil (Visible en pantallas grandes) */}
-              <Link to="/login" className="btn btn-icon btn-dark rounded-circle bg-dark me-4 d-none d-lg-block">
+              <a href="http://localhost:8080/login" className="btn btn-icon btn-dark rounded-circle bg-dark me-4 d-none d-lg-block">
                 <i className="bi bi-person align-middle"></i>
-              </Link>
+              </a>
               {/* Alternador movil: alterna el colapso*/}
               <button
                 className="navbar-toggler ms-2 me-3"
@@ -137,9 +137,9 @@ const Navbar = () => {
                   <a href="#" className="btn btn-icon btn-dark rounded-circle bg-dark mx-2">
                     <i className="bi bi-bell align-middle"></i>
                   </a>
-                  <Link to="/login" className="btn btn-icon btn-dark rounded-circle bg-dark mx-2">
+                  <a href="http://localhost:8080/login" className="btn btn-icon btn-dark rounded-circle bg-dark mx-2">
                     <i className="bi bi-person align-middle"></i>
-                  </Link>
+                  </a>
                 </div>
               </li>
             </ul>
