@@ -9,6 +9,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -26,6 +30,9 @@ class UsuarioServiceTest {
 
     @Mock
     private UsuarioRepository usuarioRepository;
+
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
     @InjectMocks
     private UsuarioService usuarioService;
@@ -151,5 +158,76 @@ class UsuarioServiceTest {
 
         assertThat(result).isPresent();
         assertThat(result.get().getEmail()).isEqualTo(email);
+    }
+
+    // --- Password Reset Tests ---
+
+    @Test
+    void testCreatePasswordResetTokenForUser_Success() {
+        Usuario usuario = new Usuario();
+        usuario.setEmail("test@utp.edu.pe");
+        given(usuarioRepository.findByEmail("test@utp.edu.pe")).willReturn(Optional.of(usuario));
+
+        String token = usuarioService.createPasswordResetTokenForUser("test@utp.edu.pe");
+
+        assertThat(token).isNotNull();
+        verify(usuarioRepository).save(any(Usuario.class));
+    }
+
+    @Test
+    void testCreatePasswordResetTokenForUser_UserNotFound() {
+        given(usuarioRepository.findByEmail(anyString())).willReturn(Optional.empty());
+
+        String token = usuarioService.createPasswordResetTokenForUser("nonexistent@utp.edu.pe");
+
+        assertThat(token).isNull();
+    }
+
+    @Test
+    void testValidatePasswordResetToken_Valid() {
+        Usuario usuario = new Usuario();
+        usuario.setResetPasswordToken("valid-token");
+        usuario.setResetPasswordTokenExpiryDate(LocalDateTime.now().plusHours(1));
+        given(usuarioRepository.findByResetPasswordToken("valid-token")).willReturn(Optional.of(usuario));
+
+        Optional<Usuario> result = usuarioService.validatePasswordResetToken("valid-token");
+
+        assertThat(result).isPresent();
+    }
+
+    @Test
+    void testValidatePasswordResetToken_Invalid() {
+        given(usuarioRepository.findByResetPasswordToken("invalid-token")).willReturn(Optional.empty());
+
+        Optional<Usuario> result = usuarioService.validatePasswordResetToken("invalid-token");
+
+        assertThat(result).isNotPresent();
+    }
+
+    @Test
+    void testValidatePasswordResetToken_Expired() {
+        Usuario usuario = new Usuario();
+        usuario.setResetPasswordToken("expired-token");
+        usuario.setResetPasswordTokenExpiryDate(LocalDateTime.now().minusHours(1));
+        given(usuarioRepository.findByResetPasswordToken("expired-token")).willReturn(Optional.of(usuario));
+
+        Optional<Usuario> result = usuarioService.validatePasswordResetToken("expired-token");
+
+        assertThat(result).isNotPresent();
+    }
+
+    @Test
+    void testChangeUserPassword() {
+        Usuario usuario = new Usuario();
+        usuario.setPassword("oldPassword");
+
+        given(passwordEncoder.encode("newPassword")).willReturn("encodedNewPassword");
+
+        usuarioService.changeUserPassword(usuario, "newPassword");
+
+        assertThat(usuario.getPassword()).isEqualTo("encodedNewPassword");
+        assertThat(usuario.getResetPasswordToken()).isNull();
+        assertThat(usuario.getResetPasswordTokenExpiryDate()).isNull();
+        verify(usuarioRepository).save(usuario);
     }
 }

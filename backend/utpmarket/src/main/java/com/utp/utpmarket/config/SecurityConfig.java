@@ -24,13 +24,32 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/protected").authenticated()
+                        // Reglas de la API: todo bajo /api/ requiere autenticación, excepto /api/auth/
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/usuarios/perfil").authenticated()
+                        .requestMatchers("/api/**").authenticated()
+
+                        // Reglas Web: permitir acceso público a las páginas de Thymeleaf y a los archivos de la SPA
+                        .requestMatchers("/", "/index.html", "/favicon.ico",
+                                "/login", "/register", "/forgot-password", "/forgot-password-sent", "/reset-password",
+                                "/static/**", "/css/**", "/js/**", "/images/**", "/fonts/**").permitAll()
+
+                        // Cualquier otra solicitud (que no sea API ni web pública) debe ser autenticada
                         .anyRequest().authenticated()
                 )
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/", true)
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
+                        .permitAll()
+                );
 
+        // Añadir el filtro JWT para las rutas de la API
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

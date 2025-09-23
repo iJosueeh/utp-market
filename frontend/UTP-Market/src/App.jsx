@@ -4,8 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import './App.css';
-import Login from './pages/Login.jsx';
-import Register from './pages/Register.jsx';
 import MainPage from './pages/MainPage.jsx';
 import ForgotPassword from './pages/features/forgotPassword/resetPasswordPage.jsx';
 import AboutUsPage from "./pages/AboutUs/AUPage.jsx";
@@ -18,8 +16,6 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
         <Route path="/about-us" element={<AboutUsPage />} />  
         <Route path="/help" element={<HelpPage />} />

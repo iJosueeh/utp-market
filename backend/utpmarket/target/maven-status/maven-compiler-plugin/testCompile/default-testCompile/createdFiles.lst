@@ -1,5 +1,2 @@
 com\utp\utpmarket\controllers\AuthControllerTest.class
 com\utp\utpmarket\UtpmarketApplicationTests.class
-com\utp\utpmarket\services\AuthServiceTest.class
-com\utp\utpmarket\services\UsuarioServiceTest.class
-com\utp\utpmarket\controllers\UsuarioControllerTest.class
