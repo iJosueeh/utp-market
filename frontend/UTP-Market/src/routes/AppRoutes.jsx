@@ -4,6 +4,8 @@ import Register from './pages/Register';
 import AUPage from '../pages/AboutUs/AUPage';
 import HelpPage from '../pages/Help/HelpPage';
 import MainPage from '../pages/MainPage';
+import ProductPage from '../pages/ProductPage'
+import ProductDetail from '../pages/ProductDetail';
 
 export default function AppRoutes() {
   return (
@@ -21,6 +23,7 @@ export default function AppRoutes() {
         {/* Ruta para la página "Centro de ayuda" */}
       <Route path="/help" element={<HelpPage />} />
       <Route path="/main" element={<MainPage />} />
+      <Route path="/products" element={<ProductPage />} />
         {/* Puedes agregar rutas protegidas aquí más adelante */}
         {/* <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} /> */}
 

@@ -10,6 +10,7 @@ import MainPage from './pages/MainPage.jsx';
 import ForgotPassword from './pages/features/forgotPassword/resetPasswordPage.jsx';
 import AboutUsPage from "./pages/AboutUs/AUPage.jsx";
 import HelpPage from "./pages/Help/HelpPage.jsx";
+import ProductPage from "./pages/ProductPage.jsx";
 
 //Función, que dependiendo de las solicitudes/rutas, renderiza los componentes:
 //MainPage, Login, Register, Profile, AdminProfile.
@@ -24,6 +25,7 @@ function App() {
         <Route path="/about-us" element={<AboutUsPage />} />  
         <Route path="/help" element={<HelpPage />} />
         <Route path="/main" element={<MainPage />} />
+        <Route path="/products" element={<ProductPage />} />
         {/* <Route path="/profile" element={<Profile />} /> */}
         {/* <Route path="/admin" element={<AdminProfile />} /> */}
       </Routes>

@@ -120,8 +120,14 @@ const Navbar = () => {
                     <i className="bi bi-caret-down-fill ms-2 align-middle"></i>
                   </button>
                   {/* Menu: Listado de categorias */}
+
+                  
                   <ul className="dropdown-menu rounded shadow-lg border-0 py-3" aria-labelledby="dropdownMenuButton1">
-                    <li><a href="#" className="dropdown-item px-4 py-2">Tutorías</a></li>
+                    <li><Link to="/products">Tutorias</Link>
+</li>
+
+
+
                     <li><a href="#" className="dropdown-item px-4 py-2">Guías de estudio</a></li>
                     <li><a href="#" className="dropdown-item px-4 py-2">Ventas de snack</a></li>
                     <li><a href="#" className="dropdown-item px-4 py-2">Materiales</a></li>
