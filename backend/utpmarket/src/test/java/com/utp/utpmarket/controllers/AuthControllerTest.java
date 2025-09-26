@@ -20,8 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @SpringBootTest // Carga el contexto completo de la aplicación Spring.
 @AutoConfigureMockMvc // Configura y nos permite inyectar MockMvc para hacer peticiones HTTP.
-@Transactional // Asegura que cada prueba se ejecute en una transacción que se revierte al final. 
-               // Esto mantiene las pruebas aisladas y evita que se afecten entre sí.
+@Transactional // Asegura que cada prueba se ejecute en una transacción que se revierte al final.
 class AuthControllerTest {
 
     @Autowired
@@ -32,7 +31,7 @@ class AuthControllerTest {
 
     @Test
     void shouldRegisterUserSuccessfully() throws Exception {
-        // Arrange: Preparamos los datos de prueba
+        // Arrange
         RegisterRequest registerRequest = new RegisterRequest(
                 "Test",
                 "User",
@@ -41,12 +40,12 @@ class AuthControllerTest {
                 "password123"
         );
 
-        // Act & Assert: Ejecutamos la petición y verificamos el resultado
-        mockMvc.perform(post("/api/auth/register") // Hacemos un POST a la URL de registro
-                        .contentType(MediaType.APPLICATION_JSON) // Definimos el tipo de contenido como JSON
-                        .content(objectMapper.writeValueAsString(registerRequest))) // Convertimos el objeto a un string JSON
-                .andExpect(status().isOk()) // Esperamos que el código de estado sea 200 OK
-                .andExpect(jsonPath("$.token").isNotEmpty()); // Verificamos que la respuesta JSON tenga un campo "token" no vacío.
+        // Act & Assert
+        mockMvc.perform(post("/api/auth/register")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(registerRequest)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.token").isNotEmpty());
     }
 
     @Test
@@ -56,7 +55,7 @@ class AuthControllerTest {
                 "Test",
                 "User",
                 "987654321",
-                "invalid-email@gmail.com", // Email no institucional, fallará la validación del patrón
+                "invalid-email@gmail.com", // Email no institucional
                 "password123"
         );
 
@@ -64,8 +63,10 @@ class AuthControllerTest {
         mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(registerRequest)))
-                .andExpect(status().isBadRequest()) // Esperamos un código 400 Bad Request
-                .andExpect(jsonPath("$.email").value("El correo debe ser institucional (@utp.edu.pe)")); // Verificamos el mensaje de error específico.
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.messages.email")
+                        .value("El correo debe ser institucional (@utp.edu.pe)"))
+                .andExpect(jsonPath("$.error").value("Bad Request"));
     }
 
     @Test
@@ -79,81 +80,90 @@ class AuthControllerTest {
                 "password123"
         );
 
-        // Act 1: Realizamos el primer registro, que debería ser exitoso.
+        // Act 1: Registro exitoso
         mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(registerRequest)))
                 .andExpect(status().isOk());
 
-        // Act 2 & Assert: Intentamos registrar al mismo usuario de nuevo.
+        // Act 2: Intento de duplicar registro
         mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(registerRequest)))
-                .andExpect(status().isConflict()); // Esperamos un código 409 Conflict.
+                .andExpect(status().isConflict());
     }
 
     // --- PRUEBAS DE LOGIN ---
 
     @Test
     void shouldLoginSuccessfullyWithValidCredentials() throws Exception {
-        // Arrange: Primero, necesitamos un usuario registrado.
-        RegisterRequest registerRequest = new RegisterRequest("loginUser", "Test", "111222333", "login.user@utp.edu.pe", "securePassword");
+        // Arrange: registrar usuario
+        RegisterRequest registerRequest = new RegisterRequest(
+                "loginUser",
+                "Test",
+                "111222333",
+                "login.user@utp.edu.pe",
+                "securePassword"
+        );
         mockMvc.perform(post("/api/auth/register")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(registerRequest)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(registerRequest)))
                 .andExpect(status().isOk());
 
-        // Ahora, preparamos la petición de login
+        // Login válido
         LoginRequest loginRequest = new LoginRequest("login.user@utp.edu.pe", "securePassword");
 
-        // Act & Assert
         mockMvc.perform(post("/api/auth/login")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(loginRequest)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(loginRequest)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.token").isNotEmpty());
     }
 
     @Test
     void shouldReturnUnauthorizedForInvalidPassword() throws Exception {
-        // Arrange: Registramos un usuario.
-        RegisterRequest registerRequest = new RegisterRequest("loginUser2", "Test", "222333444", "login.user2@utp.edu.pe", "correctPassword");
+        // Arrange
+        RegisterRequest registerRequest = new RegisterRequest(
+                "loginUser2",
+                "Test",
+                "222333444",
+                "login.user2@utp.edu.pe",
+                "correctPassword"
+        );
         mockMvc.perform(post("/api/auth/register")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(registerRequest)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(registerRequest)))
                 .andExpect(status().isOk());
 
-        // Preparamos la petición de login con la contraseña INCORRECTA.
+        // Login con contraseña incorrecta
         LoginRequest loginRequest = new LoginRequest("login.user2@utp.edu.pe", "wrongPassword");
 
-        // Act & Assert
         mockMvc.perform(post("/api/auth/login")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(loginRequest)))
-                .andExpect(status().isUnauthorized()); // Esperamos 401 Unauthorized
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(loginRequest)))
+                .andExpect(status().isUnauthorized());
     }
 
     @Test
     void shouldReturnUnauthorizedForNonExistentUser() throws Exception {
-        // Arrange: Preparamos una petición para un usuario que no existe.
+        // Usuario no registrado
         LoginRequest loginRequest = new LoginRequest("nosuchuser@utp.edu.pe", "anyPassword");
 
-        // Act & Assert
         mockMvc.perform(post("/api/auth/login")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(loginRequest)))
-                .andExpect(status().isUnauthorized()); // Esperamos 401 Unauthorized
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(loginRequest)))
+                .andExpect(status().isUnauthorized());
     }
 
     @Test
     void shouldReturnBadRequestForBlankPassword() throws Exception {
-        // Arrange
-        LoginRequest loginRequest = new LoginRequest("some.user@utp.edu.pe", ""); // Contraseña en blanco
+        // Contraseña en blanco
+        LoginRequest loginRequest = new LoginRequest("some.user@utp.edu.pe", "");
 
-        // Act & Assert
         mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(loginRequest)))
-                .andExpect(status().isBadRequest()); // Esperamos 400 Bad Request por la validación
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.error").value("Bad Request"));
     }
 }
