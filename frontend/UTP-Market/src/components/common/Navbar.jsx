@@ -122,16 +122,16 @@ const Navbar = () => {
                   {/* Menu: Listado de categorias */}
 
                   
-                  <ul className="dropdown-menu rounded shadow-lg border-0 py-3" aria-labelledby="dropdownMenuButton1">
-                    <li><Link to="/products">Tutorias</Link>
-</li>
+                <ul
+  className="dropdown-menu rounded shadow-lg border-0 py-3"
+  aria-labelledby="dropdownMenuButton1"
+>
+  <li><Link to="/products?category=Tutorías%20universitarias">Tutorías</Link></li>
+  <li><Link to="/products?category=Guías%20de%20estudio">Guías de estudio</Link></li>
+  <li><Link to="/products?category=Ventas%20de%20snacks">Snacks</Link></li>
+  <li><Link to="/products?category=Materiales">Materiales</Link></li>
+</ul>
 
-
-
-                    <li><a href="#" className="dropdown-item px-4 py-2">Guías de estudio</a></li>
-                    <li><a href="#" className="dropdown-item px-4 py-2">Ventas de snack</a></li>
-                    <li><a href="#" className="dropdown-item px-4 py-2">Materiales</a></li>
-                  </ul>
                 </div>
               </li>
               {/* Iconos para movil */}
