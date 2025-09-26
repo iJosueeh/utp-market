@@ -59,9 +59,9 @@ const Navbar = () => {
                 </a>
               </span>
               {/* Boton de perfil (Visible en pantallas grandes) */}
-              <a href="http://localhost:8080/login" className="btn btn-icon btn-dark rounded-circle bg-dark me-4 d-none d-lg-block">
+              <Link to="/login" className="btn btn-icon btn-dark rounded-circle bg-dark me-4 d-none d-lg-block">
                 <i className="bi bi-person align-middle"></i>
-              </a>
+              </Link>
               {/* Alternador movil: alterna el colapso*/}
               <button
                 className="navbar-toggler ms-2 me-3"
@@ -82,15 +82,11 @@ const Navbar = () => {
               {/* Items de navegación principales*/}
               {/* Pagina de inicio */}
               <li className="nav-item mx-2">
-                <Link className="nav-link text-white" to="/main">
-                  Inicio
-                  </Link>
+                <a className="nav-link active text-white " aria-current="page" href="#">Inicio</a>
               </li>
               {/* Pagina de nosotros */}
               <li className="nav-item mx-2">
-                   <Link className="nav-link text-white" to="/about-us">
-                  Nosotros
-                  </Link>
+                <a className="nav-link text-white" href="#">Nosotros</a>
               </li>
               {/* Pagina de sedes */}
               <li className="nav-item mx-2">
@@ -98,9 +94,7 @@ const Navbar = () => {
               </li>
               {/* Pagina de ayuda */}
               <li className="nav-item mx-2">
-                <Link className="nav-link text-white" to="/help">
-                  Ayuda
-                  </Link>
+                <a className="nav-link text-white " aria-current="page" href="#">Ayuda</a>
               </li>
               {/* Pagina de vender */}
               <li className="nav-item mx-2">
@@ -137,9 +131,9 @@ const Navbar = () => {
                   <a href="#" className="btn btn-icon btn-dark rounded-circle bg-dark mx-2">
                     <i className="bi bi-bell align-middle"></i>
                   </a>
-                  <a href="http://localhost:8080/login" className="btn btn-icon btn-dark rounded-circle bg-dark mx-2">
+                  <Link to="/login" className="btn btn-icon btn-dark rounded-circle bg-dark mx-2">
                     <i className="bi bi-person align-middle"></i>
-                  </a>
+                  </Link>
                 </div>
               </li>
             </ul>

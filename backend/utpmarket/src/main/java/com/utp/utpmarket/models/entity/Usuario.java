@@ -6,12 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.UUID;
-
 @Entity
-@Table(name = "Usuarios", schema = "public")
+@Table(name = "usuario")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,27 +17,15 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "nombre_usuario")
     private String nombre;
 
-    @Column(nullable = false)
-    private String apellido;
-
-    private String telefono;
-
-    @Column(name = "fecha_registro", nullable = false, updatable = false)
-    private Instant fechaRegistro = Instant.now();
-
-    @Column(nullable = false, unique = true)
+    @Column(name = "email")
     private String email;
 
-    @Column(nullable = false)
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "reset_password_token")
-    private String resetPasswordToken;
-
-    @Column(name = "reset_password_token_expiry_date")
-    private LocalDateTime resetPasswordTokenExpiryDate;
-
+    @Column(name = "estado")
+    private Boolean estado;
 }
