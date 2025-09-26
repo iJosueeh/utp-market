@@ -18,20 +18,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Pruebas de integración para AuthController.
  */
-@SpringBootTest // Carga el contexto completo de la aplicación Spring.
-@AutoConfigureMockMvc // Configura y nos permite inyectar MockMvc para hacer peticiones HTTP.
-@Transactional // Asegura que cada prueba se ejecute en una transacción que se revierte al final.
+@SpringBootTest
+@AutoConfigureMockMvc
+@Transactional
 class AuthControllerTest {
 
     @Autowired
-    private MockMvc mockMvc; // Herramienta principal para simular las peticiones HTTP.
+    private MockMvc mockMvc;
 
     @Autowired
-    private ObjectMapper objectMapper; // Utilidad para convertir objetos Java a JSON y viceversa.
+    private ObjectMapper objectMapper;
 
     @Test
     void shouldRegisterUserSuccessfully() throws Exception {
-        // Arrange
         RegisterRequest registerRequest = new RegisterRequest(
                 "Test",
                 "User",
@@ -40,7 +39,6 @@ class AuthControllerTest {
                 "password123"
         );
 
-        // Act & Assert
         mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(registerRequest)))
@@ -50,7 +48,6 @@ class AuthControllerTest {
 
     @Test
     void shouldReturnBadRequestForInvalidEmail() throws Exception {
-        // Arrange
         RegisterRequest registerRequest = new RegisterRequest(
                 "Test",
                 "User",
@@ -59,7 +56,6 @@ class AuthControllerTest {
                 "password123"
         );
 
-        // Act & Assert
         mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(registerRequest)))
@@ -71,7 +67,6 @@ class AuthControllerTest {
 
     @Test
     void shouldReturnConflictWhenUserAlreadyExists() throws Exception {
-        // Arrange
         RegisterRequest registerRequest = new RegisterRequest(
                 "John",
                 "Doe",
@@ -80,24 +75,21 @@ class AuthControllerTest {
                 "password123"
         );
 
-        // Act 1: Registro exitoso
+        // Primer registro exitoso
         mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(registerRequest)))
                 .andExpect(status().isOk());
 
-        // Act 2: Intento de duplicar registro
+        // Segundo intento con mismo usuario
         mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(registerRequest)))
                 .andExpect(status().isConflict());
     }
 
-    // --- PRUEBAS DE LOGIN ---
-
     @Test
     void shouldLoginSuccessfullyWithValidCredentials() throws Exception {
-        // Arrange: registrar usuario
         RegisterRequest registerRequest = new RegisterRequest(
                 "loginUser",
                 "Test",
@@ -110,7 +102,6 @@ class AuthControllerTest {
                         .content(objectMapper.writeValueAsString(registerRequest)))
                 .andExpect(status().isOk());
 
-        // Login válido
         LoginRequest loginRequest = new LoginRequest("login.user@utp.edu.pe", "securePassword");
 
         mockMvc.perform(post("/api/auth/login")
@@ -122,7 +113,6 @@ class AuthControllerTest {
 
     @Test
     void shouldReturnUnauthorizedForInvalidPassword() throws Exception {
-        // Arrange
         RegisterRequest registerRequest = new RegisterRequest(
                 "loginUser2",
                 "Test",
@@ -135,7 +125,6 @@ class AuthControllerTest {
                         .content(objectMapper.writeValueAsString(registerRequest)))
                 .andExpect(status().isOk());
 
-        // Login con contraseña incorrecta
         LoginRequest loginRequest = new LoginRequest("login.user2@utp.edu.pe", "wrongPassword");
 
         mockMvc.perform(post("/api/auth/login")
@@ -146,7 +135,6 @@ class AuthControllerTest {
 
     @Test
     void shouldReturnUnauthorizedForNonExistentUser() throws Exception {
-        // Usuario no registrado
         LoginRequest loginRequest = new LoginRequest("nosuchuser@utp.edu.pe", "anyPassword");
 
         mockMvc.perform(post("/api/auth/login")
@@ -157,7 +145,6 @@ class AuthControllerTest {
 
     @Test
     void shouldReturnBadRequestForBlankPassword() throws Exception {
-        // Contraseña en blanco
         LoginRequest loginRequest = new LoginRequest("some.user@utp.edu.pe", "");
 
         mockMvc.perform(post("/api/auth/login")
