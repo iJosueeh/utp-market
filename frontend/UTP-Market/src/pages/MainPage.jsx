@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../components/common/Navbar";
-import FAQListInicio from "../pages/features/faq/FAQlistInicio"
+import FAQList from "../pages/features/faq/FAQList";
 import Footer from "../components/common/Footer";
 import Hero from "../pages/features/hero/Hero";
 import Emprendimiento from "../pages/features/Materiales/Emprendimiento";
@@ -27,7 +27,7 @@ export default function MainPage() {
                         </section>
 
                         <section className="bg-light py-5 mt-5">
-                          <FAQListInicio />
+                            <FAQList />
                         </section>
                         <section className="bg-danger py-5 mt-5">
                             <CardProfileTeam />

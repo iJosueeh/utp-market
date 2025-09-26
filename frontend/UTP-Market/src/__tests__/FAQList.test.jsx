@@ -29,12 +29,12 @@ describe('Lista de Preguntas Frecuentes', () => {
   ];
 
   it('debería renderizar el título principal', () => {
-    render(<FAQList faqs={faqs} />);
+    render(<FAQList />);
     expect(screen.getByText('Preguntas Frecuentes')).not.toBeNull();
   });
 
   it('debería renderizar todas las preguntas frecuentes', () => {
-    render(<FAQList faqs={faqs} />);
+    render(<FAQList />);
      
     faqs.forEach(faq => {
       expect(screen.getByText(faq.pregunta)).not.toBeNull();
@@ -42,7 +42,7 @@ describe('Lista de Preguntas Frecuentes', () => {
   });
 
   it('debería renderizar el número correcto de tarjetas de preguntas frecuentes', () => {
-    const { container } = render(<FAQList faqs={faqs} />);
+    const { container } = render(<FAQList />);
     const cards = container.querySelectorAll('.accordion-item');
     expect(cards.length).toBe(faqs.length);
 
