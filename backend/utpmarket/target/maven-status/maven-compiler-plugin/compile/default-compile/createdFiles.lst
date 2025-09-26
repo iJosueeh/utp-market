@@ -1,1 +1,9 @@
+com\utp\utpmarket\exceptions\EmailAlreadyExistsException.class
+com\utp\utpmarket\models\dto\SolicitudRegistro.class
+com\utp\utpmarket\exceptions\InvalidCredentialsException.class
+com\utp\utpmarket\models\dto\SolicitudPerfilActualizado.class
+com\utp\utpmarket\models\dto\RespuestaAuth.class
+com\utp\utpmarket\models\dto\SolicitudLogin.class
+com\utp\utpmarket\models\dto\RespuestaPerfil.class
+com\utp\utpmarket\exceptions\GlobalExceptionHandler.class
 com\utp\utpmarket\UtpmarketApplication.class

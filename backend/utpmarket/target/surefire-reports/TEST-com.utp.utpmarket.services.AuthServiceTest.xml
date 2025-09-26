@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.utp.utpmarket.services.AuthServiceTest" time="0.456" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.utp.utpmarket.services.AuthServiceTest" time="0.191" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="22"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -50,17 +50,17 @@
     <property name="localRepository" value="C:\Users\HOME\.m2\repository"/>
     <property name="java.vendor.url.bug" value="https://techsupport.roguewave.com/"/>
     <property name="java.io.tmpdir" value="C:\Users\HOME\AppData\Local\Temp\"/>
-    <property name="com.zaxxer.hikari.pool_number" value="2"/>
+    <property name="com.zaxxer.hikari.pool_number" value="3"/>
     <property name="java.version" value="22.0.2"/>
     <property name="user.dir" value="C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket"/>
     <property name="os.arch" value="amd64"/>
     <property name="maven.multiModuleProjectDirectory" value="C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="14144"/>
+    <property name="PID" value="2176"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="CONSOLE_LOG_CHARSET" value="windows-1252"/>
     <property name="native.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\OpenLogic\jdk-22.0.2.9-hotspot\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\apache-maven-3.9.10\bin;C:\Program Files\OpenLogic\jdk-22.0.2.9-hotspot\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\workspaces\gradle-8.12.1-bin\gradle-8.12.1\bin;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Microsoft\Azure Functions Core Tools\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Rational\common;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\apache-maven-3.9.10\bin;C:\Users\HOME\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\HOME\AppData\Roaming\npm;C:\xampp\php;C:\Users\HOME\AppData\Roaming\Composer\vendor\bin;C:\Users\HOME\.dotnet\tools;C:\Users\HOME\AppData\Local\GitHubDesktop\bin;;c:\Users\HOME\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;."/>
+    <property name="java.library.path" value="C:\Program Files\OpenLogic\jdk-22.0.2.9-hotspot\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\apache-maven-3.9.10\bin;C:\Program Files\OpenLogic\jdk-22.0.2.9-hotspot\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\workspaces\gradle-8.12.1-bin\gradle-8.12.1\bin;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Microsoft\Azure Functions Core Tools\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Rational\common;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\apache-maven-3.9.10\bin;C:\Users\HOME\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\HOME\AppData\Roaming\npm;C:\xampp\php;C:\Users\HOME\AppData\Roaming\Composer\vendor\bin;C:\Users\HOME\.dotnet\tools;C:\Users\HOME\AppData\Local\GitHubDesktop\bin;;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
     <property name="stderr.encoding" value="Cp1252"/>
     <property name="java.vendor" value="OpenLogic"/>
@@ -70,7 +70,9 @@
     <property name="library.jansi.path" value="C:\Users\HOME\.m2\wrapper\dists\apache-maven-3.9.11\d6d3cbd4012d4c1d840e93277aca316c\lib\jansi-native"/>
     <property name="java.class.version" value="66.0"/>
   </properties>
-  <testcase name="shouldReturnUnauthorizedWhenPasswordIsIncorrect" classname="com.utp.utpmarket.services.AuthServiceTest" time="0.441"/>
-  <testcase name="shouldReturnUnauthorizedWhenUserNotFound" classname="com.utp.utpmarket.services.AuthServiceTest" time="0.003"/>
-  <testcase name="shouldLoginSuccessfullyWhenCredentialsAreValid" classname="com.utp.utpmarket.services.AuthServiceTest" time="0.011"/>
+  <testcase name="shouldThrowInvalidCredentialsExceptionWhenPasswordIsIncorrect" classname="com.utp.utpmarket.services.AuthServiceTest" time="0.166"/>
+  <testcase name="shouldThrowEmailAlreadyExistsExceptionWhenEmailIsTaken" classname="com.utp.utpmarket.services.AuthServiceTest" time="0.01"/>
+  <testcase name="shouldRegisterSuccessfullyWhenEmailIsNotTaken" classname="com.utp.utpmarket.services.AuthServiceTest" time="0.01"/>
+  <testcase name="shouldThrowInvalidCredentialsExceptionWhenUserNotFound" classname="com.utp.utpmarket.services.AuthServiceTest" time="0.005"/>
+  <testcase name="shouldLoginSuccessfullyWhenCredentialsAreValid" classname="com.utp.utpmarket.services.AuthServiceTest" time="0.0"/>
 </testsuite>

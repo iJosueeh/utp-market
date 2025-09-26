@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.utp.utpmarket.controllers.UsuarioControllerTest" time="1.773" tests="9" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.utp.utpmarket.controllers.UsuarioControllerTest" time="0.85" tests="10" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="22"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -50,17 +50,17 @@
     <property name="localRepository" value="C:\Users\HOME\.m2\repository"/>
     <property name="java.vendor.url.bug" value="https://techsupport.roguewave.com/"/>
     <property name="java.io.tmpdir" value="C:\Users\HOME\AppData\Local\Temp\"/>
-    <property name="com.zaxxer.hikari.pool_number" value="2"/>
+    <property name="com.zaxxer.hikari.pool_number" value="3"/>
     <property name="java.version" value="22.0.2"/>
     <property name="user.dir" value="C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket"/>
     <property name="os.arch" value="amd64"/>
     <property name="maven.multiModuleProjectDirectory" value="C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="14144"/>
+    <property name="PID" value="2176"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="CONSOLE_LOG_CHARSET" value="windows-1252"/>
     <property name="native.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\OpenLogic\jdk-22.0.2.9-hotspot\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\apache-maven-3.9.10\bin;C:\Program Files\OpenLogic\jdk-22.0.2.9-hotspot\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\workspaces\gradle-8.12.1-bin\gradle-8.12.1\bin;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Microsoft\Azure Functions Core Tools\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Rational\common;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\apache-maven-3.9.10\bin;C:\Users\HOME\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\HOME\AppData\Roaming\npm;C:\xampp\php;C:\Users\HOME\AppData\Roaming\Composer\vendor\bin;C:\Users\HOME\.dotnet\tools;C:\Users\HOME\AppData\Local\GitHubDesktop\bin;;c:\Users\HOME\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;."/>
+    <property name="java.library.path" value="C:\Program Files\OpenLogic\jdk-22.0.2.9-hotspot\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\apache-maven-3.9.10\bin;C:\Program Files\OpenLogic\jdk-22.0.2.9-hotspot\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\workspaces\gradle-8.12.1-bin\gradle-8.12.1\bin;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Microsoft\Azure Functions Core Tools\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Rational\common;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\apache-maven-3.9.10\bin;C:\Users\HOME\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\HOME\AppData\Roaming\npm;C:\xampp\php;C:\Users\HOME\AppData\Roaming\Composer\vendor\bin;C:\Users\HOME\.dotnet\tools;C:\Users\HOME\AppData\Local\GitHubDesktop\bin;;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
     <property name="stderr.encoding" value="Cp1252"/>
     <property name="java.vendor" value="OpenLogic"/>
@@ -70,10 +70,10 @@
     <property name="library.jansi.path" value="C:\Users\HOME\.m2\wrapper\dists\apache-maven-3.9.11\d6d3cbd4012d4c1d840e93277aca316c\lib\jansi-native"/>
     <property name="java.class.version" value="66.0"/>
   </properties>
-  <testcase name="shouldUpdateUser" classname="com.utp.utpmarket.controllers.UsuarioControllerTest" time="0.115">
-    <system-out><![CDATA[2025-09-22T23:55:54.794-05:00  INFO 14144 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.utp.utpmarket.controllers.UsuarioControllerTest]: UsuarioControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-09-22T23:55:54.802-05:00  INFO 14144 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.utp.utpmarket.UtpmarketApplication for test class com.utp.utpmarket.controllers.UsuarioControllerTest
-2025-09-22T23:55:54.810-05:00  INFO 14144 --- [           main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+  <testcase name="deberiaObtenerPerfilDeUsuario" classname="com.utp.utpmarket.controllers.UsuarioControllerTest" time="0.025">
+    <system-out><![CDATA[2025-09-25T10:34:13.126-05:00  INFO 2176 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.utp.utpmarket.controllers.UsuarioControllerTest]: UsuarioControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-09-25T10:34:13.130-05:00  INFO 2176 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.utp.utpmarket.UtpmarketApplication for test class com.utp.utpmarket.controllers.UsuarioControllerTest
+2025-09-25T10:34:13.136-05:00  INFO 2176 --- [           main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -84,47 +84,48 @@
 
  :: Spring Boot ::                (v3.5.4)
 
-2025-09-22T23:55:54.839-05:00  INFO 14144 --- [           main] c.u.u.controllers.UsuarioControllerTest  : Starting UsuarioControllerTest using Java 22.0.2 with PID 14144 (started by HOME in C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket)
-2025-09-22T23:55:54.839-05:00  INFO 14144 --- [           main] c.u.u.controllers.UsuarioControllerTest  : No active profile set, falling back to 1 default profile: "default"
-2025-09-22T23:55:55.088-05:00  INFO 14144 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-09-22T23:55:55.100-05:00  INFO 14144 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 1 JPA repository interface.
-2025-09-22T23:55:55.639-05:00  INFO 14144 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
-2025-09-22T23:55:55.641-05:00  INFO 14144 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:testdb user=SA
-2025-09-22T23:55:55.641-05:00  INFO 14144 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
-2025-09-22T23:55:55.645-05:00  INFO 14144 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-09-22T23:55:55.650-05:00  INFO 14144 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-09-22T23:55:55.678-05:00  INFO 14144 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-09-22T23:55:55.682-05:00  WARN 14144 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-22T23:55:55.683-05:00  INFO 14144 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-2)']
+2025-09-25T10:34:13.157-05:00  INFO 2176 --- [           main] c.u.u.controllers.UsuarioControllerTest  : Starting UsuarioControllerTest using Java 22.0.2 with PID 2176 (started by HOME in C:\Users\HOME\Documents\GitHub\utp-market\backend\utpmarket)
+2025-09-25T10:34:13.157-05:00  INFO 2176 --- [           main] c.u.u.controllers.UsuarioControllerTest  : No active profile set, falling back to 1 default profile: "default"
+2025-09-25T10:34:13.396-05:00  INFO 2176 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-25T10:34:13.406-05:00  INFO 2176 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 1 JPA repository interface.
+2025-09-25T10:34:13.556-05:00  INFO 2176 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2025-09-25T10:34:13.556-05:00  INFO 2176 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection conn20: url=jdbc:h2:mem:testdb user=SA
+2025-09-25T10:34:13.556-05:00  INFO 2176 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2025-09-25T10:34:13.556-05:00  INFO 2176 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-25T10:34:13.556-05:00  INFO 2176 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-25T10:34:13.566-05:00  INFO 2176 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-25T10:34:13.571-05:00  WARN 2176 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-25T10:34:13.571-05:00  INFO 2176 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-3)']
 	Database driver: undefined/unknown
 	Database version: 2.3.232
 	Autocommit mode: undefined/unknown
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-09-22T23:55:55.744-05:00  INFO 14144 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-09-22T23:55:55.749-05:00  INFO 14144 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-09-22T23:55:55.861-05:00  WARN 14144 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-22T23:55:56.001-05:00  WARN 14144 --- [           main] .s.s.UserDetailsServiceAutoConfiguration : 
+2025-09-25T10:34:13.596-05:00  INFO 2176 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-25T10:34:13.598-05:00  INFO 2176 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-25T10:34:13.622-05:00  WARN 2176 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-25T10:34:13.686-05:00  WARN 2176 --- [           main] .s.s.UserDetailsServiceAutoConfiguration : 
 
-Using generated security password: 0114b7dc-2f26-4438-bfd5-8be5a66312e6
+Using generated security password: 40c6804d-ae75-4d01-9fa7-ec57ac44f919
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2025-09-22T23:55:56.002-05:00  INFO 14144 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2025-09-22T23:55:56.246-05:00  INFO 14144 --- [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2025-09-22T23:55:56.247-05:00  INFO 14144 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2025-09-22T23:55:56.260-05:00  INFO 14144 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
-2025-09-22T23:55:56.299-05:00  INFO 14144 --- [           main] c.u.u.controllers.UsuarioControllerTest  : Started UsuarioControllerTest in 1.49 seconds (process running for 15.028)
+2025-09-25T10:34:13.686-05:00  INFO 2176 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-09-25T10:34:13.836-05:00  INFO 2176 --- [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-09-25T10:34:13.836-05:00  INFO 2176 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-09-25T10:34:13.836-05:00  INFO 2176 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2025-09-25T10:34:13.846-05:00  INFO 2176 --- [           main] c.u.u.controllers.UsuarioControllerTest  : Started UsuarioControllerTest in 0.71 seconds (process running for 18.531)
 ]]></system-out>
   </testcase>
-  <testcase name="shouldCreateUser" classname="com.utp.utpmarket.controllers.UsuarioControllerTest" time="0.015"/>
-  <testcase name="shouldReturnNotFoundForInvalidUserId" classname="com.utp.utpmarket.controllers.UsuarioControllerTest" time="0.022"/>
-  <testcase name="shouldDeleteUser" classname="com.utp.utpmarket.controllers.UsuarioControllerTest" time="0.012"/>
-  <testcase name="shouldReturnNotFoundWhenUpdatingNonExistentUser" classname="com.utp.utpmarket.controllers.UsuarioControllerTest" time="0.017"/>
-  <testcase name="shouldListAllUsers" classname="com.utp.utpmarket.controllers.UsuarioControllerTest" time="0.02"/>
-  <testcase name="shouldUpdateUserProfile" classname="com.utp.utpmarket.controllers.UsuarioControllerTest" time="0.014"/>
-  <testcase name="shouldReturnUserById" classname="com.utp.utpmarket.controllers.UsuarioControllerTest" time="0.013"/>
-  <testcase name="shouldGetUserProfile" classname="com.utp.utpmarket.controllers.UsuarioControllerTest" time="0.008"/>
+  <testcase name="deberiaActualizarUsuario" classname="com.utp.utpmarket.controllers.UsuarioControllerTest" time="0.02"/>
+  <testcase name="deberiaListarTodosLosUsuarios" classname="com.utp.utpmarket.controllers.UsuarioControllerTest" time="0.021"/>
+  <testcase name="deberiaRetornarNoEncontradoCuandoSeActualizaUsuarioInexistente" classname="com.utp.utpmarket.controllers.UsuarioControllerTest" time="0.004"/>
+  <testcase name="deberiaEliminarUsuario" classname="com.utp.utpmarket.controllers.UsuarioControllerTest" time="0.008"/>
+  <testcase name="deberiaRetornarNoEncontradoCuandoSeEliminaUsuarioInexistente" classname="com.utp.utpmarket.controllers.UsuarioControllerTest" time="0.006"/>
+  <testcase name="deberiaCrearUsuario" classname="com.utp.utpmarket.controllers.UsuarioControllerTest" time="0.005"/>
+  <testcase name="deberiaRetornarUsuarioPorId" classname="com.utp.utpmarket.controllers.UsuarioControllerTest" time="0.01"/>
+  <testcase name="deberiaActualizarPerfilDeUsuario" classname="com.utp.utpmarket.controllers.UsuarioControllerTest" time="0.011"/>
+  <testcase name="deberiaRetornarNoEncontradoParaIdInvalido" classname="com.utp.utpmarket.controllers.UsuarioControllerTest" time="0.009"/>
 </testsuite>

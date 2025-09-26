@@ -116,5 +116,79 @@
     });
 </script>
 
+<!-- Script para manejar el login con la API -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Evitar el envío tradicional del formulario
+
+            const email = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.querySelector('.alert.alert-danger');
+
+            if (errorDiv) {
+                errorDiv.style.display = 'none';
+            }
+
+            try {
+                // 1. Autenticar y obtener el token
+                const loginResponse = await fetch('http://localhost:8080/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                if (!loginResponse.ok) {
+                    throw new Error('Correo o contraseña incorrectos');
+                }
+
+                const authData = await loginResponse.json();
+                const token = authData.token;
+
+                if (!token) {
+                    throw new Error('No se recibió el token de autenticación');
+                }
+
+                // 2. Obtener el perfil del usuario con el nuevo token
+                const profileResponse = await fetch('http://localhost:8080/api/usuarios/perfil', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!profileResponse.ok) {
+                    throw new Error('No se pudo obtener el perfil del usuario');
+                }
+
+                const userProfile = await profileResponse.json();
+
+                // 3. Guardar todo en localStorage para que React lo use
+                localStorage.setItem('token', token);
+                localStorage.setItem('user', JSON.stringify(userProfile)); // El UserContext puede leer esto
+
+                // 4. Redirigir a la página principal de la aplicación de React
+                window.location.href = 'http://localhost:5173/main'; // Asumiendo que Vite corre en el puerto 5173
+
+            } catch (error) {
+                console.error('Error en el inicio de sesión:', error);
+                if (errorDiv) {
+                    errorDiv.innerText = error.message;
+                    errorDiv.style.display = 'block';
+                } else {
+                    const newErrorDiv = document.createElement('div');
+                    newErrorDiv.className = 'alert alert-danger';
+                    newErrorDiv.setAttribute('role', 'alert');
+                    newErrorDiv.innerText = error.message;
+                    form.prepend(newErrorDiv);
+                }
+            }
+        });
+    });
+</script>
+
 </body>
 </html>

@@ -1,7 +1,65 @@
+
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import brandLogo from "../../assets/utpmarketlogo.png";
 import Carrito from "../../pages/features/carrito/Carrito";
+import { useAuth } from "../../hooks/useAuth";
+
+const AuthSection = () => {
+    const { user, logout, loading } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/main'); // Redirect to main page after logout
+    };
+
+    if (loading) {
+        return null; // Or a loading spinner
+    }
+
+    return (
+        <>
+            {user ? (
+                <div className="d-flex align-items-center">
+                    <Link to="/perfil" className="nav-link text-white me-3">Hola, {user.nombre}</Link>
+                    <button onClick={handleLogout} className="btn btn-outline-danger me-3">Cerrar Sesión</button>
+                </div>
+            ) : (
+                <a href="http://localhost:8080/login" className="btn btn-icon btn-dark rounded-circle bg-dark me-4 d-none d-lg-block">
+                    <i className="bi bi-person align-middle"></i>
+                </a>
+            )}
+        </>
+    );
+};
+
+const AuthSectionMobile = () => {
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/main');
+    };
+
+    return (
+        <>
+            {user ? (
+                 <div className="d-flex justify-content-center align-items-center mt-3">
+                    <Link to="/perfil" className="nav-link text-white">Hola, {user.nombre}</Link>
+                    <button onClick={handleLogout} className="btn btn-outline-danger ms-3">Cerrar Sesión</button>
+                </div>
+            ) : (
+                <a href="http://localhost:8080/login" className="btn btn-icon btn-dark rounded-circle bg-dark mx-2">
+                    <i className="bi bi-person align-middle"></i>
+                </a>
+            )}
+        </>
+    );
+};
+
+
 const Navbar = () => {
   const [showCart, setShowCart] = useState(false);
   const cartRef = useRef(null);
@@ -58,10 +116,10 @@ const Navbar = () => {
                   <i className="bi bi-bell align-middle"></i>
                 </a>
               </span>
-              {/* Boton de perfil (Visible en pantallas grandes) */}
-              <a href="http://localhost:8080/login" className="btn btn-icon btn-dark rounded-circle bg-dark me-4 d-none d-lg-block">
-                <i className="bi bi-person align-middle"></i>
-              </a>
+              {/* Auth Section for Desktop */}
+              <div className="d-none d-lg-block">
+                <AuthSection />
+              </div>
               {/* Alternador movil: alterna el colapso*/}
               <button
                 className="navbar-toggler ms-2 me-3"
@@ -130,16 +188,15 @@ const Navbar = () => {
               </li>
               {/* Iconos para movil */}
               <li className="nav-item d-lg-none mt-3">
-                <div className="d-flex justify-content-center">
-                  <a href="#" className="btn btn-icon btn-dark rounded-circle bg-dark mx-2">
-                    <i className="bi bi-cart2 align-middle"></i>
-                  </a>
-                  <a href="#" className="btn btn-icon btn-dark rounded-circle bg-dark mx-2">
-                    <i className="bi bi-bell align-middle"></i>
-                  </a>
-                  <a href="http://localhost:8080/login" className="btn btn-icon btn-dark rounded-circle bg-dark mx-2">
-                    <i className="bi bi-person align-middle"></i>
-                  </a>
+                 <div className="d-flex justify-content-center">
+                    <a href="#" className="btn btn-icon btn-dark rounded-circle bg-dark mx-2">
+                        <i className="bi bi-cart2 align-middle"></i>
+                    </a>
+                    <a href="#" className="btn btn-icon btn-dark rounded-circle bg-dark mx-2">
+                        <i className="bi bi-bell align-middle"></i>
+                    </a>
+                    {/* Auth Section for Mobile */}
+                    <AuthSectionMobile />
                 </div>
               </li>
             </ul>

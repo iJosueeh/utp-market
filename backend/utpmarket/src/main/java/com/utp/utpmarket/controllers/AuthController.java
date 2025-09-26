@@ -1,16 +1,13 @@
 package com.utp.utpmarket.controllers;
 
-import com.utp.utpmarket.models.dto.AuthResponse;
-import com.utp.utpmarket.models.dto.LoginRequest;
-import com.utp.utpmarket.models.dto.RegisterRequest;
+import com.utp.utpmarket.models.dto.RespuestaAuth;
+import com.utp.utpmarket.models.dto.SolicitudLogin;
+import com.utp.utpmarket.models.dto.SolicitudRegistro;
 import com.utp.utpmarket.services.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -20,12 +17,13 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> registrarUsuario(@Valid @RequestBody RegisterRequest request) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public RespuestaAuth registrarUsuario(@Valid @RequestBody SolicitudRegistro request) {
         return authService.registrarUsuario(request);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
+    public RespuestaAuth login(@Valid @RequestBody SolicitudLogin request) {
         return authService.loginUsuario(request);
     }
 
