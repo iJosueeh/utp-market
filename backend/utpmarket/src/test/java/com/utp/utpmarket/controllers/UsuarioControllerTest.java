@@ -1,7 +1,7 @@
 package com.utp.utpmarket.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.utp.utpmarket.models.dto.PerfilActualizadoRequest;
+import com.utp.utpmarket.models.dto.SolicitudPerfilActualizado;
 import com.utp.utpmarket.models.entity.Usuario;
 import com.utp.utpmarket.services.UsuarioService;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,19 +47,19 @@ class UsuarioControllerTest {
         usuario1 = new Usuario();
         usuario1.setId(1L);
         usuario1.setNombre("John");
-        usuario1.setApellido("Doe");
+        usuario1.setApellidos("Doe");
         usuario1.setEmail("john.doe@utp.edu.pe");
 
         usuario2 = new Usuario();
         usuario2.setId(2L);
         usuario2.setNombre("Jane");
-        usuario2.setApellido("Doe");
+        usuario2.setApellidos("Doe");
         usuario2.setEmail("jane.doe@utp.edu.pe");
     }
 
     @Test
-    void shouldListAllUsers() throws Exception {
-        given(usuarioService.listarUsuarios()).willReturn(Arrays.asList(usuario1, usuario2));
+    void deberiaListarTodosLosUsuarios() throws Exception {
+        given(usuarioService.listarTodos()).willReturn(Arrays.asList(usuario1, usuario2));
 
         mockMvc.perform(get("/api/usuarios"))
                 .andExpect(status().isOk())
@@ -68,7 +68,7 @@ class UsuarioControllerTest {
     }
 
     @Test
-    void shouldReturnUserById() throws Exception {
+    void deberiaRetornarUsuarioPorId() throws Exception {
         given(usuarioService.buscarPorId(1L)).willReturn(Optional.of(usuario1));
 
         mockMvc.perform(get("/api/usuarios/1"))
@@ -77,7 +77,7 @@ class UsuarioControllerTest {
     }
 
     @Test
-    void shouldReturnNotFoundForInvalidUserId() throws Exception {
+    void deberiaRetornarNoEncontradoParaIdInvalido() throws Exception {
         given(usuarioService.buscarPorId(99L)).willReturn(Optional.empty());
 
         mockMvc.perform(get("/api/usuarios/99"))
@@ -85,8 +85,8 @@ class UsuarioControllerTest {
     }
 
     @Test
-    void shouldCreateUser() throws Exception {
-        given(usuarioService.crearUsuario(any(Usuario.class))).willReturn(usuario1);
+    void deberiaCrearUsuario() throws Exception {
+        given(usuarioService.guardar(any(Usuario.class))).willReturn(usuario1);
 
         mockMvc.perform(post("/api/usuarios")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -96,8 +96,8 @@ class UsuarioControllerTest {
     }
 
     @Test
-    void shouldUpdateUser() throws Exception {
-        given(usuarioService.actualizarUsuario(eq(1L), any(Usuario.class))).willReturn(usuario1);
+    void deberiaActualizarUsuario() throws Exception {
+        given(usuarioService.actualizar(eq(1L), any(Usuario.class))).willReturn(Optional.of(usuario1));
 
         mockMvc.perform(put("/api/usuarios/1")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -107,8 +107,8 @@ class UsuarioControllerTest {
     }
 
     @Test
-    void shouldReturnNotFoundWhenUpdatingNonExistentUser() throws Exception {
-        given(usuarioService.actualizarUsuario(anyLong(), any(Usuario.class))).willThrow(new RuntimeException("Usuario no encontrado."));
+    void deberiaRetornarNoEncontradoCuandoSeActualizaUsuarioInexistente() throws Exception {
+        given(usuarioService.actualizar(anyLong(), any(Usuario.class))).willReturn(Optional.empty());
 
         mockMvc.perform(put("/api/usuarios/99")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -117,13 +117,21 @@ class UsuarioControllerTest {
     }
 
     @Test
-    void shouldDeleteUser() throws Exception {
+    void deberiaEliminarUsuario() throws Exception {
+        given(usuarioService.eliminarPorId(1L)).willReturn(true);
         mockMvc.perform(delete("/api/usuarios/1"))
                 .andExpect(status().isNoContent());
     }
 
     @Test
-    void shouldGetUserProfile() throws Exception {
+    void deberiaRetornarNoEncontradoCuandoSeEliminaUsuarioInexistente() throws Exception {
+        given(usuarioService.eliminarPorId(99L)).willReturn(false);
+        mockMvc.perform(delete("/api/usuarios/99"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void deberiaObtenerPerfilDeUsuario() throws Exception {
         given(usuarioService.buscarPorEmail("test.user@utp.edu.pe")).willReturn(Optional.of(usuario1));
 
         mockMvc.perform(get("/api/usuarios/perfil"))
@@ -133,15 +141,15 @@ class UsuarioControllerTest {
     }
 
     @Test
-    void shouldUpdateUserProfile() throws Exception {
-        PerfilActualizadoRequest request = new PerfilActualizadoRequest("John Updated", "Doe", "123456789");
+    void deberiaActualizarPerfilDeUsuario() throws Exception {
+        SolicitudPerfilActualizado request = new SolicitudPerfilActualizado("John Updated", "Doe", "123456789");
         Usuario updatedUsuario = new Usuario();
         updatedUsuario.setNombre("John Updated");
-        updatedUsuario.setApellido("Doe");
+        updatedUsuario.setApellidos("Doe");
         updatedUsuario.setTelefono("123456789");
         updatedUsuario.setEmail("test.user@utp.edu.pe");
 
-        given(usuarioService.actualizarPerfil(eq("test.user@utp.edu.pe"), any(PerfilActualizadoRequest.class))).willReturn(updatedUsuario);
+        given(usuarioService.actualizarPerfil(eq("test.user@utp.edu.pe"), any(SolicitudPerfilActualizado.class))).willReturn(Optional.of(updatedUsuario));
 
         mockMvc.perform(put("/api/usuarios/perfil")
                         .contentType(MediaType.APPLICATION_JSON)

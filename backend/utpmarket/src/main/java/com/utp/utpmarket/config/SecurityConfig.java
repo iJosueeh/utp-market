@@ -1,5 +1,6 @@
 package com.utp.utpmarket.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +26,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         // Reglas de la API: todo bajo /api/ requiere autenticación, excepto /api/auth/
-                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/auth/** ").permitAll()
                         .requestMatchers("/api/**").authenticated()
 
                         // Reglas Web: permitir acceso público a las páginas de Thymeleaf y a los archivos de la SPA
@@ -40,7 +41,7 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/", true)
+                        .defaultSuccessUrl("/api/auth/redirect-to-app", true)
                         .permitAll()
                 )
                 .logout(logout -> logout

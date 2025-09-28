@@ -5,7 +5,6 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import './App.css';
 import MainPage from './pages/MainPage.jsx';
-import ForgotPassword from './pages/features/forgotPassword/resetPasswordPage.jsx';
 import AboutUsPage from "./pages/AboutUs/AUPage.jsx";
 import HelpPage from "./pages/Help/HelpPage.jsx";
 
@@ -16,7 +15,6 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/forgot-password" element={<ForgotPassword />}></Route>
         <Route path="/about-us" element={<AboutUsPage />} />  
         <Route path="/help" element={<HelpPage />} />
         <Route path="/main" element={<MainPage />} />

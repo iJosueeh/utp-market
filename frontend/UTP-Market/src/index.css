@@ -36,6 +36,19 @@ body {
   flex-direction: column;
 }
 
+/* Estilo personalizado para el botón de cerrar sesión en el dropdown */
+.dropdown-item-logout {
+  color: #fff !important;
+  background-color: #dc3545 !important; /* Color de peligro de Bootstrap */
+}
+
+.dropdown-item-logout:hover,
+.dropdown-item-logout:focus {
+  color: #fff !important;
+  background-color: #bb2d3b !important; /* Tono más oscuro para el hover */
+}
+
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
