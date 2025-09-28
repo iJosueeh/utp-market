@@ -20,6 +20,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
+import org.springframework.http.ResponseEntity;
+import java.net.URI;
+
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
@@ -41,10 +44,7 @@ public class AuthController {
     }
 
     @GetMapping("/redirect-to-app")
-    public String redirigirALaApp(Authentication autenticacion) throws JsonProcessingException, UnsupportedEncodingException {
-        UserDetails detallesUsuario = (UserDetails) autenticacion.getPrincipal();
-        String nombreUsuario = detallesUsuario.getUsername();
-
+    public ResponseEntity<Void> redirigirALaApp(@RequestParam("username") String nombreUsuario) throws JsonProcessingException, UnsupportedEncodingException {
         // Generar token
         RespuestaAuth respuestaAuth = authService.generarTokenParaUsuario(nombreUsuario);
         String token = respuestaAuth.token();
@@ -58,10 +58,12 @@ public class AuthController {
         String tokenString = URLEncoder.encode(token, StandardCharsets.UTF_8);
 
         // Construir la URL de redirección
-        return "redirect:" + UriComponentsBuilder
+        String redirectUrl = UriComponentsBuilder
                 .fromUriString("http://localhost:5173/auth/callback")
                 .queryParam("token", tokenString)
                 .queryParam("user", perfilUsuarioString)
                 .build().toUriString();
+
+        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(redirectUrl)).build();
     }
 }

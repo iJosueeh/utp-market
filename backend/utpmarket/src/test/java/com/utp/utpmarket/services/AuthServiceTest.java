@@ -113,4 +113,16 @@ class AuthServiceTest {
 
         verify(jwtUtil, never()).generarToken(anyString());
     }
+
+    @Test
+    void deberiaGenerarTokenParaUsuario() {
+        String email = "test@utp.edu.pe";
+        when(jwtUtil.generarToken(email)).thenReturn("generated-fake-jwt-token");
+
+        RespuestaAuth authResponse = authService.generarTokenParaUsuario(email);
+
+        assertThat(authResponse).isNotNull();
+        assertThat(authResponse.token()).isEqualTo("generated-fake-jwt-token");
+        verify(jwtUtil, times(1)).generarToken(email);
+    }
 }

@@ -4,12 +4,15 @@ import { describe, it, expect } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import Navbar from '../components/common/Navbar';
 import brandLogo from '../assets/utpmarketlogo.png';
+import { UserProvider } from '../context/UserContext'; // Import UserProvider
 
 describe('Componente Navbar', () => {
   it('debería renderizar el logo de la marca', () => {
     const { container } = render(
       <MemoryRouter>
-        <Navbar />
+        <UserProvider>
+          <Navbar />
+        </UserProvider>
       </MemoryRouter>
     );
     const brandLogoImg = container.querySelector('img');
@@ -19,7 +22,9 @@ describe('Componente Navbar', () => {
   it('debería renderizar los enlaces de navegación principales', () => {
     render(
       <MemoryRouter>
-        <Navbar />
+        <UserProvider>
+          <Navbar />
+        </UserProvider>
       </MemoryRouter>
     );
     expect(screen.getByText(/Inicio/i)).not.toBeNull();
@@ -32,7 +37,9 @@ describe('Componente Navbar', () => {
   it('debería renderizar el botón de dropdown de categorías', () => {
     render(
       <MemoryRouter>
-        <Navbar />
+        <UserProvider>
+          <Navbar />
+        </UserProvider>
       </MemoryRouter>
     );
     expect(screen.getByText(/Categoria/i)).not.toBeNull();
@@ -41,7 +48,9 @@ describe('Componente Navbar', () => {
   it('debería renderizar los íconos de carrito, notificaciones y perfil en pantallas grandes', () => {
     const { container } = render(
       <MemoryRouter>
-        <Navbar />
+        <UserProvider>
+          <Navbar />
+        </UserProvider>
       </MemoryRouter>
     );
     const cartIcon = container.querySelector('.d-none.d-lg-block .bi-cart2');
@@ -57,7 +66,9 @@ describe('Componente Navbar', () => {
   it('debería renderizar los íconos para móvil en el menú colapsable', () => {
     const { container } = render(
       <MemoryRouter>
-        <Navbar />
+        <UserProvider>
+          <Navbar />
+        </UserProvider>
       </MemoryRouter>
     );
     const mobileIcons = container.querySelector('.d-lg-none .bi-cart2');
