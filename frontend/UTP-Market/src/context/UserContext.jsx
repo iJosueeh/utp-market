@@ -1,13 +1,11 @@
-
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useCallback, useMemo } from 'react';
 
 const UserContext = createContext(null);
 
-// Helper function to get user from localStorage
 const getStoredUser = () => {
     try {
         return JSON.parse(localStorage.getItem('user'));
-    } catch (error) {
+    } catch {
         return null;
     }
 };
@@ -15,24 +13,32 @@ const getStoredUser = () => {
 export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(getStoredUser);
     const [token, setToken] = useState(() => localStorage.getItem('token'));
-    const [loading, setLoading] = useState(false); // No longer loading on initial mount
+    const [loading] = useState(false);
 
-    const login = (userData, authToken) => {
+    const login = useCallback((userData, authToken) => {
         localStorage.setItem('token', authToken);
         localStorage.setItem('user', JSON.stringify(userData));
         setToken(authToken);
         setUser(userData);
-    };
+    }, []);
 
-    const logout = () => {
+    const logout = useCallback(() => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         setToken(null);
         setUser(null);
-    };
+    }, []);
+
+    const value = useMemo(() => ({
+        user,
+        token,
+        login,
+        logout,
+        loading
+    }), [user, token, login, logout, loading]);
 
     return (
-        <UserContext.Provider value={{ user, token, login, logout, loading }}>
+        <UserContext.Provider value={value}>
             {children}
         </UserContext.Provider>
     );

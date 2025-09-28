@@ -50,4 +50,9 @@ public class AuthService {
         return new RespuestaAuth(token);
     }
 
+    public RespuestaAuth generarTokenParaUsuario(String nombreUsuario) {
+        String token = jwtUtil.generarToken(nombreUsuario);
+        return new RespuestaAuth(token);
+    }
+
 }
