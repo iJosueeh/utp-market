@@ -3,7 +3,9 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
 if (!apiKey) {
-  console.error("VITE_GEMINI_API_KEY is not set. Please add it to your .env file or configure it in your deployment environment.");
+  console.error(
+    "VITE_GEMINI_API_KEY is not set. Please add it to your .env file or configure it in your deployment environment."
+  );
 }
 
 const ai = new GoogleGenerativeAI(apiKey);
@@ -48,11 +50,14 @@ async function generateResponse(prompt) {
     return "¡Uy! La configuración de la API no está completa. Por favor, contacta al administrador.";
   }
   try {
-    const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
-    const fullPrompt = `${systemPrompt}\n\nUsuario: ${prompt}\nAsistente:`
-    const result = await model.generateContent(fullPrompt);
-    const response = await result.response;
-    return response.text();
+    const model = ai.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+    const fullPrompt = `${systemPrompt}\n\nUsuario: ${prompt}\nAsistente:`;
+    const result = await model.generateContent({
+      contents: [{ role: "user", parts: [{ text: fullPrompt }] }],
+    });
+
+    return result.response.text();
   } catch (error) {
     console.error("Error generating content:", error);
     return "¡Uy! Algo salió mal al intentar conectar con mi cerebro digital. Inténtalo de nuevo.";
