@@ -4,23 +4,18 @@ import com.utp.utpmarket.models.dto.ProductRequest;
 import com.utp.utpmarket.models.dto.ProductResponse;
 import com.utp.utpmarket.models.entity.Product;
 import com.utp.utpmarket.repository.ProductRepository;
-import com.utp.utpmarket.services.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
-
-    @Autowired
-    public ProductServiceImpl(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
-
+    
     @Override
     public ProductResponse createProduct(ProductRequest request) {
         Product product = new Product(request.getNombre(), request.getPrecio());

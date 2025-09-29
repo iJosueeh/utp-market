@@ -1,7 +1,7 @@
 package com.utp.utpmarket.controllers;
 
-import com.utp.utpmarket.models.dto.PerfilActualizadoRequest;
-import com.utp.utpmarket.models.dto.PerfilResponse;
+import com.utp.utpmarket.models.dto.SolicitudPerfilActualizado;
+import com.utp.utpmarket.models.dto.RespuestaPerfil;
 import com.utp.utpmarket.models.entity.Usuario;
 import com.utp.utpmarket.services.UsuarioService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class UsuarioController {
 
     @GetMapping
     public List<Usuario> listarUsuarios() {
-        return usuarioService.listarUsuarios();
+        return usuarioService.listarTodos();
     }
 
     @GetMapping("/{id}")
@@ -32,32 +32,31 @@ public class UsuarioController {
 
     @PostMapping
     public Usuario crearUsuario(@RequestBody Usuario usuario) {
-        return usuarioService.crearUsuario(usuario);
+        return usuarioService.guardar(usuario);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
-        try {
-            return ResponseEntity.ok(usuarioService.actualizarUsuario(id, usuario));
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+        return usuarioService.actualizar(id, usuario)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarUsuario(@PathVariable Long id) {
-        usuarioService.eliminarUsuario(id);
-        return ResponseEntity.noContent().build();
+        return usuarioService.eliminarPorId(id)
+                ? ResponseEntity.noContent().build()
+                : ResponseEntity.notFound().build();
     }
 
     @GetMapping("/perfil")
-    public ResponseEntity<PerfilResponse> getPerfil(Authentication authentication) {
+    public ResponseEntity<RespuestaPerfil> getPerfil(Authentication authentication) {
         String email = authentication.getName();
         return usuarioService.buscarPorEmail(email)
                 .map(usuario -> ResponseEntity.ok(
-                        new PerfilResponse(
+                        new RespuestaPerfil(
                                 usuario.getNombre(),
-                                usuario.getApellido(),
+                                usuario.getApellidos(),
                                 usuario.getTelefono(),
                                 usuario.getEmail()
                         )
@@ -66,22 +65,19 @@ public class UsuarioController {
     }
 
     @PutMapping("/perfil")
-    public ResponseEntity<PerfilResponse> actualizarPerfil(
+    public ResponseEntity<RespuestaPerfil> actualizarPerfil(
             Authentication authentication,
-            @RequestBody PerfilActualizadoRequest request) {
+            @RequestBody SolicitudPerfilActualizado request) {
         String email = authentication.getName();
-        try {
-            Usuario actualizado = usuarioService.actualizarPerfil(email, request);
-            return ResponseEntity.ok(
-                    new PerfilResponse(
-                            actualizado.getNombre(),
-                            actualizado.getApellido(),
-                            actualizado.getTelefono(),
-                            actualizado.getEmail()
-                    )
-            );
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+        return usuarioService.actualizarPerfil(email, request)
+                .map(actualizado -> ResponseEntity.ok(
+                        new RespuestaPerfil(
+                                actualizado.getNombre(),
+                                actualizado.getApellidos(),
+                                actualizado.getTelefono(),
+                                actualizado.getEmail()
+                        )
+                ))
+                .orElse(ResponseEntity.notFound().build());
     }
 }

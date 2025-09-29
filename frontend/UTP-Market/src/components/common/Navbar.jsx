@@ -1,7 +1,75 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import brandLogo from "../../assets/utpmarketlogo.png";
 import Carrito from "../../pages/features/carrito/Carrito";
+import { useAuth } from "../../hooks/useAuth";
+
+const AuthSection = () => {
+    const { user, logout, loading } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/main');
+    };
+
+    if (loading) {
+        return null;
+    }
+
+    return (
+        <>
+            {user ? (
+                <div className="dropdown">
+                    <a href="#" className="nav-link text-white dropdown-toggle pe-5" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Hola, {user.nombre}
+                    </a>
+                    <ul className="dropdown-menu dropdown-menu-end pe-3" aria-labelledby="userDropdown">
+                        <li><Link className="dropdown-item" to="/profile">Ver Perfil</Link></li>
+                        <li><hr className="dropdown-divider" /></li>
+                        <li><button className="dropdown-item dropdown-item-logout" onClick={handleLogout}>Cerrar Sesión</button></li>
+                    </ul>
+                </div>
+            ) : (
+                <a href="http://localhost:8080/login" className="btn btn-icon btn-dark rounded-circle bg-dark me-4 d-none d-lg-block">
+                    <i className="bi bi-person align-middle"></i>
+                </a>
+            )}
+        </>
+    );
+};
+
+const AuthSectionMobile = () => {
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/main');
+    };
+
+    return (
+        <>
+            {user ? (
+                 <div className="dropdown">
+                    <a href="#" className="nav-link text-white dropdown-toggle" id="userDropdownMobile" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Hola, {user.nombre}
+                    </a>
+                    <ul className="dropdown-menu" aria-labelledby="userDropdownMobile">
+                        <li><Link className="dropdown-item" to="/profile">Ver Perfil</Link></li>
+                        <li><hr className="dropdown-divider" /></li>
+                        <li><button className="dropdown-item" onClick={handleLogout}>Cerrar Sesión</button></li>
+                    </ul>
+                </div>
+            ) : (
+                <a href="http://localhost:8080/login" className="btn btn-icon btn-dark rounded-circle bg-dark mx-2">
+                    <i className="bi bi-person align-middle"></i>
+                </a>
+            )}
+        </>
+    );
+};
+
 const Navbar = () => {
   const [showCart, setShowCart] = useState(false);
   const cartRef = useRef(null);
@@ -19,13 +87,9 @@ const Navbar = () => {
   }, [cartRef]);
   return (
     <>
-      {/* NAVBAR: wrapper principal de navegación */}
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top ">
-        {/* CONTAINER: contiene a los grupos de la izquierda y derecha*/}
         <div className="container-fluid px-0">
-          {/* Grupo a la izquierda, contiene el logo*/}
           <div className="d-flex">
-            {/* Logo*/}
             <a className="navbar-brand ms-5" href="/">
               <img
                 src={brandLogo}
@@ -34,11 +98,8 @@ const Navbar = () => {
               />
             </a>
           </div>
-          {/* Grupo a la derecha, contiene carrito de compras, boton de notificaciónes, botones de autenticación
-           ( la clase "order-lg-3" lo posiciciona a la derecha) */}
           <div className="order-lg-3">
             <div className="d-flex align-items-center">
-              {/* Carrito de compras (Se esconde en pantallas pequeñas)*/}
               <div className="position-relative d-none d-lg-block" ref={cartRef}> 
                 <button type="button" className="btn btn-icon btn-dark rounded-circle bg-dark" onClick={() => setShowCart(!showCart)}>
                   <i className="bi bi-cart2 align-middle"></i>
@@ -58,11 +119,9 @@ const Navbar = () => {
                   <i className="bi bi-bell align-middle"></i>
                 </a>
               </span>
-              {/* Boton de perfil (Visible en pantallas grandes) */}
-              <a href="http://localhost:8080/login" className="btn btn-icon btn-dark rounded-circle bg-dark me-4 d-none d-lg-block">
-                <i className="bi bi-person align-middle"></i>
-              </a>
-              {/* Alternador movil: alterna el colapso*/}
+              <div className="d-none d-lg-block">
+                <AuthSection />
+              </div>
               <button
                 className="navbar-toggler ms-2 me-3"
                 type="button"
@@ -76,38 +135,30 @@ const Navbar = () => {
               </button>
             </div>
           </div>
-          {/* Barra de navegación con los links principales de la pagina principal (Colapsa en moviles) */}
           <div className="collapse navbar-collapse justify-content-center" id="navbar-default2">
             <ul className="navbar-nav mx-1 text-center">
-              {/* Items de navegación principales*/}
-              {/* Pagina de inicio */}
               <li className="nav-item mx-2">
                 <Link className="nav-link text-white" to="/main">
                   Inicio
                   </Link>
               </li>
-              {/* Pagina de nosotros */}
               <li className="nav-item mx-2">
                    <Link className="nav-link text-white" to="/about-us">
                   Nosotros
                   </Link>
               </li>
-              {/* Pagina de sedes */}
               <li className="nav-item mx-2">
                 <a className="nav-link text-white " aria-current="page" href="#">Sedes</a>
               </li>
-              {/* Pagina de ayuda */}
               <li className="nav-item mx-2">
                 <Link className="nav-link text-white" to="/help">
                   Ayuda
                   </Link>
               </li>
-              {/* Pagina de vender */}
               <li className="nav-item mx-2">
                 <a className="nav-link text-white " aria-current="page" href="#">Vender</a>
               </li>
               <li>
-                {/* Dropdown de categoria, solo se muestra en pantallas medianas o más grandes */}
                 <div className="dropdown d-none d-md-block">
                   <button
                     className="btn btn-light-primary text-white"
@@ -130,16 +181,14 @@ const Navbar = () => {
               </li>
               {/* Iconos para movil */}
               <li className="nav-item d-lg-none mt-3">
-                <div className="d-flex justify-content-center">
-                  <a href="#" className="btn btn-icon btn-dark rounded-circle bg-dark mx-2">
-                    <i className="bi bi-cart2 align-middle"></i>
-                  </a>
-                  <a href="#" className="btn btn-icon btn-dark rounded-circle bg-dark mx-2">
-                    <i className="bi bi-bell align-middle"></i>
-                  </a>
-                  <a href="http://localhost:8080/login" className="btn btn-icon btn-dark rounded-circle bg-dark mx-2">
-                    <i className="bi bi-person align-middle"></i>
-                  </a>
+                 <div className="d-flex justify-content-center">
+                    <a href="#" className="btn btn-icon btn-dark rounded-circle bg-dark mx-2">
+                        <i className="bi bi-cart2 align-middle"></i>
+                    </a>
+                    <a href="#" className="btn btn-icon btn-dark rounded-circle bg-dark mx-2">
+                        <i className="bi bi-bell align-middle"></i>
+                    </a>
+                    <AuthSectionMobile />
                 </div>
               </li>
             </ul>

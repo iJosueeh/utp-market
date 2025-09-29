@@ -1,158 +1,142 @@
+
 package com.utp.utpmarket.services;
 
-import com.utp.utpmarket.models.dto.PerfilActualizadoRequest;
+import com.utp.utpmarket.models.dto.SolicitudPerfilActualizado;
 import com.utp.utpmarket.models.entity.Usuario;
-import com.utp.utpmarket.repository.UsuarioRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class UsuarioServiceTest {
 
     @Mock
-    private UsuarioRepository usuarioRepository;
-
-    @Mock
     private PasswordEncoder passwordEncoder;
 
-    @InjectMocks
     private UsuarioService usuarioService;
 
-    @Test
-    void shouldReturnAllUsers() {
-        Usuario usuario1 = new Usuario();
-        usuario1.setId(1L);
-        usuario1.setNombre("John");
-        Usuario usuario2 = new Usuario();
-        usuario2.setId(2L);
-        usuario2.setNombre("Jane");
-        List<Usuario> usuarios = Arrays.asList(usuario1, usuario2);
+    @BeforeEach
+    void setUp() {
+        usuarioService = new UsuarioService(passwordEncoder);
+    }
 
-        given(usuarioRepository.findAll()).willReturn(usuarios);
-
-        List<Usuario> result = usuarioService.listarUsuarios();
-
-        assertThat(result).hasSize(2);
-        assertThat(result.get(0).getNombre()).isEqualTo("John");
+    private Usuario crearYGuardarUsuario(String nombre, String email) {
+        Usuario user = new Usuario();
+        user.setNombre(nombre);
+        user.setEmail(email);
+        return usuarioService.guardar(user);
     }
 
     @Test
-    void shouldReturnUserWhenFoundById() {
-        Usuario usuario = new Usuario();
-        usuario.setId(1L);
-        usuario.setNombre("Test User");
+    void deberiaRetornarTodosLosUsuarios() {
+        crearYGuardarUsuario("John Doe", "john.doe@utp.edu.pe");
+        crearYGuardarUsuario("Jane Doe", "jane.doe@utp.edu.pe");
 
-        given(usuarioRepository.findById(1L)).willReturn(Optional.of(usuario));
+        List<Usuario> result = usuarioService.listarTodos();
 
-        Optional<Usuario> result = usuarioService.buscarPorId(1L);
+        assertThat(result).hasSize(2);
+    }
+
+    @Test
+    void deberiaRetornarUsuarioCuandoSeEncuentraPorId() {
+        Usuario savedUser = crearYGuardarUsuario("Test User", "test.user@utp.edu.pe");
+
+        Optional<Usuario> result = usuarioService.buscarPorId(savedUser.getId());
 
         assertThat(result).isPresent();
         assertThat(result.get().getNombre()).isEqualTo("Test User");
     }
 
     @Test
-    void shouldReturnEmptyOptionalWhenUserNotFoundById() {
-        given(usuarioRepository.findById(1L)).willReturn(Optional.empty());
-
-        Optional<Usuario> result = usuarioService.buscarPorId(1L);
+    void deberiaRetornarOpcionalVacioCuandoUsuarioNoSeEncuentraPorId() {
+        Optional<Usuario> result = usuarioService.buscarPorId(999L);
 
         assertThat(result).isNotPresent();
     }
 
     @Test
-    void shouldCreateAndReturnUser() {
-        Usuario usuario = new Usuario();
-        usuario.setNombre("New User");
+    void deberiaCrearYRetornarUsuarioConId() {
+        Usuario newUser = new Usuario();
+        newUser.setNombre("New User");
+        newUser.setEmail("new.user@utp.edu.pe");
 
-        given(usuarioRepository.save(any(Usuario.class))).willReturn(usuario);
+        Usuario result = usuarioService.guardar(newUser);
 
-        Usuario result = usuarioService.crearUsuario(new Usuario());
-
+        assertThat(result.getId()).isNotNull().isPositive();
         assertThat(result.getNombre()).isEqualTo("New User");
     }
 
     @Test
-    void shouldUpdateAndReturnUser() {
-        Usuario existingUsuario = new Usuario();
-        existingUsuario.setId(1L);
-        existingUsuario.setNombre("Old Name");
+    void deberiaActualizarYRetornarUsuario() {
+        Usuario existingUser = crearYGuardarUsuario("Old Name", "old.email@utp.edu.pe");
 
         Usuario updatedInfo = new Usuario();
         updatedInfo.setNombre("New Name");
-        updatedInfo.setApellido("New Lastname");
+        updatedInfo.setApellidos("New Lastname");
         updatedInfo.setTelefono("123456789");
         updatedInfo.setEmail("new.email@utp.edu.pe");
 
-        given(usuarioRepository.findById(1L)).willReturn(Optional.of(existingUsuario));
-        given(usuarioRepository.save(any(Usuario.class))).willAnswer(invocation -> invocation.getArgument(0));
+        Optional<Usuario> result = usuarioService.actualizar(existingUser.getId(), updatedInfo);
 
-        Usuario result = usuarioService.actualizarUsuario(1L, updatedInfo);
-
-        assertThat(result.getNombre()).isEqualTo("New Name");
-        assertThat(result.getApellido()).isEqualTo("New Lastname");
+        assertThat(result).isPresent();
+        assertThat(result.get().getNombre()).isEqualTo("New Name");
+        assertThat(result.get().getApellidos()).isEqualTo("New Lastname");
     }
 
     @Test
-    void shouldThrowExceptionWhenUpdatingNonExistentUser() {
-        given(usuarioRepository.findById(anyLong())).willReturn(Optional.empty());
+    void deberiaRetornarOpcionalVacioCuandoSeActualizaUsuarioInexistente() {
+        Optional<Usuario> result = usuarioService.actualizar(999L, new Usuario());
 
-        assertThrows(RuntimeException.class, () -> {
-            usuarioService.actualizarUsuario(1L, new Usuario());
-        });
+        assertThat(result).isNotPresent();
     }
 
     @Test
-    void shouldUpdateUserProfile() {
+    void deberiaActualizarPerfilDeUsuario() {
         String email = "test@utp.edu.pe";
-        Usuario usuario = new Usuario();
-        usuario.setEmail(email);
-        usuario.setNombre("Original");
+        crearYGuardarUsuario("Original", email);
 
-        PerfilActualizadoRequest request = new PerfilActualizadoRequest("Updated", "Name", "987654321");
+        SolicitudPerfilActualizado request = new SolicitudPerfilActualizado("Updated", "Name", "987654321");
 
-        when(usuarioRepository.findByEmail(email)).thenReturn(Optional.of(usuario));
-        when(usuarioRepository.save(any(Usuario.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        Optional<Usuario> result = usuarioService.actualizarPerfil(email, request);
 
-        Usuario result = usuarioService.actualizarPerfil(email, request);
-
-        assertThat(result.getNombre()).isEqualTo("Updated");
-        assertThat(result.getApellido()).isEqualTo("Name");
-        assertThat(result.getTelefono()).isEqualTo("987654321");
+        assertThat(result).isPresent();
+        assertThat(result.get().getNombre()).isEqualTo("Updated");
+        assertThat(result.get().getApellidos()).isEqualTo("Name");
+        assertThat(result.get().getTelefono()).isEqualTo("987654321");
     }
 
     @Test
-    void shouldDeleteUser() {
-        Long userId = 1L;
-        usuarioService.eliminarUsuario(userId);
-        verify(usuarioRepository).deleteById(userId);
+    void deberiaEliminarUsuario() {
+        Usuario userToDelete = crearYGuardarUsuario("To Delete", "delete.me@utp.edu.pe");
+
+        boolean result = usuarioService.eliminarPorId(userToDelete.getId());
+
+        assertThat(result).isTrue();
+        assertThat(usuarioService.buscarPorId(userToDelete.getId())).isNotPresent();
     }
 
     @Test
-    void shouldReturnUserWhenFoundByEmail() {
+    void deberiaRetornarFalsoCuandoSeEliminaUsuarioInexistente() {
+        boolean result = usuarioService.eliminarPorId(999L);
+
+        assertThat(result).isFalse();
+    }
+
+    @Test
+    void deberiaRetornarUsuarioCuandoSeEncuentraPorEmail() {
         String email = "test@utp.edu.pe";
-        Usuario usuario = new Usuario();
-        usuario.setEmail(email);
-
-        given(usuarioRepository.findByEmail(email)).willReturn(Optional.of(usuario));
+        crearYGuardarUsuario("Test User", email);
 
         Optional<Usuario> result = usuarioService.buscarPorEmail(email);
 
@@ -160,74 +144,74 @@ class UsuarioServiceTest {
         assertThat(result.get().getEmail()).isEqualTo(email);
     }
 
-    // --- Password Reset Tests ---
+    // --- Pruebas de Reseteo de Contraseña ---
 
     @Test
-    void testCreatePasswordResetTokenForUser_Success() {
-        Usuario usuario = new Usuario();
-        usuario.setEmail("test@utp.edu.pe");
-        given(usuarioRepository.findByEmail("test@utp.edu.pe")).willReturn(Optional.of(usuario));
+    void testCrearTokenReseteoPassword_Exitoso() {
+        String email = "test@utp.edu.pe";
+        crearYGuardarUsuario("Test User", email);
 
-        String token = usuarioService.createPasswordResetTokenForUser("test@utp.edu.pe");
+        String token = usuarioService.crearTokenReseteoPassword(email);
 
         assertThat(token).isNotNull();
-        verify(usuarioRepository).save(any(Usuario.class));
+        Optional<Usuario> userWithToken = usuarioService.buscarPorEmail(email);
+        assertThat(userWithToken).isPresent();
+        assertThat(userWithToken.get().getResetPasswordToken()).isEqualTo(token);
     }
 
     @Test
-    void testCreatePasswordResetTokenForUser_UserNotFound() {
-        given(usuarioRepository.findByEmail(anyString())).willReturn(Optional.empty());
-
-        String token = usuarioService.createPasswordResetTokenForUser("nonexistent@utp.edu.pe");
+    void testCrearTokenReseteoPassword_UsuarioNoEncontrado() {
+        String token = usuarioService.crearTokenReseteoPassword("nonexistent@utp.edu.pe");
 
         assertThat(token).isNull();
     }
 
     @Test
-    void testValidatePasswordResetToken_Valid() {
-        Usuario usuario = new Usuario();
-        usuario.setResetPasswordToken("valid-token");
-        usuario.setResetPasswordTokenExpiryDate(LocalDateTime.now().plusHours(1));
-        given(usuarioRepository.findByResetPasswordToken("valid-token")).willReturn(Optional.of(usuario));
+    void testValidarTokenReseteoPassword_Valido() {
+        String email = "test@utp.edu.pe";
+        crearYGuardarUsuario("Test User", email);
+        String token = usuarioService.crearTokenReseteoPassword(email);
 
-        Optional<Usuario> result = usuarioService.validatePasswordResetToken("valid-token");
+        Optional<Usuario> result = usuarioService.validarTokenReseteoPassword(token);
 
         assertThat(result).isPresent();
     }
 
     @Test
-    void testValidatePasswordResetToken_Invalid() {
-        given(usuarioRepository.findByResetPasswordToken("invalid-token")).willReturn(Optional.empty());
-
-        Optional<Usuario> result = usuarioService.validatePasswordResetToken("invalid-token");
+    void testValidarTokenReseteoPassword_Invalido() {
+        Optional<Usuario> result = usuarioService.validarTokenReseteoPassword("invalid-token");
 
         assertThat(result).isNotPresent();
     }
 
     @Test
-    void testValidatePasswordResetToken_Expired() {
-        Usuario usuario = new Usuario();
-        usuario.setResetPasswordToken("expired-token");
-        usuario.setResetPasswordTokenExpiryDate(LocalDateTime.now().minusHours(1));
-        given(usuarioRepository.findByResetPasswordToken("expired-token")).willReturn(Optional.of(usuario));
+    void testValidarTokenReseteoPassword_Expirado() {
+        String email = "test@utp.edu.pe";
+        Usuario user = crearYGuardarUsuario("Test User", email);
+        String token = UUID.randomUUID().toString();
+        user.setResetPasswordToken(token);
+        user.setResetPasswordTokenExpiryDate(LocalDateTime.now().minusHours(1)); // Token expirado
+        usuarioService.guardar(user);
 
-        Optional<Usuario> result = usuarioService.validatePasswordResetToken("expired-token");
+        Optional<Usuario> result = usuarioService.validarTokenReseteoPassword(token);
 
         assertThat(result).isNotPresent();
     }
 
     @Test
-    void testChangeUserPassword() {
-        Usuario usuario = new Usuario();
-        usuario.setPassword("oldPassword");
+    void testCambiarPassword() {
+        Usuario user = crearYGuardarUsuario("Test User", "test@utp.edu.pe");
+        String newPassword = "newPassword";
+        String encodedPassword = "encodedNewPassword";
 
-        given(passwordEncoder.encode("newPassword")).willReturn("encodedNewPassword");
+        when(passwordEncoder.encode(newPassword)).thenReturn(encodedPassword);
 
-        usuarioService.changeUserPassword(usuario, "newPassword");
+        usuarioService.cambiarPassword(user, newPassword);
 
-        assertThat(usuario.getPassword()).isEqualTo("encodedNewPassword");
-        assertThat(usuario.getResetPasswordToken()).isNull();
-        assertThat(usuario.getResetPasswordTokenExpiryDate()).isNull();
-        verify(usuarioRepository).save(usuario);
+        Optional<Usuario> updatedUser = usuarioService.buscarPorId(user.getId());
+        assertThat(updatedUser).isPresent();
+        assertThat(updatedUser.get().getPassword()).isEqualTo(encodedPassword);
+        assertThat(updatedUser.get().getResetPasswordToken()).isNull();
+        assertThat(updatedUser.get().getResetPasswordTokenExpiryDate()).isNull();
     }
 }

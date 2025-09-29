@@ -2,7 +2,11 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AUPage from '../pages/AboutUs/AUPage';
 import HelpPage from '../pages/Help/HelpPage';
 import MainPage from '../pages/MainPage';
+<<<<<<< HEAD
 import UsuarioDashboard from '../pages/Usuario/UsuarioDashboard';
+=======
+import AuthCallback from '../pages/auth/AuthCallback';
+>>>>>>> 3116017616450d064207d5f7d9c82f4a2768106d
 
 export default function AppRoutes() {
   return (
@@ -17,7 +21,12 @@ export default function AppRoutes() {
         {/* Ruta para la página "Centro de ayuda" */}
         <Route path="/help" element={<HelpPage />} />
         <Route path="/main" element={<MainPage />} />
+<<<<<<< HEAD
         <Route path="/usuario/*" element={<UsuarioDashboard />} />
+=======
+        <Route path="/auth/callback" element={<AuthCallback />} />
+
+>>>>>>> 3116017616450d064207d5f7d9c82f4a2768106d
         {/* Puedes agregar rutas protegidas aquí más adelante */}
         {/* <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} /> */}
 

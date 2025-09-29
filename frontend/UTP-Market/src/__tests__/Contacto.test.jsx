@@ -6,14 +6,13 @@ describe('ContactoForm', () => {
   it('renders the contact form', () => {
     render(<ContactoForm />);
     
-    expect(screen.getByText('CONTACTANOS')).toBeInTheDocument();
+    expect(screen.getByText('CONTÁCTANOS')).toBeInTheDocument();
     expect(screen.getByText('Escríbenos un mensaje')).toBeInTheDocument();
     
     expect(screen.getByLabelText('Nombre Completo')).toBeInTheDocument();
-    expect(screen.getByLabelText('Correo')).toBeInTheDocument();
-    expect(screen.getByLabelText('Sede')).toBeInTheDocument();
-    expect(screen.getByLabelText('Teléfono')).toBeInTheDocument();
-    expect(screen.getByLabelText('Descripción')).toBeInTheDocument();
+    expect(screen.getByLabelText('Correo Electrónico')).toBeInTheDocument();
+    expect(screen.getByLabelText('Asunto')).toBeInTheDocument();
+    expect(screen.getByLabelText('Tu Mensaje')).toBeInTheDocument();
     
     expect(screen.getByRole('button', { name: 'Enviar Mensaje' })).toBeInTheDocument();
   });
