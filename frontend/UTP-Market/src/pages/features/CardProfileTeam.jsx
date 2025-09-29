@@ -15,7 +15,7 @@ export default function CardProfileTeam() {
       setShowToast(true);
       setTimeout(() => {
         setShowToast(false);
-      }, 3000); // Hide toast after 3 seconds
+      }, 3000);
     } else {
       window.open(url, '_blank', 'noopener noreferrer');
     }
