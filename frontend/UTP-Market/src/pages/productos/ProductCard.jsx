@@ -43,9 +43,14 @@ export default function ProductCard({ product, onAddToCart, onToggleWishlist }) 
           {product?.price != null ? formatPrice(product.price) : "—"}
         </p>
 
+        {/* Botón de añadir al carrito */}
         <button
-          className="btn btn-primary w-100"
-          onClick={() => onAddToCart(product)}
+          className="btn btn-success w-100"
+          onClick={(e) => {
+            e.target.classList.add("btn-dark"); // cambia a verde oscuro
+            setTimeout(() => e.target.classList.remove("btn-dark"), 300);
+            onAddToCart(product);
+          }}
         >
           Añadir al carrito
         </button>
@@ -61,7 +66,7 @@ ProductCard.propTypes = {
     price: PropTypes.number,
     image: PropTypes.string,
     category: PropTypes.string,
-    isNew: PropTypes.string, // ahora string ("new" | "normal")
+    isNew: PropTypes.string,
     isWishlisted: PropTypes.bool,
   }).isRequired,
   onAddToCart: PropTypes.func.isRequired,

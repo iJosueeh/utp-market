@@ -8,52 +8,80 @@ export default function SideBar({
   sortValue,
 }) {
   return (
-    <aside className="w-full sm:w-60 p-4 border-r bg-gray-50 shadow-sm">
+    <aside
+      className="w-100 p-3 border-end shadow-sm"
+      style={{ backgroundColor: "#F2F2F2" }}
+    >
       {/* Categorías */}
-      <h3 className="font-bold text-lg mb-3 text-gray-800 border-b pb-2">
+      <h3
+        className="fw-bold fs-5 mb-3 border-bottom pb-2"
+        style={{ color: "#222222" }}
+      >
         Categorías
       </h3>
-      <ul className="space-y-2">
-        <li
-          role="button"
+
+      <div className="d-flex flex-column gap-2">
+        <button
           onClick={() => onFilter("all")}
-          className={`cursor-pointer px-2 py-1 rounded transition ${
-            activeCategory === "all"
-              ? "bg-blue-500 text-white"
-              : "hover:bg-blue-100 hover:text-blue-600"
-          }`}
+          className="btn btn-sm"
+          style={{
+            backgroundColor: activeCategory === "all" ? "#B50D30" : "transparent",
+            color: activeCategory === "all" ? "#fff" : "#B50D30",
+            border: `1px solid #B50D30`,
+          }}
         >
           Todos
-        </li>
+        </button>
+
         {categories.length === 0 ? (
-          <p className="text-gray-500 italic">No hay categorías</p>
+          <p className="text-muted fst-italic">No hay categorías</p>
         ) : (
           categories.map((cat) => (
-            <li
+            <button
               key={cat}
-              role="button"
               onClick={() => onFilter(cat)}
-              className={`cursor-pointer px-2 py-1 rounded transition ${
-                activeCategory === cat
-                  ? "bg-blue-500 text-white"
-                  : "hover:bg-blue-100 hover:text-blue-600"
-              }`}
+              className="btn btn-sm text-start"
+              style={{
+                backgroundColor: activeCategory === cat ? "#B50D30" : "transparent",
+                color: activeCategory === cat ? "#fff" : "#B50D30",
+                border: `1px solid #B50D30`,
+              }}
             >
               {cat}
-            </li>
+            </button>
           ))
         )}
-      </ul>
+
+        {/* Botón para limpiar filtros */}
+        <button
+          onClick={() => {
+            onFilter("all");
+            onSort("default");
+          }}
+          className="btn btn-sm"
+          style={{
+            backgroundColor: "#222222",
+            color: "#fff",
+            border: "1px solid #222222",
+          }}
+        >
+          Limpiar filtros
+        </button>
+      </div>
 
       {/* Ordenar por */}
-      <div className="mt-6">
-        <h3 className="font-bold text-lg mb-2 text-gray-800 border-b pb-2">
+      <div className="mt-4">
+        <h3
+          className="fw-bold fs-6 mb-2 border-bottom pb-2"
+          style={{ color: "#222222" }}
+        >
           Ordenar por
         </h3>
         <select
           value={sortValue}
           onChange={(e) => onSort(e.target.value)}
-          className="w-full p-2 border rounded focus:ring focus:ring-blue-200"
+          className="form-select form-select-sm"
+          style={{ borderColor: "#B50D30", color: "#222222" }}
         >
           <option value="default">Por defecto</option>
           <option value="price-asc">Precio: Menor a Mayor</option>

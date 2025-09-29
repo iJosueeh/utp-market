@@ -7,14 +7,56 @@ import { useLocation } from "react-router-dom";
 import Footer from "../components/common/Footer";
 
 export default function ProductsPage() {
-  // Productos de prueba (mock)
+  // Productos de prueba (mock) con imágenes reales
   const [products] = useState([
-    { id: 1, name: "Tutoría de Matemáticas", price: 25, category: "Tutorías universitarias", image: "https://via.placeholder.com/400x300?text=Tutoría+Matemáticas", isNew: "new" },
-    { id: 2, name: "Guía de Álgebra", price: 10, category: "Guías de estudio", image: "https://via.placeholder.com/400x300?text=Guía+Álgebra", isNew: "normal" },
-    { id: 3, name: "Snack Galletas", price: 3, category: "Ventas de snacks", image: "https://via.placeholder.com/400x300?text=Snack+Galletas", isNew: "normal" },
-    { id: 4, name: "Cuaderno A4", price: 6, category: "Materiales", image: "https://via.placeholder.com/400x300?text=Cuaderno+A4", isNew: "normal" },
-    { id: 5, name: "Tutoría de Física", price: 30, category: "Tutorías universitarias", image: "https://via.placeholder.com/400x300?text=Tutoría+Física", isNew: "new" },
-    { id: 6, name: "Guía de Estadística", price: 12, category: "Guías de estudio", image: "https://via.placeholder.com/400x300?text=Guía+Estadística", isNew: "normal" },
+    {
+      id: 1,
+      name: "Tutoría de Matemáticas",
+      price: 25,
+      category: "Tutorías universitarias",
+      image: "https://www.aulaplaneta.com/sites/default/files/styles/article_detail/public/articles/images/recurso462.jpeg?itok=3rEnqGzj",
+      isNew: "new",
+    },
+    {
+      id: 2,
+      name: "Guía de Álgebra",
+      price: 10,
+      category: "Guías de estudio",
+      image: "https://img.freepik.com/foto-gratis/estudiantes-aprendiendo-algebra_1098-1155.jpg",
+      isNew: "normal",
+    },
+    {
+      id: 3,
+      name: "Snack Galletas",
+      price: 3,
+      category: "Ventas de snacks",
+      image: "https://images-cdn.ubuy.co.id/64ff997c192014395b3b6379-cookie-variety-pack-assortment-25-pack.jpg",
+      isNew: "normal",
+    },
+    {
+      id: 4,
+      name: "Cuaderno A4",
+      price: 6,
+      category: "Materiales",
+      image: "https://www.infofar.com.pe/wp-content/uploads/CUADERNO-ALPHA-A4-X-92H-RAYADO.jpg",
+      isNew: "normal",
+    },
+    {
+      id: 5,
+      name: "Tutoría de Física",
+      price: 30,
+      category: "Tutorías universitarias",
+      image: "https://images.squarespace-cdn.com/content/v1/5728d511cf80a17bbd8f8dcb/1462705348963-P6EDSWXTDTIJPUNIO1KF/tutoria-individual-fisica-matematica-tutor-san-salvador-el-salvador",
+      isNew: "new",
+    },
+    {
+      id: 6,
+      name: "Guía de Estadística",
+      price: 12,
+      category: "Guías de estudio",
+      image: "https://sciencemediacentre.es/sites/default/files/2023-07/estadistica.jpg",
+      isNew: "normal",
+    },
   ]);
 
   // Estados
@@ -22,7 +64,7 @@ export default function ProductsPage() {
   const [sortValue, setSortValue] = useState("default");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // 🔹 Capturar query param de categoría desde el Navbar
+  // Capturar query param de categoría desde el Navbar
   const location = useLocation();
 
   useEffect(() => {
@@ -69,13 +111,11 @@ export default function ProductsPage() {
   ];
 
   return (
-    
-    <div className="container-fluid">
+    <div className="container-fluid d-flex flex-column min-vh-100 p-0">
       <Navbar />
-      {/* Barra de búsqueda */}
       <SearchBar onSearch={setSearchQuery} />
 
-      <div className="row">
+      <div className="row flex-grow-1 m-0">
         {/* Sidebar */}
         <div className="col-12 col-md-3 col-lg-2">
           <SideBar
@@ -92,6 +132,7 @@ export default function ProductsPage() {
           <ProductList products={sortedProducts} />
         </div>
       </div>
+
       <Footer />
     </div>
   );
