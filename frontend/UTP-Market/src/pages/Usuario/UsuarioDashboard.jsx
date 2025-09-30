@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Sidebar from './SideBar';
+import Sidebar from './Sidebar';
 import DatosPersonales from './DatosPersonales';
 import TusResenas from './TusReseñas';
 import TusProductos from './TusProductos';
