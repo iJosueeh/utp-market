@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import utpMarketLogo from '../../assets/utpmarketlogo.png';
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, toggle }) => {
   const navigate = useNavigate();
 
   const linkStyle = {
@@ -30,17 +30,8 @@ const Sidebar = () => {
   };
 
   return (
-    <div>
-      <style>{`
-        .sidebar-button {
-          background: none;
-          transition: background-color 0.3s;
-        }
-        .sidebar-button:hover {
-          background-color: #B50D30;
-        }
-      `}</style>
-      <div style={{ backgroundColor: '#222222', padding: '20px 0', height: '100vh', display: 'flex', flexDirection: 'column', width: '220px' }}>
+    <>
+      <div className={`sidebar ${isOpen ? 'open' : ''}`}>
         <div style={{ textAlign: 'center', marginBottom: '20px' }}>
           <img src={utpMarketLogo} alt="UTP Market Logo" style={{ width: '80%' }} />
         </div>
@@ -62,7 +53,56 @@ const Sidebar = () => {
           <button style={linkStyle} className="sidebar-button"><i className="bi bi-box-arrow-right" style={iconStyle}></i> Cerrar sesión</button>
         </div>
       </div>
-    </div>
+      <div className={`sidebar-overlay ${isOpen ? 'open' : ''}`} onClick={toggle}></div>
+      <style jsx>{`
+        .sidebar {
+          background-color: #222222;
+          padding: 20px 0;
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+          width: 220px;
+          transition: transform 0.3s ease-in-out;
+          z-index: 1000;
+        }
+        .sidebar-button {
+          background: none;
+          transition: background-color 0.3s;
+        }
+        .sidebar-button:hover {
+          background-color: #B50D30;
+        }
+        .sidebar-overlay {
+          display: none;
+        }
+        @media (max-width: 992px) {
+          .sidebar {
+            position: fixed;
+            transform: translateX(-100%);
+          }
+          .sidebar.open {
+            transform: translateX(0);
+          }
+          .sidebar-overlay {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+          }
+          .sidebar-overlay.open {
+            opacity: 1;
+            visibility: visible;
+          }
+        }
+      `}</style>
+    </>
   );
 };
 

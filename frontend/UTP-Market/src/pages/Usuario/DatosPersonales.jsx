@@ -32,99 +32,103 @@ const DatosPersonales = () => {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <div className="card" style={{ maxWidth: '800px' }}>
-        <div className="card-body">
-          <h2 className="mb-3 mt-3 text-center">Datos Personales</h2>
-          <div className="text-center">
-            <h5 className="card-title">Foto de perfil</h5>
-            <div className="profile-picture-container">
-              <img src="/src/assets/img_M/plantilla-perfil.png" alt="Avatar" className="img-fluid rounded-circle" style={{ width: '150px', height: '150px', border: '5px solid #B50D30' }} />
-              <div className="overlay rounded-circle">
-                <i className="bi bi-pencil"></i>
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-lg-8">
+          <div className="card">
+            <div className="card-body">
+              <h2 className="mb-3 mt-3 text-center">Datos Personales</h2>
+              <div className="text-center">
+                <h5 className="card-title">Foto de perfil</h5>
+                <div className="profile-picture-container">
+                  <img src="/src/assets/img_M/plantilla-perfil.png" alt="Avatar" className="img-fluid rounded-circle" style={{ width: '150px', height: '150px', border: '5px solid #B50D30' }} />
+                  <div className="overlay rounded-circle">
+                    <i className="bi bi-pencil"></i>
+                  </div>
+                </div>
               </div>
+
+              <h5 className="card-title mt-4">Detalles de Usuario</h5>
+              <form onSubmit={handleSubmit}>
+                <div className="row">
+                  <div className="col-md-6 mb-3">
+                    <label htmlFor="nombre" className="form-label">Nombres</label>
+                    <input
+                      type="text"
+                      className={`form-control ${!isEditing ? 'readonly-input' : ''}`}
+                      id="nombre"
+                      name="nombre"
+                      value={userData.nombre}
+                      onChange={handleChange}
+                      readOnly={!isEditing}
+                    />
+                  </div>
+                  <div className="col-md-6 mb-3">
+                    <label htmlFor="apellido" className="form-label">Apellidos</label>
+                    <input
+                      type="text"
+                      className={`form-control ${!isEditing ? 'readonly-input' : ''}`}
+                      id="apellido"
+                      name="apellido"
+                      value={userData.apellido}
+                      onChange={handleChange}
+                      readOnly={!isEditing}
+                    />
+                  </div>
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="telefono" className="form-label">Teléfono</label>
+                  <input
+                    type="text"
+                    className={`form-control ${!isEditing ? 'readonly-input' : ''}`}
+                    id="telefono"
+                    name="telefono"
+                    value={userData.telefono}
+                    onChange={handleChange}
+                    readOnly={!isEditing}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">Email</label>
+                  <input
+                    type="email"
+                    className="form-control readonly-input"
+                    id="email"
+                    name="email"
+                    value={userData.email}
+                    onChange={handleChange}
+                    readOnly
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="password">Contraseña</label>
+                  <div className="input-group">
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      className={`form-control ${!isEditing ? 'readonly-input' : ''}`}
+                      id="password"
+                      name="password"
+                      value={userData.password}
+                      onChange={handleChange}
+                      readOnly={!isEditing}
+                    />
+                    <button className="btn btn-outline-secondary" type="button" onClick={() => setShowPassword(!showPassword)} aria-label="toggle password visibility">
+                      <i className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'}`}></i>
+                    </button>
+                  </div>
+                </div>
+                <div style={{ position: 'relative', height: '40px' }}>
+                  <div className={`button-group ${isEditing ? 'hidden' : ''}`}>
+                    <button type="button" className="btn text-white" style={{backgroundColor: '#B50D30' }} onClick={() => setIsEditing(true)}>Editar datos</button>
+                  </div>
+                  <div className={`button-group ${!isEditing ? 'hidden' : ''}`}>
+                    <button type="submit" className="btn text-white me-2" style={{backgroundColor: '#B50D30' }}>Guardar Cambios</button>
+                    <button type="button" className="btn btn-secondary" onClick={handleCancel}>Cancelar</button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
-
-          <h5 className="card-title mt-4">Detalles de Usuario</h5>
-          <form onSubmit={handleSubmit}>
-            <div className="row">
-              <div className="col-md-6 mb-3">
-                <label htmlFor="nombre" className="form-label">Nombres</label>
-                <input
-                  type="text"
-                  className={`form-control ${!isEditing ? 'readonly-input' : ''}`}
-                  id="nombre"
-                  name="nombre"
-                  value={userData.nombre}
-                  onChange={handleChange}
-                  readOnly={!isEditing}
-                />
-              </div>
-              <div className="col-md-6 mb-3">
-                <label htmlFor="apellido" className="form-label">Apellidos</label>
-                <input
-                  type="text"
-                  className={`form-control ${!isEditing ? 'readonly-input' : ''}`}
-                  id="apellido"
-                  name="apellido"
-                  value={userData.apellido}
-                  onChange={handleChange}
-                  readOnly={!isEditing}
-                />
-              </div>
-            </div>
-            <div className="mb-3">
-              <label htmlFor="telefono" className="form-label">Teléfono</label>
-              <input
-                type="text"
-                className={`form-control ${!isEditing ? 'readonly-input' : ''}`}
-                id="telefono"
-                name="telefono"
-                value={userData.telefono}
-                onChange={handleChange}
-                readOnly={!isEditing}
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="email" className="form-label">Email</label>
-              <input
-                type="email"
-                className="form-control readonly-input"
-                id="email"
-                name="email"
-                value={userData.email}
-                onChange={handleChange}
-                readOnly
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="password">Contraseña</label>
-              <div className="input-group">
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  className={`form-control ${!isEditing ? 'readonly-input' : ''}`}
-                  id="password"
-                  name="password"
-                  value={userData.password}
-                  onChange={handleChange}
-                  readOnly={!isEditing}
-                />
-                <button className="btn btn-outline-secondary" type="button" onClick={() => setShowPassword(!showPassword)}>
-                  <i className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'}`}></i>
-                </button>
-              </div>
-            </div>
-            <div style={{ position: 'relative', height: '40px' }}>
-              <div className={`button-group ${isEditing ? 'hidden' : ''}`}>
-                <button type="button" className="btn text-white" style={{backgroundColor: '#B50D30' }} onClick={() => setIsEditing(true)}>Editar datos</button>
-              </div>
-              <div className={`button-group ${!isEditing ? 'hidden' : ''}`}>
-                <button type="submit" className="btn text-white me-2" style={{backgroundColor: '#B50D30' }}>Guardar Cambios</button>
-                <button type="button" className="btn btn-secondary" onClick={handleCancel}>Cancelar</button>
-              </div>
-            </div>
-          </form>
         </div>
       </div>
       <style jsx>{`
