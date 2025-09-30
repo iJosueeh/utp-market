@@ -25,7 +25,7 @@ const AuthSection = () => {
                         Hola, {user.nombre}
                     </a>
                     <ul className="dropdown-menu dropdown-menu-end pe-3" aria-labelledby="userDropdown">
-                        <li><Link className="dropdown-item" to="/profile">Ver Perfil</Link></li>
+                        <li><Link className="dropdown-item" to="/usuario">Ver Perfil</Link></li>
                         <li><hr className="dropdown-divider" /></li>
                         <li><button className="dropdown-item dropdown-item-logout" onClick={handleLogout}>Cerrar Sesión</button></li>
                     </ul>
