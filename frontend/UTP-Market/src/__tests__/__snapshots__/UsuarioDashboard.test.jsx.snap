@@ -1,0 +1,20 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UsuarioDashboard > renders Sidebar and default route (DatosPersonales) 1`] = `
+<DocumentFragment>
+  <div
+    style="display: flex;"
+  >
+    <div>
+      Sidebar
+    </div>
+    <div
+      style="flex: 1 1 0%; padding: 20px;"
+    >
+      <div>
+        Datos Personales
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
