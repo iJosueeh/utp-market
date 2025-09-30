@@ -15,6 +15,7 @@ exports[`UsuarioDashboard > renderiza el Sidebar y la ruta por defecto (DatosPer
     >
       <button
         class="sidebar-toggle d-lg-none "
+        data-testid="sidebar-toggle"
       >
         <i
           class="bi bi-list"
