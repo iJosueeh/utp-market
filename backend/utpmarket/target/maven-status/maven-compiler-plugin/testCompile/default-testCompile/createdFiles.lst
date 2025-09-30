@@ -1,5 +1,9 @@
+com\utp\utpmarket\controllers\PasswordResetControllerTest.class
+com\utp\utpmarket\controllers\PageControllerTest.class
+com\utp\utpmarket\controllers\UsuarioControllerTest.class
 com\utp\utpmarket\controllers\AuthControllerTest.class
+com\utp\utpmarket\services\ContactoServiceTest.class
 com\utp\utpmarket\UtpmarketApplicationTests.class
 com\utp\utpmarket\services\AuthServiceTest.class
 com\utp\utpmarket\services\UsuarioServiceTest.class
-com\utp\utpmarket\controllers\UsuarioControllerTest.class
+com\utp\utpmarket\controllers\ContactoControllerTest.class

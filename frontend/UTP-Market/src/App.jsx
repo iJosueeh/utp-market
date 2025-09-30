@@ -4,13 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import './App.css';
-import Login from './pages/Login.jsx';
-import Register from './pages/Register.jsx';
 import MainPage from './pages/MainPage.jsx';
-import ForgotPassword from './pages/features/forgotPassword/resetPasswordPage.jsx';
 import AboutUsPage from "./pages/AboutUs/AUPage.jsx";
 import HelpPage from "./pages/Help/HelpPage.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
+import UsuarioDashboard from "./pages/Usuario/UsuarioDashboard.jsx";
 
 //Función, que dependiendo de las solicitudes/rutas, renderiza los componentes:
 //MainPage, Login, Register, Profile, AdminProfile.
@@ -19,14 +17,12 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/forgot-password" element={<ForgotPassword />}></Route>
         <Route path="/about-us" element={<AboutUsPage />} />  
         <Route path="/help" element={<HelpPage />} />
         <Route path="/main" element={<MainPage />} />
         <Route path="/products" element={<ProductPage />} />
         {/* <Route path="/profile" element={<Profile />} /> */}
+        <Route path="/usuario/*" element={<UsuarioDashboard />} />
         {/* <Route path="/admin" element={<AdminProfile />} /> */}
       </Routes>
     </Router>

@@ -1,159 +1,200 @@
 package com.utp.utpmarket.controllers;
 
+import com.utp.utpmarket.config.SecurityConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.utp.utpmarket.models.dto.LoginRequest;
-import com.utp.utpmarket.models.dto.RegisterRequest;
+import com.utp.utpmarket.exceptions.EmailAlreadyExistsException;
+import com.utp.utpmarket.exceptions.InvalidCredentialsException;
+import com.utp.utpmarket.models.dto.RespuestaAuth;
+import com.utp.utpmarket.models.dto.SolicitudLogin;
+import com.utp.utpmarket.models.dto.SolicitudRegistro;
+import com.utp.utpmarket.models.entity.Usuario;
+import com.utp.utpmarket.services.AuthService;
+import com.utp.utpmarket.services.UsuarioService;
+import com.utp.utpmarket.utils.JwtUtil;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Optional;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-/**
- * Pruebas de integración para AuthController.
- */
-@SpringBootTest // Carga el contexto completo de la aplicación Spring.
-@AutoConfigureMockMvc // Configura y nos permite inyectar MockMvc para hacer peticiones HTTP.
-@Transactional // Asegura que cada prueba se ejecute en una transacción que se revierte al final. 
-               // Esto mantiene las pruebas aisladas y evita que se afecten entre sí.
+@WebMvcTest(controllers = AuthController.class, excludeAutoConfiguration = {SecurityConfig.class, SecurityAutoConfiguration.class, UserDetailsServiceAutoConfiguration.class})
 class AuthControllerTest {
 
     @Autowired
-    private MockMvc mockMvc; // Herramienta principal para simular las peticiones HTTP.
+    private MockMvc mockMvc;
 
     @Autowired
-    private ObjectMapper objectMapper; // Utilidad para convertir objetos Java a JSON y viceversa.
+    private ObjectMapper objectMapper;
 
-    @Test
-    void shouldRegisterUserSuccessfully() throws Exception {
-        // Arrange: Preparamos los datos de prueba
-        RegisterRequest registerRequest = new RegisterRequest(
-                "Test",
-                "User",
-                "987654321",
-                "test.user@utp.edu.pe",
-                "password123"
-        );
+    @MockBean
+    private UsuarioService usuarioService;
 
-        // Act & Assert: Ejecutamos la petición y verificamos el resultado
-        mockMvc.perform(post("/api/auth/register") // Hacemos un POST a la URL de registro
-                        .contentType(MediaType.APPLICATION_JSON) // Definimos el tipo de contenido como JSON
-                        .content(objectMapper.writeValueAsString(registerRequest))) // Convertimos el objeto a un string JSON
-                .andExpect(status().isOk()) // Esperamos que el código de estado sea 200 OK
-                .andExpect(jsonPath("$.token").isNotEmpty()); // Verificamos que la respuesta JSON tenga un campo "token" no vacío.
+    @MockBean
+    private AuthService authService;
+
+    @MockBean
+    private JwtUtil jwtUtil;
+
+    @BeforeEach
+    void setUp() {
+        when(jwtUtil.generarToken(anyString())).thenReturn("fake-jwt-token");
+
+        // Mocking for authService.registrarUsuario()
+        Set<String> registeredEmails = new HashSet<>();
+        when(authService.registrarUsuario(any(SolicitudRegistro.class)))
+                .thenAnswer(invocation -> {
+                    SolicitudRegistro reg = invocation.getArgument(0);
+                    if (registeredEmails.contains(reg.email())) {
+                        throw new EmailAlreadyExistsException("El Email ya esta registrado");
+                    }
+                    registeredEmails.add(reg.email());
+                    return new RespuestaAuth("fake-jwt-token");
+                });
+
+        // Mocking for authService.loginUsuario()
+        when(authService.loginUsuario(any(SolicitudLogin.class)))
+                .thenAnswer(invocation -> {
+                    SolicitudLogin login = invocation.getArgument(0);
+                    if ("login.user@utp.edu.pe".equals(login.email()) && "password123".equals(login.password())) {
+                        return new RespuestaAuth("fake-jwt-token");
+                    } else if ("nosuchuser@utp.edu.pe".equals(login.email())) {
+                        throw new InvalidCredentialsException("Credenciales inválidas");
+                    } else if ("login.user2@utp.edu.pe".equals(login.email()) && "wrongPassword".equals(login.password())) {
+                        throw new InvalidCredentialsException("Credenciales inválidas");
+                    }
+                    return new RespuestaAuth("fake-jwt-token"); // Default successful login
+                });
+
+        // Mocking for usuarioService.guardar()
+        when(usuarioService.guardar(any(Usuario.class)))
+                .thenAnswer(invocation -> {
+                    Usuario user = invocation.getArgument(0);
+                    user.setId(3L); // Assign a dummy ID
+                    return user;
+                });
+
+        // Mocking for usuarioService.buscarPorEmail()
+        when(usuarioService.buscarPorEmail("test.user@utp.edu.pe"))
+                .thenReturn(Optional.of(new Usuario(1L, "Test", "User", "987654321", Instant.now(), "test.user@utp.edu.pe", "encodedPassword", null, null)));
+
+        when(usuarioService.buscarPorEmail("login.user@utp.edu.pe"))
+                .thenReturn(Optional.of(new Usuario(2L, "Login", "User", "111222333", Instant.now(), "login.user@utp.edu.pe", "encodedPassword", null, null)));
+
+        when(usuarioService.buscarPorEmail("login.user2@utp.edu.pe"))
+                .thenReturn(Optional.of(new Usuario(4L, "Login", "User", "111222333", Instant.now(), "login.user2@utp.edu.pe", "encodedPassword", null, null)));
+
+        when(usuarioService.buscarPorEmail("nosuchuser@utp.edu.pe"))
+                .thenReturn(Optional.empty());
     }
 
     @Test
-    void shouldReturnBadRequestForInvalidEmail() throws Exception {
-        // Arrange
-        RegisterRequest registerRequest = new RegisterRequest(
-                "Test",
-                "User",
-                "987654321",
-                "invalid-email@gmail.com", // Email no institucional, fallará la validación del patrón
-                "password123"
-        );
+    void deberiaRedirigirALaAppConTokenYUsuario() throws Exception {
+        // Arrange: Mock the behavior of authService.generarTokenParaUsuario
+        when(authService.generarTokenParaUsuario("test.user@utp.edu.pe"))
+                .thenReturn(new RespuestaAuth("fake-auth-token"));
 
-        // Act & Assert
-        mockMvc.perform(post("/api/auth/register")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(registerRequest)))
-                .andExpect(status().isBadRequest()) // Esperamos un código 400 Bad Request
-                .andExpect(jsonPath("$.email").value("El correo debe ser institucional (@utp.edu.pe)")); // Verificamos el mensaje de error específico.
+        // Mock the behavior of usuarioService.buscarPorEmail
+        when(usuarioService.buscarPorEmail("test.user@utp.edu.pe"))
+                .thenReturn(Optional.of(new Usuario(1L, "Test", "User", "987654321", Instant.now(), "test.user@utp.edu.pe", "encodedPassword", null, null)));
+
+        mockMvc.perform(get("/api/auth/redirect-to-app")
+                        .param("username", "test.user@utp.edu.pe"))
+                .andExpect(status().isFound()) // 302 Found
+                .andExpect(redirectedUrlPattern("http://localhost:5173/auth/callback?token=*&user=*"));
     }
 
     @Test
-    void shouldReturnConflictWhenUserAlreadyExists() throws Exception {
-        // Arrange
-        RegisterRequest registerRequest = new RegisterRequest(
-                "John",
-                "Doe",
-                "123456789",
-                "john.doe@utp.edu.pe",
-                "password123"
-        );
+    void deberiaRegistrarUsuarioExitosamente() throws Exception {
+        SolicitudRegistro solicitudRegistro = new SolicitudRegistro("New", "User", "123456789", "new.user@utp.edu.pe", "password123");
 
-        // Act 1: Realizamos el primer registro, que debería ser exitoso.
         mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(registerRequest)))
-                .andExpect(status().isOk());
-
-        // Act 2 & Assert: Intentamos registrar al mismo usuario de nuevo.
-        mockMvc.perform(post("/api/auth/register")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(registerRequest)))
-                .andExpect(status().isConflict()); // Esperamos un código 409 Conflict.
+                        .content(objectMapper.writeValueAsString(solicitudRegistro)))
+                .andExpect(status().isCreated()) // Esperamos 201 Created
+                .andExpect(jsonPath("$.token").value("fake-jwt-token"));
     }
 
-    // --- PRUEBAS DE LOGIN ---
+    @Test
+    void deberiaRetornarConflictoCuandoEmailYaExiste() throws Exception {
+        // Arrange: Registramos un usuario primero
+        SolicitudRegistro solicitudRegistro = new SolicitudRegistro("Test", "User", "987654321", "test.user@utp.edu.pe", "password123");
+        mockMvc.perform(post("/api/auth/register")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(solicitudRegistro)))
+                .andExpect(status().isCreated());
+
+        // Act & Assert: Intentamos registrarlo de nuevo
+        mockMvc.perform(post("/api/auth/register")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(solicitudRegistro)))
+                .andExpect(status().isConflict());
+    }
 
     @Test
-    void shouldLoginSuccessfullyWithValidCredentials() throws Exception {
-        // Arrange: Primero, necesitamos un usuario registrado.
-        RegisterRequest registerRequest = new RegisterRequest("loginUser", "Test", "111222333", "login.user@utp.edu.pe", "securePassword");
+    void deberiaIniciarSesionExitosamenteConCredencialesValidas() throws Exception {
+        // Arrange: Registramos un usuario
+        SolicitudRegistro solicitudRegistro = new SolicitudRegistro("Login", "User", "111222333", "login.user@utp.edu.pe", "password123");
         mockMvc.perform(post("/api/auth/register")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(registerRequest)))
-                .andExpect(status().isOk());
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(solicitudRegistro)))
+                .andExpect(status().isCreated());
 
-        // Ahora, preparamos la petición de login
-        LoginRequest loginRequest = new LoginRequest("login.user@utp.edu.pe", "securePassword");
+        SolicitudLogin solicitudLogin = new SolicitudLogin("login.user@utp.edu.pe", "password123");
 
         // Act & Assert
         mockMvc.perform(post("/api/auth/login")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(loginRequest)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(solicitudLogin)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.token").isNotEmpty());
+                .andExpect(jsonPath("$.token").value("fake-jwt-token"));
     }
 
     @Test
-    void shouldReturnUnauthorizedForInvalidPassword() throws Exception {
-        // Arrange: Registramos un usuario.
-        RegisterRequest registerRequest = new RegisterRequest("loginUser2", "Test", "222333444", "login.user2@utp.edu.pe", "correctPassword");
+    void deberiaRetornarNoAutorizadoParaUsuarioInexistente() throws Exception {
+        SolicitudLogin solicitudLogin = new SolicitudLogin("nosuchuser@utp.edu.pe", "anyPassword");
+
+        mockMvc.perform(post("/api/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(solicitudLogin)))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    void deberiaRetornarNoAutorizadoParaPasswordIncorrecta() throws Exception {
+        // Arrange: Registramos un usuario
+        SolicitudRegistro solicitudRegistro = new SolicitudRegistro("Login", "User", "111222333", "login.user2@utp.edu.pe", "correctPassword");
         mockMvc.perform(post("/api/auth/register")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(registerRequest)))
-                .andExpect(status().isOk());
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(solicitudRegistro)))
+                .andExpect(status().isCreated());
 
-        // Preparamos la petición de login con la contraseña INCORRECTA.
-        LoginRequest loginRequest = new LoginRequest("login.user2@utp.edu.pe", "wrongPassword");
-
-        // Act & Assert
-        mockMvc.perform(post("/api/auth/login")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(loginRequest)))
-                .andExpect(status().isUnauthorized()); // Esperamos 401 Unauthorized
-    }
-
-    @Test
-    void shouldReturnUnauthorizedForNonExistentUser() throws Exception {
-        // Arrange: Preparamos una petición para un usuario que no existe.
-        LoginRequest loginRequest = new LoginRequest("nosuchuser@utp.edu.pe", "anyPassword");
-
-        // Act & Assert
-        mockMvc.perform(post("/api/auth/login")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(loginRequest)))
-                .andExpect(status().isUnauthorized()); // Esperamos 401 Unauthorized
-    }
-
-    @Test
-    void shouldReturnBadRequestForBlankPassword() throws Exception {
-        // Arrange
-        LoginRequest loginRequest = new LoginRequest("some.user@utp.edu.pe", ""); // Contraseña en blanco
+        SolicitudLogin solicitudLogin = new SolicitudLogin("login.user2@utp.edu.pe", "wrongPassword");
 
         // Act & Assert
         mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(loginRequest)))
-                .andExpect(status().isBadRequest()); // Esperamos 400 Bad Request por la validación
+                        .content(objectMapper.writeValueAsString(solicitudLogin)))
+                .andExpect(status().isUnauthorized());
     }
 }

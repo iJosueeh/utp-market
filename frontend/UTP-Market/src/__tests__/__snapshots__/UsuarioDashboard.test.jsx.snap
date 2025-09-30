@@ -1,0 +1,72 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UsuarioDashboard > renderiza el Sidebar y la ruta por defecto (DatosPersonales) 1`] = `
+<DocumentFragment>
+  <div
+    class="usuario-dashboard"
+  >
+    <div
+      data-testid="sidebar"
+    >
+      Sidebar Closed
+    </div>
+    <div
+      class="main-content"
+    >
+      <button
+        class="sidebar-toggle d-lg-none "
+        data-testid="sidebar-toggle"
+      >
+        <i
+          class="bi bi-list"
+        />
+      </button>
+      <div
+        class="content-wrapper"
+      >
+        <div>
+          Datos Personales
+        </div>
+      </div>
+    </div>
+    <style>
+      
+        .usuario-dashboard {
+          display: flex;
+        }
+        .main-content {
+          flex: 1;
+          padding: 20px;
+          position: relative;
+        }
+        .sidebar-toggle {
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          z-index: 1001;
+          background: #222222;
+          color: white;
+          border: none;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          font-size: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          line-height: 0;
+        }
+        .sidebar-toggle.hidden {
+          display: none;
+        }
+        @media (max-width: 992px) {
+          .content-wrapper {
+            padding-top: 50px;
+          }
+        }
+      
+    </style>
+  </div>
+</DocumentFragment>
+`;

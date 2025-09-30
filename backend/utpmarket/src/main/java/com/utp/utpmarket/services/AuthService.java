@@ -1,14 +1,14 @@
+
 package com.utp.utpmarket.services;
 
-import com.utp.utpmarket.models.dto.AuthResponse;
-import com.utp.utpmarket.models.dto.LoginRequest;
-import com.utp.utpmarket.models.dto.RegisterRequest;
+import com.utp.utpmarket.exceptions.EmailAlreadyExistsException;
+import com.utp.utpmarket.exceptions.InvalidCredentialsException;
+import com.utp.utpmarket.models.dto.RespuestaAuth;
+import com.utp.utpmarket.models.dto.SolicitudLogin;
+import com.utp.utpmarket.models.dto.SolicitudRegistro;
 import com.utp.utpmarket.models.entity.Usuario;
-import com.utp.utpmarket.repository.UsuarioRepository;
 import com.utp.utpmarket.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,38 +16,43 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthService {
 
-    private final UsuarioRepository usuarioRepository;
+    private final UsuarioService usuarioService;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
 
-    public ResponseEntity<?> registrarUsuario(RegisterRequest request) {
-        if (usuarioRepository.findByEmail(request.email()).isPresent()) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("El Email ya esta registrado");
-        }
+    public RespuestaAuth registrarUsuario(SolicitudRegistro request) {
+        usuarioService.buscarPorEmail(request.email()).ifPresent(u -> {
+            throw new EmailAlreadyExistsException("El Email ya esta registrado");
+        });
 
         Usuario usuario = new Usuario();
         usuario.setNombre(request.nombre());
-        usuario.setApellido(request.apellido());
+        usuario.setApellidos(request.apellidos());
         usuario.setTelefono(request.telefono());
         usuario.setEmail(request.email());
         usuario.setPassword(passwordEncoder.encode(request.password()));
 
-        usuarioRepository.save(usuario);
+        Usuario savedUsuario = usuarioService.guardar(usuario);
 
-        String token = jwtUtil.generarToken(usuario.getEmail());
-        return ResponseEntity.ok(new AuthResponse(token));
+        String token = jwtUtil.generarToken(savedUsuario.getEmail());
+        return new RespuestaAuth(token);
     }
 
-    public ResponseEntity<?> loginUsuario(LoginRequest request) {
-        return usuarioRepository.findByEmail(request.email())
-                .map(usuario -> {
-                    if (!passwordEncoder.matches(request.password(), usuario.getPassword())) {
-                        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
-                    }
-                    String token = jwtUtil.generarToken(usuario.getEmail());
-                    return ResponseEntity.ok(new AuthResponse(token));
-                })
-                .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas"));
+    public RespuestaAuth loginUsuario(SolicitudLogin request) {
+        Usuario usuario = usuarioService.buscarPorEmail(request.email())
+                .orElseThrow(() -> new InvalidCredentialsException("Credenciales inválidas"));
+
+        if (!passwordEncoder.matches(request.password(), usuario.getPassword())) {
+            throw new InvalidCredentialsException("Credenciales inválidas");
+        }
+
+        String token = jwtUtil.generarToken(usuario.getEmail());
+        return new RespuestaAuth(token);
+    }
+
+    public RespuestaAuth generarTokenParaUsuario(String nombreUsuario) {
+        String token = jwtUtil.generarToken(nombreUsuario);
+        return new RespuestaAuth(token);
     }
 
 }
