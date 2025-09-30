@@ -1,11 +1,11 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { describe, test, expect, vi } from 'vitest';
 import UsuarioDashboard from '../pages/Usuario/UsuarioDashboard';
 
-// Mock the components to isolate the test
-vi.mock('../pages/Usuario/SideBar', () => ({ default: () => <div>Sidebar</div> }));
+
+vi.mock('../pages/Usuario/SideBar', () => ({ default: ({ isOpen }) => <div data-testid="sidebar">{isOpen ? 'Sidebar Open' : 'Sidebar Closed'}</div> }));
 vi.mock('../pages/Usuario/DatosPersonales', () => ({ default: () => <div>Datos Personales</div> }));
 vi.mock('../pages/Usuario/TusReseñas', () => ({ default: () => <div>Tus Reseñas</div> }));
 vi.mock('../pages/Usuario/TusProductos', () => ({ default: () => <div>Tus Productos</div> }));
@@ -24,34 +24,49 @@ describe('UsuarioDashboard', () => {
     );
   };
 
-  test('renders Sidebar and default route (DatosPersonales)', () => {
+  test('renderiza el Sidebar y la ruta por defecto (DatosPersonales)', () => {
     const { asFragment } = renderWithRouter(['/usuario']);
-    expect(screen.getByText('Sidebar')).toBeInTheDocument();
+    expect(screen.getByTestId('sidebar')).toHaveTextContent('Sidebar Closed');
     expect(screen.getByText('Datos Personales')).toBeInTheDocument();
     expect(asFragment()).toMatchSnapshot();
   });
 
-  test('renders TusResenas component on /tus-resenas route', () => {
+  test('intercala el sidebar al hacer click en el botón', () => {
+    renderWithRouter(['/usuario']);
+    const button = screen.getByRole('button');
+    
+    expect(screen.getByTestId('sidebar')).toHaveTextContent('Sidebar Closed');
+
+    fireEvent.click(button);
+
+    expect(screen.getByTestId('sidebar')).toHaveTextContent('Sidebar Open');
+
+    fireEvent.click(button);
+
+    expect(screen.getByTestId('sidebar')).toHaveTextContent('Sidebar Closed');
+  });
+
+  test('renderiza el componente TusResenas en la ruta /tus-resenas', () => {
     renderWithRouter(['/usuario/tus-resenas']);
     expect(screen.getByText('Tus Reseñas')).toBeInTheDocument();
   });
 
-  test('renders TusProductos component on /tus-productos route', () => {
+  test('renderiza el componente TusProductos en la ruta /tus-productos', () => {
     renderWithRouter(['/usuario/tus-productos']);
     expect(screen.getByText('Tus Productos')).toBeInTheDocument();
   });
 
-  test('renders Favoritos component on /favoritos route', () => {
+  test('renderiza el componente Favoritos en la ruta /favoritos', () => {
     renderWithRouter(['/usuario/favoritos']);
     expect(screen.getByText('Favoritos')).toBeInTheDocument();
   });
 
-  test('renders HistorialDeCompra component on /historial-de-compra route', () => {
+  test('renderiza el componente HistorialDeCompra en la ruta /historial-de-compra', () => {
     renderWithRouter(['/usuario/historial-de-compra']);
     expect(screen.getByText('Historial De Compra')).toBeInTheDocument();
   });
 
-  test('renders EstadisticasPersonales component on /estadisticas-personales route', () => {
+  test('renderiza el componente EstadisticasPersonales en la ruta /estadisticas-personales', () => {
     renderWithRouter(['/usuario/estadisticas-personales']);
     expect(screen.getByText('Estadisticas Personales')).toBeInTheDocument();
   });
