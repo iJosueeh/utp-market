@@ -31,7 +31,7 @@ const Sidebar = ({ isOpen, toggle }) => {
 
   return (
     <>
-      <div className={`sidebar ${isOpen ? 'open' : ''}`}>
+      <div className={`sidebar ${isOpen ? 'open' : ''}`} data-testid="sidebar">
         <div style={{ textAlign: 'center', marginBottom: '20px' }}>
           <img src={utpMarketLogo} alt="UTP Market Logo" style={{ width: '80%' }} />
         </div>

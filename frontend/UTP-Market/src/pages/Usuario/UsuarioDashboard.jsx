@@ -19,7 +19,7 @@ const UsuarioDashboard = () => {
     <div className="usuario-dashboard">
       <Sidebar isOpen={isSidebarOpen} toggle={toggleSidebar} />
       <div className="main-content">
-        <button className={`sidebar-toggle d-lg-none ${isSidebarOpen ? 'hidden' : ''}`} onClick={toggleSidebar}>
+        <button className={`sidebar-toggle d-lg-none ${isSidebarOpen ? 'hidden' : ''}`} onClick={toggleSidebar} data-testid="sidebar-toggle">
           <i className="bi bi-list"></i>
         </button>
         <div className="content-wrapper">
