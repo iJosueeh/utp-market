@@ -114,15 +114,15 @@ export default function ProductList({ products }) {
                     {/* Stock */}
                     <p className="mb-1 text-dark"><strong>Stock:</strong> {stock} unidades</p>
 
-                    {/* Fecha de publicación */}
+                    {/* Fecha de publicación */} 
                     <p className="mb-1 text-dark"><strong>Publicado:</strong> {fakeDate}</p>
 
-                    {/* Reseñas */}
+                    {/* Reseñas */} 
                     <p className="mb-2 text-dark">
                       <strong>⭐ {fakeReviews.rating}</strong> ({fakeReviews.count} reseñas)
                     </p>
 
-                    {/* Botón para añadir al carrito */}
+                    {/* Botón para añadir al carrito */} 
                     <button
                       onClick={() => handleAddToCart(p)}
                       className="btn btn-danger mt-auto"

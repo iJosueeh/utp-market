@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import SideBar from "./productos/SideBar";
+import SideBar from "./productos/SideBar"
 import SearchBar from "./productos/SearchBar";
 import ProductList from "./productos/ProductList";
 import Navbar from "../components/common/Navbar";
