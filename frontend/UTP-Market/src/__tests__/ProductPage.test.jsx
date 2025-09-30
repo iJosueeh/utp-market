@@ -1,14 +1,16 @@
-
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import ProductsPage from '../pages/ProductPage';
+import { UserProvider } from '../context/UserContext';
 
 describe('ProductsPage', () => {
   it('renders the products page with all components', () => {
     render(
       <MemoryRouter>
-        <ProductsPage />
+        <UserProvider>
+          <ProductsPage />
+        </UserProvider>
       </MemoryRouter>
     );
 
