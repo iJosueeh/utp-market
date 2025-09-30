@@ -171,12 +171,85 @@ const Navbar = () => {
                     <i className="bi bi-caret-down-fill ms-2 align-middle"></i>
                   </button>
                   {/* Menu: Listado de categorias */}
-                  <ul className="dropdown-menu rounded shadow-lg border-0 py-3" aria-labelledby="dropdownMenuButton1">
-                    <li><a href="#" className="dropdown-item px-4 py-2">Tutorías</a></li>
-                    <li><a href="#" className="dropdown-item px-4 py-2">Guías de estudio</a></li>
-                    <li><a href="#" className="dropdown-item px-4 py-2">Ventas de snack</a></li>
-                    <li><a href="#" className="dropdown-item px-4 py-2">Materiales</a></li>
-                  </ul>
+
+                  
+<ul
+  className="dropdown-menu rounded-3 shadow border-0 p-2 animate__animated animate__fadeIn"
+  aria-labelledby="dropdownMenuButton1"
+>
+  <li>
+    <Link
+      to="/products?category=Tutorías%20universitarias"
+      className="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+    >
+      <i className="bi bi-mortarboard"></i> Tutorías
+    </Link>
+  </li>
+  <li>
+    <Link
+      to="/products?category=Guías%20de%20estudio"
+      className="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+    >
+      <i className="bi bi-journal-text"></i> Guías de estudio
+    </Link>
+  </li>
+  <li>
+    <Link
+      to="/products?category=Ventas%20de%20snacks"
+      className="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+    >
+      <i className="bi bi-cup-straw"></i> Snacks
+    </Link>
+  </li>
+  <li>
+    <Link
+      to="/products?category=Materiales"
+      className="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+    >
+      <i className="bi bi-box-seam"></i> Materiales
+    </Link>
+  </li>
+</ul>
+<ul
+  className="dropdown-menu rounded-3 shadow border-0 p-2 animate__animated animate__fadeIn"
+  aria-labelledby="dropdownMenuButton1"
+>
+  <li>
+    <Link
+      to="/products?category=Tutorías%20universitarias"
+      className="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+    >
+      <i className="bi bi-mortarboard"></i> Tutorías
+    </Link>
+  </li>
+  <li>
+    <Link
+      to="/products?category=Guías%20de%20estudio"
+      className="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+    >
+      <i className="bi bi-journal-text"></i> Guías de estudio
+    </Link>
+  </li>
+  <li>
+    <Link
+      to="/products?category=Ventas%20de%20snacks"
+      className="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+    >
+      <i className="bi bi-cup-straw"></i> Snacks
+    </Link>
+  </li>
+  <li>
+    <Link
+      to="/products?category=Materiales"
+      className="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+    >
+      <i className="bi bi-box-seam"></i> Materiales
+    </Link>
+  </li>
+</ul>
+
+
+
                 </div>
               </li>
               {/* Iconos para movil */}
