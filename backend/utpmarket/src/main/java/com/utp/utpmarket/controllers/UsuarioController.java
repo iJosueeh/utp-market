@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controlador para gestionar las operaciones relacionadas con los usuarios.
+ */
 @RestController
 @RequestMapping("/api/usuarios")
 @RequiredArgsConstructor
@@ -18,11 +21,22 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
+    /**
+     * Lista todos los usuarios registrados.
+     *
+     * @return una lista de objetos Usuario.
+     */
     @GetMapping
     public List<Usuario> listarUsuarios() {
         return usuarioService.listarTodos();
     }
 
+    /**
+     * Busca un usuario por su ID.
+     *
+     * @param id el ID del usuario a buscar.
+     * @return un ResponseEntity con el usuario encontrado o un estado 404 si no se encuentra.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> buscarPorId(@PathVariable Long id) {
         return usuarioService.buscarPorId(id)
@@ -30,11 +44,24 @@ public class UsuarioController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    /**
+     * Crea un nuevo usuario.
+     *
+     * @param usuario el objeto Usuario a crear.
+     * @return el usuario creado.
+     */
     @PostMapping
     public Usuario crearUsuario(@RequestBody Usuario usuario) {
         return usuarioService.guardar(usuario);
     }
 
+    /**
+     * Actualiza un usuario existente por su ID.
+     *
+     * @param id el ID del usuario a actualizar.
+     * @param usuario el objeto Usuario con los datos actualizados.
+     * @return un ResponseEntity con el usuario actualizado o un estado 404 si no se encuentra.
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
         return usuarioService.actualizar(id, usuario)
@@ -42,6 +69,12 @@ public class UsuarioController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    /**
+     * Elimina un usuario por su ID.
+     *
+     * @param id el ID del usuario a eliminar.
+     * @return un ResponseEntity con estado 204 (No Content) si se elimina, o 404 (Not Found) si no se encuentra.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarUsuario(@PathVariable Long id) {
         return usuarioService.eliminarPorId(id)
@@ -49,6 +82,12 @@ public class UsuarioController {
                 : ResponseEntity.notFound().build();
     }
 
+    /**
+     * Obtiene el perfil del usuario autenticado.
+     *
+     * @param authentication el objeto de autenticación que contiene los detalles del usuario.
+     * @return un ResponseEntity con el perfil del usuario o un estado 404 si no se encuentra.
+     */
     @GetMapping("/perfil")
     public ResponseEntity<RespuestaPerfil> getPerfil(Authentication authentication) {
         String email = authentication.getName();
@@ -64,6 +103,13 @@ public class UsuarioController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    /**
+     * Actualiza el perfil del usuario autenticado.
+     *
+     * @param authentication el objeto de autenticación que contiene los detalles del usuario.
+     * @param request la solicitud con los datos actualizados del perfil.
+     * @return un ResponseEntity con el perfil actualizado o un estado 404 si no se encuentra.
+     */
     @PutMapping("/perfil")
     public ResponseEntity<RespuestaPerfil> actualizarPerfil(
             Authentication authentication,

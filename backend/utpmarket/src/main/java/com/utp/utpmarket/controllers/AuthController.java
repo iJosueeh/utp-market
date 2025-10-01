@@ -44,7 +44,10 @@ public class AuthController {
     }
 
     @GetMapping("/redirect-to-app")
-    public ResponseEntity<Void> redirigirALaApp(@RequestParam("username") String nombreUsuario) throws JsonProcessingException, UnsupportedEncodingException {
+    public ResponseEntity<Void> redirigirALaApp(Authentication authentication) throws JsonProcessingException, UnsupportedEncodingException {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String nombreUsuario = userDetails.getUsername();
+
         // Generar token
         RespuestaAuth respuestaAuth = authService.generarTokenParaUsuario(nombreUsuario);
         String token = respuestaAuth.token();

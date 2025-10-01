@@ -13,7 +13,7 @@ export default function ProductList({ products }) {
   // Handler para añadir al carrito
   const handleAddToCart = (product) => {
     setCart((prev) => [...prev, product]);
-    setAlert(`${product.name} añadido al carrito 🛒`);
+    setAlert(`${product.nombre} añadido al carrito 🛒`);
 
     // La alerta desaparece automáticamente después de 2 segundos
     setTimeout(() => setAlert(null), 2000);
@@ -95,7 +95,7 @@ export default function ProductList({ products }) {
                   {/* Imagen del producto */}
                   <img
                     src={p.image}
-                    alt={p.name}
+                    alt={p.nombre}
                     style={{
                       width: "100%",
                       height: "200px",
@@ -107,8 +107,8 @@ export default function ProductList({ products }) {
 
                   <div className="card-body d-flex flex-column">
                     {/* Nombre y precio */}
-                    <h5 className="card-title text-truncate text-dark">{p.name}</h5>
-                    <p className="card-text fw-bold text-danger">S/. {p.price}</p>
+                    <h5 className="card-title text-truncate text-dark">{p.nombre}</h5>
+                    <p className="card-text fw-bold text-danger">S/. {p.precio}</p>
                     <small className="text-dark">{p.category}</small>
 
                     {/* Stock */}
