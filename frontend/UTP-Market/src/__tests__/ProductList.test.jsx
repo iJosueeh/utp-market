@@ -7,14 +7,14 @@ describe('ProductList', () => {
   const products = [
     {
       id: 1,
-      name: 'Test Product 1',
+      nombre: 'Test Product 1',
       price: 100,
       category: 'Category 1',
       image: 'https://via.placeholder.com/300x200',
     },
     {
       id: 2,
-      name: 'Test Product 2',
+      nombre: 'Test Product 2',
       price: 200,
       category: 'Category 2',
       image: 'https://via.placeholder.com/300x200',

@@ -6,6 +6,7 @@ import TusProductos from './TusProductos';
 import Favoritos from './Favoritos';
 import HistorialDeCompra from './HistorialDeCompra';
 import EstadisticasPersonales from './EstadisticasPersonales';
+import NotFoundSection from './NotFoundSection';
 import { Routes, Route } from 'react-router-dom';
 
 const UsuarioDashboard = () => {
@@ -31,6 +32,7 @@ const UsuarioDashboard = () => {
             <Route path="favoritos" element={<Favoritos />} />
             <Route path="historial-de-compra" element={<HistorialDeCompra />} />
             <Route path="estadisticas-personales" element={<EstadisticasPersonales />} />
+            <Route path="*" element={<NotFoundSection />} />
           </Routes>
         </div>
       </div>

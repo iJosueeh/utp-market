@@ -1,16 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getProfile, updateProfile } from '../../services/authService';
+import { useAuth } from '../../hooks/useAuth';
 
 const DatosPersonales = () => {
+  const { user, token } = useAuth();
   const [userData, setUserData] = useState({
-    nombre: 'John',
-    apellido: 'Doe',
-    email: 'john.doe@example.com',
-    telefono: '123-456-7890',
-    password: '***asd'
+    nombre: '',
+    apellido: '',
+    email: '',
+    telefono: '',
+    password: ''
   });
   const [originalUserData, setOriginalUserData] = useState({ ...userData });
   const [isEditing, setIsEditing] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const profile = await getProfile();
+        setUserData(prevData => ({ ...prevData, ...profile }));
+        setOriginalUserData(prevData => ({ ...prevData, ...profile }));
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      }
+    };
+
+    if (token) {
+      fetchProfile();
+    }
+  }, [token]);
 
   const handleChange = (e) => {
     setUserData({
@@ -19,11 +38,16 @@ const DatosPersonales = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Datos actualizados:', userData);
-    setOriginalUserData({ ...userData });
-    setIsEditing(false);
+    try {
+      const updatedProfile = await updateProfile(userData);
+      setUserData(updatedProfile);
+      setOriginalUserData(updatedProfile);
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
   };
 
   const handleCancel = () => {

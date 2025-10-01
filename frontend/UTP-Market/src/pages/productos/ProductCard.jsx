@@ -12,7 +12,7 @@ export default function ProductCard({ product, onAddToCart, onToggleWishlist }) 
         <img
           src={product?.image || "https://via.placeholder.com/300x200"}
           className="card-img-top"
-          alt={product?.name || "Producto"}
+          alt={product?.nombre || "Producto"}
         />
 
         {/* Wishlist */}
@@ -33,14 +33,14 @@ export default function ProductCard({ product, onAddToCart, onToggleWishlist }) 
 
         {/* Nombre con link */}
         <Link
-          to={`/products/${product.id}`}
+          to={`/productos/${product.id}`}
           className="text-decoration-none text-reset"
         >
-          <h3 className="mt-3 h5 mb-1">{product?.name || "Product name"}</h3>
+          <h3 className="mt-3 h5 mb-1">{product?.nombre || "Product name"}</h3>
         </Link>
 
         <p className="text-muted mb-3">
-          {product?.price != null ? formatPrice(product.price) : "—"}
+          {product?.precio != null ? formatPrice(product.precio) : "—"}
         </p>
 
         {/* Botón de añadir al carrito */}
@@ -62,8 +62,8 @@ export default function ProductCard({ product, onAddToCart, onToggleWishlist }) 
 ProductCard.propTypes = {
   product: PropTypes.shape({
     id: PropTypes.number,
-    name: PropTypes.string,
-    price: PropTypes.number,
+    nombre: PropTypes.string,
+    precio: PropTypes.number,
     image: PropTypes.string,
     category: PropTypes.string,
     isNew: PropTypes.string,

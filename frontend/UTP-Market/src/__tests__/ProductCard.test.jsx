@@ -7,8 +7,8 @@ import ProductCard from '../pages/productos/ProductCard';
 describe('ProductCard', () => {
   const product = {
     id: 1,
-    name: 'Test Product',
-    price: 100,
+    nombre: 'Test Product',
+    precio: 100,
     image: 'https://via.placeholder.com/300x200',
     isNew: 'new',
     isWishlisted: false,
