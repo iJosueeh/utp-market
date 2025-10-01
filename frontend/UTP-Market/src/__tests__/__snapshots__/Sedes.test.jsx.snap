@@ -162,38 +162,107 @@ exports[`Sedes > matches snapshot 1`] = `
                 </button>
                 <ul
                   aria-labelledby="dropdownMenuButton1"
-                  class="dropdown-menu rounded shadow-lg border-0 py-3"
+                  class="dropdown-menu rounded-3 shadow border-0 p-2 animate__animated animate__fadeIn"
                 >
                   <li>
                     <a
-                      class="dropdown-item px-4 py-2"
-                      href="#"
+                      class="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+                      data-discover="true"
+                      href="/products?category=Tutorías%20universitarias"
                     >
-                      Tutorías
+                      <i
+                        class="bi bi-mortarboard"
+                      />
+                       Tutorías
                     </a>
                   </li>
                   <li>
                     <a
-                      class="dropdown-item px-4 py-2"
-                      href="#"
+                      class="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+                      data-discover="true"
+                      href="/products?category=Guías%20de%20estudio"
                     >
-                      Guías de estudio
+                      <i
+                        class="bi bi-journal-text"
+                      />
+                       Guías de estudio
                     </a>
                   </li>
                   <li>
                     <a
-                      class="dropdown-item px-4 py-2"
-                      href="#"
+                      class="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+                      data-discover="true"
+                      href="/products?category=Ventas%20de%20snacks"
                     >
-                      Ventas de snack
+                      <i
+                        class="bi bi-cup-straw"
+                      />
+                       Snacks
                     </a>
                   </li>
                   <li>
                     <a
-                      class="dropdown-item px-4 py-2"
-                      href="#"
+                      class="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+                      data-discover="true"
+                      href="/products?category=Materiales"
                     >
-                      Materiales
+                      <i
+                        class="bi bi-box-seam"
+                      />
+                       Materiales
+                    </a>
+                  </li>
+                </ul>
+                <ul
+                  aria-labelledby="dropdownMenuButton1"
+                  class="dropdown-menu rounded-3 shadow border-0 p-2 animate__animated animate__fadeIn"
+                >
+                  <li>
+                    <a
+                      class="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+                      data-discover="true"
+                      href="/products?category=Tutorías%20universitarias"
+                    >
+                      <i
+                        class="bi bi-mortarboard"
+                      />
+                       Tutorías
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+                      data-discover="true"
+                      href="/products?category=Guías%20de%20estudio"
+                    >
+                      <i
+                        class="bi bi-journal-text"
+                      />
+                       Guías de estudio
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+                      data-discover="true"
+                      href="/products?category=Ventas%20de%20snacks"
+                    >
+                      <i
+                        class="bi bi-cup-straw"
+                      />
+                       Snacks
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+                      data-discover="true"
+                      href="/products?category=Materiales"
+                    >
+                      <i
+                        class="bi bi-box-seam"
+                      />
+                       Materiales
                     </a>
                   </li>
                 </ul>
