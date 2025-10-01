@@ -148,7 +148,8 @@ const Navbar = () => {
                   </Link>
               </li>
               <li className="nav-item mx-2">
-                <a className="nav-link text-white " aria-current="page" href="#">Sedes</a>
+
+                <Link className="nav-link text-white" to="/sedes">Sedes</Link>
               </li>
               <li className="nav-item mx-2">
                 <Link className="nav-link text-white" to="/help">

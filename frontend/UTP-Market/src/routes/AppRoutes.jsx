@@ -3,6 +3,7 @@ import AUPage from '../pages/AboutUs/AUPage';
 import HelpPage from '../pages/Help/HelpPage';
 import MainPage from '../pages/MainPage';
 import AuthCallback from '../pages/auth/AuthCallback';
+import Sedes from '../pages/features/sedes/Sedes'; // Asegúrate de importar el componente Sedes
 
 export default function AppRoutes() {
   return (
@@ -10,7 +11,7 @@ export default function AppRoutes() {
       <Routes>
         {/* Página por defecto ahora es /main */}
         <Route path="/" element={<Navigate to="/main" replace />} />
-
+        <Route path="/sedes" element={<Sedes />} />
         {/* Rutas públicas */}
         {/* Ruta para la página "Acerca de nosotros" */}
         <Route path="/about-us" element={<AUPage />} />
