@@ -37,8 +37,22 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.authentication;
 
-@WebMvcTest(controllers = AuthController.class, excludeAutoConfiguration = {SecurityConfig.class, SecurityAutoConfiguration.class, UserDetailsServiceAutoConfiguration.class})
+import org.springframework.security.test.context.support.WithMockUser;
+
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+
+// ... other imports ...
+
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import java.util.Collections;
+
+// ... other imports ...
+
+@SpringBootTest
+@AutoConfigureMockMvc
 class AuthControllerTest {
 
     @Autowired
@@ -82,6 +96,8 @@ class AuthControllerTest {
                         throw new InvalidCredentialsException("Credenciales inválidas");
                     } else if ("login.user2@utp.edu.pe".equals(login.email()) && "wrongPassword".equals(login.password())) {
                         throw new InvalidCredentialsException("Credenciales inválidas");
+                    } else if ("login.user2@utp.edu.pe".equals(login.email()) && !"correctPassword".equals(login.password())) {
+                        throw new InvalidCredentialsException("Credenciales inválidas");
                     }
                     return new RespuestaAuth("fake-jwt-token"); // Default successful login
                 });
@@ -108,18 +124,27 @@ class AuthControllerTest {
                 .thenReturn(Optional.empty());
     }
 
+
+
     @Test
+    @WithMockUser(username = "test.user@utp.edu.pe")
     void deberiaRedirigirALaAppConTokenYUsuario() throws Exception {
         // Arrange: Mock the behavior of authService.generarTokenParaUsuario
         when(authService.generarTokenParaUsuario("test.user@utp.edu.pe"))
                 .thenReturn(new RespuestaAuth("fake-auth-token"));
 
         // Mock the behavior of usuarioService.buscarPorEmail
+        Usuario mockUser = new Usuario(1L, "Test", "User", "987654321", Instant.now(), "test.user@utp.edu.pe", "encodedPassword", null, null);
         when(usuarioService.buscarPorEmail("test.user@utp.edu.pe"))
-                .thenReturn(Optional.of(new Usuario(1L, "Test", "User", "987654321", Instant.now(), "test.user@utp.edu.pe", "encodedPassword", null, null)));
+                .thenReturn(Optional.of(mockUser));
+
+        // Create a mock Authentication object
+        Authentication mockAuthentication = new UsernamePasswordAuthenticationToken(
+                new User(mockUser.getEmail(), mockUser.getPassword(), Collections.emptyList()),
+                null, Collections.emptyList());
 
         mockMvc.perform(get("/api/auth/redirect-to-app")
-                        .param("username", "test.user@utp.edu.pe"))
+                        .with(authentication(mockAuthentication)))
                 .andExpect(status().isFound()) // 302 Found
                 .andExpect(redirectedUrlPattern("http://localhost:5173/auth/callback?token=*&user=*"));
     }

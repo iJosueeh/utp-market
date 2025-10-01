@@ -64,7 +64,7 @@ function Chatbot() {
 
     const mensajeUsuario = { 
       sender: 'user', 
-      name: 'Guest', 
+      name: 'Invitado', 
       text: entrada, 
       timestamp: getTimestamp() 
     };
