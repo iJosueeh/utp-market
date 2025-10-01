@@ -1,0 +1,687 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Sedes > matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="d-flex flex-column min-vh-100"
+  >
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top "
+    >
+      <div
+        class="container-fluid px-0"
+      >
+        <div
+          class="d-flex"
+        >
+          <a
+            class="navbar-brand ms-5"
+            href="/"
+          >
+            <img
+              alt=""
+              src="/src/assets/utpmarketlogo.png"
+              style="height: 45px;"
+            />
+          </a>
+        </div>
+        <div
+          class="order-lg-3"
+        >
+          <div
+            class="d-flex align-items-center"
+          >
+            <div
+              class="position-relative d-none d-lg-block"
+            >
+              <button
+                class="btn btn-icon btn-dark rounded-circle bg-dark"
+                type="button"
+              >
+                <i
+                  class="bi bi-cart2 align-middle"
+                />
+              </button>
+            </div>
+            <span
+              class="d-none d-lg-block"
+            >
+              <a
+                class="btn btn-icon btn-dark rounded-circle bg-dark"
+                href="#"
+              >
+                <i
+                  class="bi bi-bell align-middle"
+                />
+              </a>
+            </span>
+            <div
+              class="d-none d-lg-block"
+            >
+              <a
+                class="btn btn-icon btn-dark rounded-circle bg-dark me-4 d-none d-lg-block"
+                href="http://localhost:8080/login"
+              >
+                <i
+                  class="bi bi-person align-middle"
+                />
+              </a>
+            </div>
+            <button
+              aria-controls="navbar-default2"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+              class="navbar-toggler ms-2 me-3"
+              data-bs-target="#navbar-default2"
+              data-bs-toggle="collapse"
+              type="button"
+            >
+              <span
+                class="navbar-toggler-icon"
+              />
+            </button>
+          </div>
+        </div>
+        <div
+          class="collapse navbar-collapse justify-content-center"
+          id="navbar-default2"
+        >
+          <ul
+            class="navbar-nav mx-1 text-center"
+          >
+            <li
+              class="nav-item mx-2"
+            >
+              <a
+                class="nav-link text-white"
+                data-discover="true"
+                href="/main"
+              >
+                Inicio
+              </a>
+            </li>
+            <li
+              class="nav-item mx-2"
+            >
+              <a
+                class="nav-link text-white"
+                data-discover="true"
+                href="/about-us"
+              >
+                Nosotros
+              </a>
+            </li>
+            <li
+              class="nav-item mx-2"
+            >
+              <a
+                class="nav-link text-white"
+                data-discover="true"
+                href="/sedes"
+              >
+                Sedes
+              </a>
+            </li>
+            <li
+              class="nav-item mx-2"
+            >
+              <a
+                class="nav-link text-white"
+                data-discover="true"
+                href="/help"
+              >
+                Ayuda
+              </a>
+            </li>
+            <li
+              class="nav-item mx-2"
+            >
+              <a
+                aria-current="page"
+                class="nav-link text-white "
+                href="#"
+              >
+                Vender
+              </a>
+            </li>
+            <li>
+              <div
+                class="dropdown d-none d-md-block"
+              >
+                <button
+                  aria-expanded="false"
+                  class="btn btn-light-primary text-white"
+                  data-bs-toggle="dropdown"
+                  id="dropdownMenuButton1"
+                  type="button"
+                >
+                  Categoria
+                  <i
+                    class="bi bi-caret-down-fill ms-2 align-middle"
+                  />
+                </button>
+                <ul
+                  aria-labelledby="dropdownMenuButton1"
+                  class="dropdown-menu rounded-3 shadow border-0 p-2 animate__animated animate__fadeIn"
+                >
+                  <li>
+                    <a
+                      class="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+                      data-discover="true"
+                      href="/products?category=Tutorías%20universitarias"
+                    >
+                      <i
+                        class="bi bi-mortarboard"
+                      />
+                       Tutorías
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+                      data-discover="true"
+                      href="/products?category=Guías%20de%20estudio"
+                    >
+                      <i
+                        class="bi bi-journal-text"
+                      />
+                       Guías de estudio
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+                      data-discover="true"
+                      href="/products?category=Ventas%20de%20snacks"
+                    >
+                      <i
+                        class="bi bi-cup-straw"
+                      />
+                       Snacks
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+                      data-discover="true"
+                      href="/products?category=Materiales"
+                    >
+                      <i
+                        class="bi bi-box-seam"
+                      />
+                       Materiales
+                    </a>
+                  </li>
+                </ul>
+                <ul
+                  aria-labelledby="dropdownMenuButton1"
+                  class="dropdown-menu rounded-3 shadow border-0 p-2 animate__animated animate__fadeIn"
+                >
+                  <li>
+                    <a
+                      class="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+                      data-discover="true"
+                      href="/products?category=Tutorías%20universitarias"
+                    >
+                      <i
+                        class="bi bi-mortarboard"
+                      />
+                       Tutorías
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+                      data-discover="true"
+                      href="/products?category=Guías%20de%20estudio"
+                    >
+                      <i
+                        class="bi bi-journal-text"
+                      />
+                       Guías de estudio
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+                      data-discover="true"
+                      href="/products?category=Ventas%20de%20snacks"
+                    >
+                      <i
+                        class="bi bi-cup-straw"
+                      />
+                       Snacks
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
+                      data-discover="true"
+                      href="/products?category=Materiales"
+                    >
+                      <i
+                        class="bi bi-box-seam"
+                      />
+                       Materiales
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li
+              class="nav-item d-lg-none mt-3"
+            >
+              <div
+                class="d-flex justify-content-center"
+              >
+                <a
+                  class="btn btn-icon btn-dark rounded-circle bg-dark mx-2"
+                  href="#"
+                >
+                  <i
+                    class="bi bi-cart2 align-middle"
+                  />
+                </a>
+                <a
+                  class="btn btn-icon btn-dark rounded-circle bg-dark mx-2"
+                  href="#"
+                >
+                  <i
+                    class="bi bi-bell align-middle"
+                  />
+                </a>
+                <a
+                  class="btn btn-icon btn-dark rounded-circle bg-dark mx-2"
+                  href="http://localhost:8080/login"
+                >
+                  <i
+                    class="bi bi-person align-middle"
+                  />
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main
+      class="container my-5 flex-grow-1 pt-5"
+    >
+      <h2
+        class="mb-5 text-center fw-bold"
+        style="color: rgb(181, 13, 48);"
+      >
+        Nuestras Sedes
+      </h2>
+      <div
+        class="row g-4"
+      >
+        <div
+          class="col-12 col-md-6 col-lg-4"
+        >
+          <div
+            class="card shadow-sm h-100 border-0 rounded-3"
+          >
+            <div
+              class="card-body text-center"
+            >
+              <h5
+                class="card-title fw-bold mb-3"
+                style="color: rgb(34, 34, 34);"
+              >
+                Sede Norte
+              </h5>
+              <p
+                class="card-text mb-2"
+              >
+                <strong>
+                  Dirección:
+                </strong>
+                 Panamericana Norte, Av. Alfredo Mendiola 6377, Los Olivos 15306
+              </p>
+              <p
+                class="card-text mb-3"
+              >
+                <strong>
+                  Teléfono:
+                </strong>
+                 970804148
+              </p>
+              <a
+                href="https://www.google.com/maps/place/Panamericana+Norte+6377,+Los+Olivos+15306"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <img
+                  alt="Imagen Sede Norte"
+                  class="img-fluid rounded shadow-sm"
+                  src="https://utp.edu.pe/sites/default/files/campus/campus-los-olivos-utp.webp"
+                  style="max-height: 200px; object-fit: cover; width: 100%;"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-12 col-md-6 col-lg-4"
+        >
+          <div
+            class="card shadow-sm h-100 border-0 rounded-3"
+          >
+            <div
+              class="card-body text-center"
+            >
+              <h5
+                class="card-title fw-bold mb-3"
+                style="color: rgb(34, 34, 34);"
+              >
+                Sede Lima Centro
+              </h5>
+              <p
+                class="card-text mb-2"
+              >
+                <strong>
+                  Dirección:
+                </strong>
+                 Avenida Petit Thouars 116, Lima 15046
+              </p>
+              <p
+                class="card-text mb-3"
+              >
+                <strong>
+                  Teléfono:
+                </strong>
+                 (01) 3159600
+              </p>
+              <a
+                href="https://www.google.com/maps/place/Avenida+Petit+Thouars+116,+Lima+15046"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <img
+                  alt="Imagen Sede Lima Centro"
+                  class="img-fluid rounded shadow-sm"
+                  src="https://utp.edu.pe/sites/default/files/campus/utp-lima-centro.webp"
+                  style="max-height: 200px; object-fit: cover; width: 100%;"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-12 col-md-6 col-lg-4"
+        >
+          <div
+            class="card shadow-sm h-100 border-0 rounded-3"
+          >
+            <div
+              class="card-body text-center"
+            >
+              <h5
+                class="card-title fw-bold mb-3"
+                style="color: rgb(34, 34, 34);"
+              >
+                Sede Lima Sur
+              </h5>
+              <p
+                class="card-text mb-2"
+              >
+                <strong>
+                  Dirección:
+                </strong>
+                 Ctra. Panamericana Sur km 16, Villa El Salvador 15842
+              </p>
+              <p
+                class="card-text mb-3"
+              >
+                <strong>
+                  Teléfono:
+                </strong>
+                 (01) 3159600
+              </p>
+              <a
+                href="https://www.google.com/maps/place/Panamericana+Sur+Km+16,+Villa+El+Salvador+15842"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <img
+                  alt="Imagen Sede Lima Sur"
+                  class="img-fluid rounded shadow-sm"
+                  src="https://utp.edu.pe/sites/default/files/campus/LimaSur-.webp"
+                  style="max-height: 200px; object-fit: cover; width: 100%;"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-12 col-md-6 col-lg-4"
+        >
+          <div
+            class="card shadow-sm h-100 border-0 rounded-3"
+          >
+            <div
+              class="card-body text-center"
+            >
+              <h5
+                class="card-title fw-bold mb-3"
+                style="color: rgb(34, 34, 34);"
+              >
+                Sede San Juan de Lurigancho
+              </h5>
+              <p
+                class="card-text mb-2"
+              >
+                <strong>
+                  Dirección:
+                </strong>
+                 Av. Wiesse 571, San Juan de Lurigancho 15434
+              </p>
+              <p
+                class="card-text mb-3"
+              >
+                <strong>
+                  Teléfono:
+                </strong>
+                 (01) 3159600
+              </p>
+              <a
+                href="https://maps.app.goo.gl/REhYfwjyYBLGhErc6"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <img
+                  alt="Imagen Sede San Juan de Lurigancho"
+                  class="img-fluid rounded shadow-sm"
+                  src="https://utp.edu.pe/sites/default/files/campus/SJL-.webp"
+                  style="max-height: 200px; object-fit: cover; width: 100%;"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-12 col-md-6 col-lg-4"
+        >
+          <div
+            class="card shadow-sm h-100 border-0 rounded-3"
+          >
+            <div
+              class="card-body text-center"
+            >
+              <h5
+                class="card-title fw-bold mb-3"
+                style="color: rgb(34, 34, 34);"
+              >
+                Sede Ate
+              </h5>
+              <p
+                class="card-text mb-2"
+              >
+                <strong>
+                  Dirección:
+                </strong>
+                 Av. Carretera Central 123, Ate, Lima
+              </p>
+              <p
+                class="card-text mb-3"
+              >
+                <strong>
+                  Teléfono:
+                </strong>
+                 (01) 3159600
+              </p>
+              <a
+                href="https://maps.app.goo.gl/m6p3aiWzAuyf8mLu7"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <img
+                  alt="Imagen Sede Ate"
+                  class="img-fluid rounded shadow-sm"
+                  src="https://utp.edu.pe/sites/default/files/campus/utp-sede-ate.webp"
+                  style="max-height: 200px; object-fit: cover; width: 100%;"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer
+      class="py-lg-8 py-5 bg-dark text-white"
+    >
+      <div
+        class="container "
+      >
+        <div
+          class="row text-center align-items-center text-md-start"
+        >
+          <div
+            class="col-12 col-md-4 mb-4 mb-md-0 "
+          >
+            <h5
+              class="fw-bold mb-3"
+            >
+              Contactanos
+            </h5>
+            <div
+              class="d-grid gap-2"
+            >
+              <span>
+                <i
+                  class="bi bi-whatsapp me-2"
+                >
+                   +51 922 873 004
+                </i>
+              </span>
+              <span>
+                <i
+                  class="bi bi-telephone me-2"
+                >
+                   +51 922 873 004 
+                </i>
+              </span>
+              <span>
+                <i
+                  class="bi bi-envelope-at me-2"
+                >
+                   UTP-Market@outlook.com
+                </i>
+              </span>
+            </div>
+          </div>
+          <div
+            class="col-12 col-md-4 mb-4 mb-md-0 text-center"
+          >
+            <img
+              class="mb-3"
+              src="/src/assets/utpmarketlogo.png"
+              style="height: 45px;"
+            />
+          </div>
+          <div
+            class="col-12 col-md-4 text-center text-md-end"
+          >
+            <div
+              class="my-6"
+            >
+              <a
+                aria-label="YouTube"
+                class="me-4"
+                href="https://www.youtube.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+                title="YouTube"
+              >
+                <i
+                  class="bi bi-youtube fs-4 text-white"
+                />
+              </a>
+              <a
+                aria-label="Facebook"
+                class="me-4"
+                href="https://www.facebook.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+                title="Facebook"
+              >
+                <i
+                  class="bi bi-facebook fs-4 text-white"
+                />
+              </a>
+              <a
+                aria-label="Twitter"
+                class="me-4"
+                href="https://twitter.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+                title="Twitter"
+              >
+                <i
+                  class="bi bi-twitter fs-4 text-white"
+                />
+              </a>
+              <a
+                aria-label="Instagram"
+                class="me-4"
+                href="https://www.instagram.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+                title="Instagram"
+              >
+                <i
+                  class="bi bi-instagram fs-4 text-white"
+                />
+              </a>
+              <a
+                aria-label="LinkedIn"
+                class=""
+                href="https://www.linkedin.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+                title="LinkedIn"
+              >
+                <i
+                  class="bi bi-linkedin fs-4 text-white"
+                />
+              </a>
+            </div>
+          </div>
+          <div
+            class="row"
+          >
+            <div
+              class="col-12 text-center mt-4"
+            >
+              <span>
+                 © UTP MARKET  2025. Todos los derechos reservados
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</DocumentFragment>
+`;

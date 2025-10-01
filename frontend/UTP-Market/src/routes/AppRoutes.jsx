@@ -4,6 +4,7 @@ import HelpPage from '../pages/Help/HelpPage';
 import MainPage from '../pages/MainPage';
 import ProductPage from '../pages/ProductPage';
 import AuthCallback from '../pages/auth/AuthCallback';
+import Sedes from '../pages/features/sedes/Sedes'; // Asegúrate de importar el componente Sedes
 import UsuarioDashboard from '../pages/Usuario/UsuarioDashboard';
 
 export default function AppRoutes() {
@@ -12,6 +13,9 @@ export default function AppRoutes() {
       <Routes>
         {/* Página por defecto */}
         <Route path="/" element={<Navigate to="/main" replace />} />
+        <Route path="/sedes" element={<Sedes />} />
+        {/* Rutas públicas */}
+        {/* Ruta para la página "Acerca de nosotros" */}
 
         {/* Ruta para la página "Acerca de nosotros" */}    
         <Route path="/about-us" element={<AUPage />} />
